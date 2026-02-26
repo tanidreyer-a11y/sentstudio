@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { Perfume } from "@/data/perfumes";
+import { getPerfumeImage } from "@/lib/perfume-images";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -25,9 +26,12 @@ const PerfumeCard = ({ perfume }: { perfume: Perfume }) => {
     <div className="group relative">
       <Link to={`/perfume/${perfume.id}`}>
         <div className="relative overflow-hidden mb-4 bg-card aspect-[3/4]">
-          <div className="w-full h-full flex items-center justify-center bg-secondary">
-            <span className="font-display text-6xl text-primary/30">{perfume.name[0]}</span>
-          </div>
+          <img
+            src={getPerfumeImage(perfume.gender, perfume.category)}
+            alt={perfume.name}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
           <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 transition-colors duration-500" />
         </div>
       </Link>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
 import { getPerfumeById } from "@/data/perfumes";
+import { getPerfumeImage } from "@/lib/perfume-images";
 import { useCart } from "@/contexts/CartContext";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
@@ -51,8 +52,12 @@ const PerfumeDetailPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             {/* Image */}
-            <div className="bg-secondary aspect-square flex items-center justify-center border border-border">
-              <span className="font-display text-9xl text-primary/20">{perfume.name[0]}</span>
+            <div className="bg-secondary aspect-square flex items-center justify-center border border-border overflow-hidden">
+              <img
+                src={getPerfumeImage(perfume.gender, perfume.category)}
+                alt={perfume.name}
+                className="w-full h-full object-cover"
+              />
             </div>
 
             {/* Details */}
