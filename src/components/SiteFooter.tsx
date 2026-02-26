@@ -1,0 +1,83 @@
+import { Link } from "react-router-dom";
+
+const SiteFooter = () => {
+  return (
+    <footer className="py-16 bg-noir border-t border-border">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div>
+            <h3 className="font-display text-2xl font-semibold tracking-wider text-primary mb-6">
+              SCENT STUDIO
+            </h3>
+            <p className="font-body text-base text-muted-foreground leading-relaxed">
+              Purveyors of the world's finest fragrances. Experience luxury, redefined.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-sans text-xs tracking-[0.3em] uppercase text-foreground mb-6">Shop</h4>
+            <div className="flex flex-col gap-3">
+              {[
+                { label: "For Him", path: "/catalog/men" },
+                { label: "For Her", path: "/catalog/women" },
+                { label: "Find My Scent", path: "/quiz" },
+              ].map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.path}
+                  className="font-body text-base text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-sans text-xs tracking-[0.3em] uppercase text-foreground mb-6">Company</h4>
+            <div className="flex flex-col gap-3">
+              {[
+                { label: "About", path: "/about" },
+                { label: "Reviews", path: "/reviews" },
+                { label: "VIP Membership", path: "/vip" },
+                { label: "Contact", path: "/contact" },
+              ].map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.path}
+                  className="font-body text-base text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-sans text-xs tracking-[0.3em] uppercase text-foreground mb-6">Contact</h4>
+            <div className="font-body text-base text-muted-foreground space-y-2">
+              <p>Scent Studio</p>
+              <p>South Africa</p>
+              <a
+                href="https://wa.me/27792449607"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block mt-4 text-primary hover:text-gold-light transition-colors"
+              >
+                WhatsApp: +27 79 244 9607
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-border pt-8 text-center">
+          <p className="font-sans text-xs tracking-wider text-muted-foreground">
+            © 2026 Scent Studio. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default SiteFooter;
