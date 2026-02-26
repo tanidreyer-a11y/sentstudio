@@ -12,7 +12,7 @@ const AboutSection = () => {
           </h2>
           <div className="w-16 h-px bg-primary mx-auto mb-10" />
           <p className="font-body text-lg md:text-xl text-secondary-foreground/80 leading-relaxed mb-8">
-            At Maison Noir, we believe that fragrance is the most intimate form of self-expression.
+            At Scent Studio, we believe that fragrance is the most intimate form of self-expression.
             Each scent in our collection has been sourced from the world's most revered perfume
             houses, selected for its artistry, complexity, and ability to evoke profound emotion.
           </p>
