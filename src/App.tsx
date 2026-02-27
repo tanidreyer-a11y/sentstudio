@@ -13,6 +13,7 @@ import ContactPage from "./pages/ContactPage";
 import ReviewsPage from "./pages/ReviewsPage";
 import VIPPage from "./pages/VIPPage";
 import QuizPage from "./pages/QuizPage";
+import FindMyScentPage from "./pages/FindMyScentPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/reviews" element={<ReviewsPage />} />
             <Route path="/vip" element={<VIPPage />} />
             <Route path="/quiz" element={<QuizPage />} />
+            <Route path="/find-my-scent" element={<FindMyScentPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
