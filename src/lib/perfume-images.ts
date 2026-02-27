@@ -1,6 +1,6 @@
 import menLuxury from "@/assets/men-luxury.jpeg";
-import menFresh from "@/assets/men-fresh.webp";
-import menMusky from "@/assets/men-musky.webp";
+import menFresh from "@/assets/men-fresh.jpeg";
+import menMusky from "@/assets/men-musky.jpeg";
 import womenLuxury from "@/assets/women-luxury.jpeg";
 
 const imageMap: Record<string, string> = {
