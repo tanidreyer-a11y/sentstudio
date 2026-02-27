@@ -22,13 +22,13 @@ const Header = () => {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-6 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <img
               src={logo}
               alt="Scent Studio"
-              className="h-10 w-auto"
-              style={{ filter: "brightness(0) saturate(100%) invert(72%) sepia(58%) saturate(487%) hue-rotate(1deg) brightness(92%) contrast(89%)" }}
+              className="h-14 w-auto"
+              style={{ filter: "brightness(0) saturate(100%) invert(68%) sepia(63%) saturate(600%) hue-rotate(8deg) brightness(95%) contrast(85%)" }}
             />
           </Link>
 
