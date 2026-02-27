@@ -33,14 +33,14 @@ const ContactPage = () => {
             </div>
 
             <a
-              href="https://instagram.com/scentstudio"
+              href="https://instagram.com/scentstudio_floracentre"
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-col items-center p-8 bg-card border border-border hover:border-primary transition-colors text-center group"
             >
               <Instagram className="text-primary mb-4" size={28} />
               <h3 className="font-display text-lg text-foreground mb-2">Instagram</h3>
-              <p className="font-body text-sm text-muted-foreground">@scentstudio</p>
+              <p className="font-body text-sm text-muted-foreground">@scentstudio_floracentre</p>
             </a>
 
             <div className="flex flex-col items-center p-8 bg-card border border-border text-center">

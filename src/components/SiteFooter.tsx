@@ -14,13 +14,13 @@ const SiteFooter = () => {
               Purveyors of the world's finest fragrances. Experience luxury, redefined.
             </p>
             <a
-              href="https://instagram.com/scentstudio"
+              href="https://instagram.com/scentstudio_floracentre"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-4 text-primary hover:text-gold-light transition-colors"
             >
               <Instagram className="w-5 h-5" />
-              <span className="font-body text-sm">@scentstudio</span>
+              <span className="font-body text-sm">@scentstudio_floracentre</span>
             </a>
           </div>
 
