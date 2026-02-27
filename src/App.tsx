@@ -15,6 +15,7 @@ import VIPPage from "./pages/VIPPage";
 import QuizPage from "./pages/QuizPage";
 import FindMyScentPage from "./pages/FindMyScentPage";
 import FindMyScentFab from "./components/FindMyScentFab";
+import ScrollToTop from "./components/ScrollToTop";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <FindMyScentFab />
           <Routes>
             <Route path="/" element={<Index />} />
