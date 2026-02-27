@@ -1,20 +1,29 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
 import PerfumeCard from "@/components/PerfumeCard";
 import { getPerfumesByGender } from "@/data/perfumes";
+import type { Perfume } from "@/data/perfumes";
+
+const categories = ["All", "Luxury", "Fresh", "Musky", "Sweet"] as const;
 
 const CatalogPage = () => {
   const { gender } = useParams<{ gender: string }>();
   const validGender = gender === "men" || gender === "women" ? gender : "men";
-  const perfumes = getPerfumesByGender(validGender);
+  const allPerfumes = getPerfumesByGender(validGender);
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+
+  const filteredPerfumes = activeCategory === "All"
+    ? allPerfumes
+    : allPerfumes.filter((p) => p.category === activeCategory);
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <div className="pt-24 pb-20">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <p className="font-sans text-sm tracking-[0.4em] uppercase text-primary mb-4">
               {validGender === "men" ? "For Him" : "For Her"}
             </p>
@@ -24,11 +33,34 @@ const CatalogPage = () => {
             <div className="w-16 h-px bg-primary mx-auto mt-8" />
           </div>
 
+          {/* Category Filter */}
+          <div className="flex justify-center gap-3 mb-12 flex-wrap">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`font-sans text-xs tracking-[0.2em] uppercase px-6 py-3 border transition-all duration-300 ${
+                  activeCategory === cat
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border text-muted-foreground hover:border-primary hover:text-primary"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {perfumes.map((perfume) => (
+            {filteredPerfumes.map((perfume) => (
               <PerfumeCard key={perfume.id} perfume={perfume} />
             ))}
           </div>
+
+          {filteredPerfumes.length === 0 && (
+            <p className="text-center text-muted-foreground font-body text-lg mt-8">
+              No perfumes found in this category.
+            </p>
+          )}
         </div>
       </div>
       <SiteFooter />
