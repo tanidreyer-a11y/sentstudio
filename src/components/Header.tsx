@@ -27,7 +27,7 @@ const Header = () => {
             <img
               src={logo}
               alt="Scent Studio"
-              className="h-12 w-auto"
+              className="h-12 w-auto mix-blend-lighten"
             />
           </Link>
 
