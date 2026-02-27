@@ -1,9 +1,23 @@
+import { useEffect, useRef } from "react";
 import heroImage from "@/assets/hero-perfume-bg.jpeg";
 
 const HeroSection = () => {
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (bgRef.current) {
+        const scrollY = window.scrollY;
+        bgRef.current.style.transform = `translateY(${scrollY * 0.4}px) scale(1.1)`;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0">
+      <div ref={bgRef} className="absolute inset-0 will-change-transform scale-110">
         <img
           src={heroImage}
           alt="Scent Studio luxury perfume collection"
