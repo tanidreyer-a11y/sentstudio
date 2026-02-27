@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Instagram } from "lucide-react";
 
 const SiteFooter = () => {
   return (
@@ -12,6 +13,15 @@ const SiteFooter = () => {
             <p className="font-body text-base text-muted-foreground leading-relaxed">
               Purveyors of the world's finest fragrances. Experience luxury, redefined.
             </p>
+            <a
+              href="https://instagram.com/scentstudio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 text-primary hover:text-gold-light transition-colors"
+            >
+              <Instagram className="w-5 h-5" />
+              <span className="font-body text-sm">@scentstudio</span>
+            </a>
           </div>
 
           <div>
@@ -58,13 +68,14 @@ const SiteFooter = () => {
             <div className="font-body text-base text-muted-foreground space-y-2">
               <p>Scent Studio</p>
               <p>South Africa</p>
+              <p className="mt-4 text-sm">scentstudio.fragrance@gmail.com</p>
               <a
-                href="https://wa.me/27792449607"
+                href="https://wa.me/27761328213"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block mt-4 text-primary hover:text-gold-light transition-colors"
+                className="block mt-2 text-primary hover:text-gold-light transition-colors"
               >
-                WhatsApp: +27 79 244 9607
+                WhatsApp: 076 132 8213
               </a>
             </div>
           </div>

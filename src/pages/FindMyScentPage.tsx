@@ -661,7 +661,7 @@ const ResultCard = ({
 
   const handleWhatsApp = () => {
     const message = `Hi Scent Studio! 🌟\n\nI'm ${userName}, and your Fragrance Stylist recommended:\n\n• ${perfume.name} (${selectedSize}) — R${perfume.prices[selectedSize]}\n\nI'd like to order this. Please confirm availability!`;
-    window.open(`https://wa.me/27792449607?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(`https://wa.me/27761328213?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   const image = getPerfumeImage(perfume.gender, perfume.category);

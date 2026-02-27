@@ -40,7 +40,7 @@ const VIPPage = () => {
 
           <div className="text-center">
             <a
-              href="https://wa.me/27792449607?text=Hi%20Scent%20Studio!%20I'm%20interested%20in%20VIP%20membership."
+              href="https://wa.me/27761328213?text=Hi%20Scent%20Studio!%20I'm%20interested%20in%20VIP%20membership."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-10 py-4 bg-primary text-primary-foreground font-sans text-sm tracking-[0.2em] uppercase hover:bg-gold-light transition-colors duration-300"
