@@ -23,13 +23,15 @@ const Header = () => {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-6 py-3 flex items-center justify-between">
-          <Link to="/" className="flex items-center">
-            <img
-              src={logo}
-              alt="Scent Studio"
-              className="h-14 w-auto"
-              style={{ filter: "brightness(0) saturate(100%) invert(68%) sepia(63%) saturate(600%) hue-rotate(8deg) brightness(95%) contrast(85%)" }}
-            />
+          <Link to="/" className="flex items-center relative">
+            <div className="h-14 w-auto relative" style={{ background: "hsl(40 60% 55%)" }}>
+              <img
+                src={logo}
+                alt="Scent Studio"
+                className="h-14 w-auto mix-blend-screen"
+                style={{ filter: "invert(1)" }}
+              />
+            </div>
           </Link>
 
           <div className="hidden md:flex items-center gap-10">
