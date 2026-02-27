@@ -52,7 +52,7 @@ const ValuesSection = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="font-sans text-xs tracking-[0.2em] uppercase">
-              <Link to="/quiz">Find My Scent AI</Link>
+              <Link to="/find-my-scent">Find My Scent AI</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="font-sans text-xs tracking-[0.2em] uppercase">
               <Link to="/catalog/men">Shop the Catalog</Link>
