@@ -2,6 +2,8 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import FeaturedCollection from "@/components/FeaturedCollection";
 import AboutSection from "@/components/AboutSection";
+import ValuesSection from "@/components/ValuesSection";
+import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import SiteFooter from "@/components/SiteFooter";
 import { Link } from "react-router-dom";
@@ -40,6 +42,8 @@ const Index = () => {
 
       <FeaturedCollection />
       <AboutSection />
+      <ValuesSection />
+      <ProblemSolutionSection />
       <NewsletterSection />
       <SiteFooter />
     </div>
