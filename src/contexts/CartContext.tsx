@@ -70,7 +70,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     const message = `🛍️ *New Order — Scent Studio*\n\n👤 Customer: ${customerName}\n\n📦 Items:\n${itemsList}\n\n💰 *Total: R${totalPrice}*\n\nPlease confirm availability and payment details. Thank you!`;
 
-    return `https://wa.me/27792449607?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/27761328213?text=${encodeURIComponent(message)}`;
   };
 
   return (
