@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Search, ShoppingBag } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import SearchDialog from "@/components/SearchDialog";
+import logo from "@/assets/scent-studio-logo.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,8 +23,13 @@ const Header = () => {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/" className="font-display text-2xl font-semibold tracking-wider text-primary">
-            SCENT STUDIO
+          <Link to="/" className="flex items-center">
+            <img
+              src={logo}
+              alt="Scent Studio"
+              className="h-10 w-auto"
+              style={{ filter: "brightness(0) saturate(100%) invert(72%) sepia(58%) saturate(487%) hue-rotate(1deg) brightness(92%) contrast(89%)" }}
+            />
           </Link>
 
           <div className="hidden md:flex items-center gap-10">
