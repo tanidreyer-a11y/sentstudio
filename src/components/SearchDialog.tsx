@@ -54,8 +54,11 @@ const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
                   <div className="w-12 h-12 rounded bg-muted flex items-center justify-center">
                     <span className="font-display text-lg text-primary">{perfume.name[0]}</span>
                   </div>
-                  <div>
-                    <p className="font-display text-sm text-foreground">{perfume.name}</p>
+                   <div>
+                    <p className="font-display text-sm text-foreground">
+                      <span className="font-sans text-[10px] tracking-wider text-muted-foreground/70 uppercase mr-1">Inspired by</span>
+                      {perfume.name}
+                    </p>
                     <p className="font-sans text-xs text-muted-foreground tracking-wider">
                       {perfume.category} · {perfume.gender === "men" ? "For Him" : "For Her"} · From R{perfume.prices["30ml"]}
                     </p>

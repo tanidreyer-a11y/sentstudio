@@ -13,8 +13,9 @@ const AboutSection = () => {
           <div className="w-16 h-px bg-primary mx-auto mb-10" />
           <p className="font-body text-lg md:text-xl text-secondary-foreground/80 leading-relaxed mb-8">
             At Scent Studio, we believe that fragrance is the most intimate form of self-expression.
-            Each scent in our collection has been sourced from the world's most revered perfume
-            houses, selected for its artistry, complexity, and ability to evoke profound emotion.
+            Our collection features premium oil-based perfumes inspired by the world's most beloved
+            designer fragrances — crafted to deliver the same captivating scent profiles at a
+            fraction of the price, with longer-lasting intensity.
           </p>
           <p className="font-body text-lg md:text-xl text-secondary-foreground/80 leading-relaxed">
             Our expert consultants guide you through a sensory journey, helping you discover

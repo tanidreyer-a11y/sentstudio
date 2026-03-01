@@ -71,6 +71,7 @@ const PerfumeDetailPage = () => {
               <p className="font-sans text-xs tracking-[0.3em] uppercase text-muted-foreground mb-2">
                 {perfume.category} · {perfume.gender === "men" ? "For Him" : "For Her"}
               </p>
+              <p className="font-sans text-xs tracking-wider text-muted-foreground/70 uppercase mb-1">Inspired by</p>
               <h1 className="font-display text-4xl md:text-5xl font-light text-foreground mb-4">
                 {perfume.name}
               </h1>
