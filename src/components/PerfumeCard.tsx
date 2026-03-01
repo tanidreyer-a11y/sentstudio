@@ -54,6 +54,7 @@ const PerfumeCard = ({ perfume }: { perfume: Perfume }) => {
         {perfume.category}
       </p>
       <Link to={`/perfume/${perfume.id}`}>
+        <p className="font-sans text-[10px] tracking-wider text-muted-foreground/70 uppercase mb-0.5">Inspired by</p>
         <h3 className="font-display text-lg font-medium text-foreground mb-1 hover:text-primary transition-colors">
           {perfume.name}
         </h3>

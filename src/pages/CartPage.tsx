@@ -43,6 +43,7 @@ const CartPage = () => {
                     </div>
 
                     <div className="flex-1 min-w-0">
+                      <p className="font-sans text-[10px] tracking-wider text-muted-foreground/70 uppercase">Inspired by</p>
                       <h3 className="font-display text-lg text-foreground">{item.name}</h3>
                       <p className="font-sans text-xs tracking-wider text-muted-foreground">
                         {item.size} · {item.gender === "men" ? "For Him" : "For Her"}

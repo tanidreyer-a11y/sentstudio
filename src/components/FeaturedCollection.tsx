@@ -37,6 +37,7 @@ const FeaturedCard = ({ perfume }: { perfume: { id: string; name: string; catego
       <p className="font-sans text-xs tracking-[0.3em] uppercase text-muted-foreground mb-2">
         {perfume.category}
       </p>
+      <p className="font-sans text-[10px] tracking-wider text-muted-foreground/70 uppercase mb-0.5">Inspired by</p>
       <h3 className="font-display text-xl font-medium text-foreground mb-1 group-hover:text-primary transition-colors">
         {perfume.name}
       </h3>
@@ -58,6 +59,9 @@ const FeaturedCollection = () => {
           <h2 className="font-display text-4xl md:text-5xl font-light text-foreground">
             Featured Fragrances
           </h2>
+          <p className="font-body text-base text-muted-foreground mt-4 max-w-lg mx-auto">
+            Oil-based perfumes inspired by your favourite designer brands
+          </p>
           <div className="w-16 h-px bg-primary mx-auto mt-8" />
         </div>
 

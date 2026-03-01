@@ -35,8 +35,8 @@ const HeroSection = () => {
           <span className="italic font-medium text-gold-gradient">Define You</span>
         </h1>
         <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mx-auto animate-fade-up-delay-2 mb-10">
-          Discover our curated collection of the world's most exquisite fragrances,
-          handpicked for the discerning connoisseur.
+          Premium oil-based fragrances inspired by the world's most iconic designer scents.
+          Long-lasting, affordable, and crafted for the discerning connoisseur.
         </p>
         <a
           href="#collection"
