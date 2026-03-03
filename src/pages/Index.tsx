@@ -14,6 +14,15 @@ const Index = () => {
       <Header />
       <HeroSection />
 
+      {/* Legal Disclaimer Banner */}
+      <div className="bg-secondary border-y border-border">
+        <div className="container mx-auto px-6 py-3 text-center">
+          <p className="font-sans text-xs tracking-[0.15em] uppercase text-muted-foreground">
+            All fragrances are inspired alternatives — not original designer products
+          </p>
+        </div>
+      </div>
+
       {/* For Him / For Her Links */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-6">
