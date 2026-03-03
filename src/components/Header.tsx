@@ -23,11 +23,11 @@ const Header = () => {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-6 py-3 flex items-center justify-between">
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center bg-[#131110] text-secondary-foreground mx-[9px] my-[9px] text-6xl">
             <img
+
               alt="Scent Studio"
-              className="h-16 w-auto brightness-125 contrast-110 drop-shadow-[0_0_8px_hsl(40,60%,55%,0.4)]"
-              src="/lovable-uploads/21cc2a8c-4744-49c6-bcf6-2f67fee9f74c.png" />
+              className="h-12 w-auto mix-blend-lighten" src="/lovable-uploads/21cc2a8c-4744-49c6-bcf6-2f67fee9f74c.png" />
             
           </Link>
 
