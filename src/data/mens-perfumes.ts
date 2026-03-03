@@ -55,7 +55,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Amberwood", "Ambergris"],
       base: ["Fir Resin", "Cedar"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -181,7 +181,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Benzoin", "Tonka Bean"],
       base: ["Amber", "Vanilla", "Styrax"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 100, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -209,7 +209,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Black Pepper", "Nutmeg", "Violet"],
       base: ["Vetiver", "Oud", "Amber", "Vanilla"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -337,7 +337,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Tobacco", "Honey", "Rose"],
       base: ["Vanilla", "Sandalwood", "Benzoin"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -351,7 +351,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Sage", "Cinnamon"],
       base: ["Chestnut", "Vanilla", "Amber"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 150, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -407,7 +407,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Tonka Bean", "Vanilla", "Cacao"],
       base: ["Dried Fruits", "Wood Sap"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -507,7 +507,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Rose", "Patchouli"],
       base: ["Oud", "Musk"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -521,7 +521,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["White Oud", "Rose"],
       base: ["Musk", "Amber", "Sandalwood"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 100, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -535,7 +535,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["White Oud", "Rose"],
       base: ["Musk", "Sandalwood"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -633,7 +633,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Damask Rose", "Labdanum"],
       base: ["Oud", "Sandalwood", "Vetiver"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -661,7 +661,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Oud", "Raspberry"],
       base: ["Leather", "Amber", "Musk"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -689,7 +689,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Agarwood (Oud)", "Lavender"],
       base: ["Musk", "Patchouli"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 160, "50ml": 250, "100ml": 490 },
     image: "/placeholder.svg",
   },
   {
@@ -717,7 +717,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Amberwood", "Jasmine"],
       base: ["Musk", "Vanilla", "Sandalwood"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 160, "50ml": 250, "100ml": 490 },
     image: "/placeholder.svg",
   },
   {
@@ -731,7 +731,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Oud", "Benzoin"],
       base: ["Raspberry", "Amber", "Incense"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 100, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -745,7 +745,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Oud", "Jasmine"],
       base: ["Musk", "Cedar", "Vanilla"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -759,7 +759,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Rose", "Oud"],
       base: ["Benzoin", "Vanilla", "Sandalwood"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -773,7 +773,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Jasmine Sambac", "Leather"],
       base: ["Patchouli", "Amber", "Moss"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 100, "50ml": 150, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -787,7 +787,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Oud", "Sandalwood", "Vetiver"],
       base: ["Tonka Bean", "Amber"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -845,7 +845,7 @@ export const mensPerfumes: Perfume[] = [
       middle: ["Jasmine", "Rose", "Nutmeg"],
       base: ["Musk", "Amber", "Cedarwood"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
