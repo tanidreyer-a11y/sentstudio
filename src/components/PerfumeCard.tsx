@@ -3,12 +3,14 @@ import { Heart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { Perfume } from "@/data/perfumes";
 import { getPerfumeImage } from "@/lib/perfume-images";
+import { getPricingTier, tierLabel } from "@/lib/pricing-tiers";
 import { useState } from "react";
 import { toast } from "sonner";
 
 const PerfumeCard = ({ perfume }: { perfume: Perfume }) => {
   const { addToCart } = useCart();
   const [wishlisted, setWishlisted] = useState(false);
+  const tier = getPricingTier(perfume);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -39,6 +41,15 @@ const PerfumeCard = ({ perfume }: { perfume: Perfume }) => {
             </span>
           )}
           <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 transition-colors duration-500" />
+          {tier !== "standard" && (
+            <span className={`absolute top-3 left-3 px-3 py-1 font-sans text-[10px] tracking-[0.15em] uppercase backdrop-blur-sm ${
+              tier === "ultra-premium"
+                ? "bg-primary/90 text-primary-foreground"
+                : "bg-secondary/90 text-primary border border-primary/30"
+            }`}>
+              {tierLabel[tier]}
+            </span>
+          )}
         </div>
       </Link>
 
