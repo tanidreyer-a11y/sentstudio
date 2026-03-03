@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
 import { getPerfumeById } from "@/data/perfumes";
 import { getPerfumeImage } from "@/lib/perfume-images";
+import { getPricingTier, tierLabel } from "@/lib/pricing-tiers";
 import { useCart } from "@/contexts/CartContext";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
@@ -68,9 +69,20 @@ const PerfumeDetailPage = () => {
 
             {/* Details */}
             <div className="flex flex-col justify-center">
-              <p className="font-sans text-xs tracking-[0.3em] uppercase text-muted-foreground mb-2">
-                {perfume.category} · {perfume.gender === "men" ? "For Him" : "For Her"}
-              </p>
+              <div className="flex items-center gap-3 mb-2">
+                <p className="font-sans text-xs tracking-[0.3em] uppercase text-muted-foreground">
+                  {perfume.category} · {perfume.gender === "men" ? "For Him" : "For Her"}
+                </p>
+                {getPricingTier(perfume) !== "standard" && (
+                  <span className={`px-3 py-1 font-sans text-[10px] tracking-[0.15em] uppercase ${
+                    getPricingTier(perfume) === "ultra-premium"
+                      ? "bg-primary/90 text-primary-foreground"
+                      : "bg-secondary text-primary border border-primary/30"
+                  }`}>
+                    {tierLabel[getPricingTier(perfume)]}
+                  </span>
+                )}
+              </div>
               <p className="font-sans text-xs tracking-wider text-muted-foreground/70 uppercase mb-1">Inspired by</p>
               <h1 className="font-display text-4xl md:text-5xl font-light text-foreground mb-4">
                 {perfume.name}
