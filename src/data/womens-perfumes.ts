@@ -125,7 +125,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Rose Absolute", "Cinnamon", "Clove"],
       base: ["Patchouli", "Sandalwood", "Incense"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 280 },
     image: "/placeholder.svg",
   },
   {
@@ -209,7 +209,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Hibiscus", "Jasmine", "Rose"],
       base: ["Patchouli", "Amber", "Musk"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -223,7 +223,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Musks", "Vanilla"],
       base: ["Amber", "Sandalwood", "Tonka Bean"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
 
@@ -407,7 +407,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Vanilla Orchid", "Patchouli"],
       base: ["Musk", "Amber", "Guaiac Wood"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -421,7 +421,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Praline", "Oak"],
       base: ["Tonka Bean", "Vanilla", "Sandalwood"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 280 },
     image: "/placeholder.svg",
   },
   {
@@ -435,7 +435,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Peony", "Heliotrope"],
       base: ["Vanilla", "Musk", "Sandalwood"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 160, "50ml": 250, "100ml": 490 },
     image: "/placeholder.svg",
   },
   {
@@ -449,7 +449,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Rum", "Davana", "Cardamom"],
       base: ["Patchouli", "Vanilla", "Cashmeran"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -463,7 +463,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Bulgarian Rose", "Heliotrope"],
       base: ["Vanilla", "Amber", "Sandalwood"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 160, "50ml": 250, "100ml": 490 },
     image: "/placeholder.svg",
   },
   {
@@ -535,7 +535,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["White Oud", "Jasmine"],
       base: ["Musk", "Amber"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -577,7 +577,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Saffron", "Juniper"],
       base: ["Vanilla", "Benzoin", "Frankincense"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -605,7 +605,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Vetiver", "Orris"],
       base: ["Golden Vanilla", "Amber", "Musk"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
@@ -619,7 +619,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Mahogany", "Suede"],
       base: ["Vanilla", "Leather", "Guaiac Wood"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
 
@@ -789,7 +789,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Osmanthus", "Orange Blossom"],
       base: ["Roasted Cocoa", "Vanilla", "Cedar"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
     image: "/placeholder.svg",
   },
   {
