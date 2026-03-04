@@ -1,7 +1,34 @@
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const NewsletterSection = () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+
+    setLoading(true);
+    const { error } = await supabase
+      .from("newsletter_subscribers")
+      .insert({ email: email.trim().toLowerCase() });
+
+    setLoading(false);
+
+    if (error) {
+      if (error.code === "23505") {
+        toast({ title: "You're already subscribed!", description: "This email is already in our list." });
+      } else {
+        toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
+      }
+      return;
+    }
+
+    toast({ title: "Welcome to our world ✨", description: "You've been added to our exclusive list." });
+    setEmail("");
+  };
 
   return (
     <section className="py-28 bg-background">
@@ -17,11 +44,12 @@ const NewsletterSection = () => {
             Receive exclusive access to new arrivals, private events, and curated fragrance insights.
           </p>
           <form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
             className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto"
           >
             <input
               type="email"
+              required
               placeholder="Your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -29,9 +57,10 @@ const NewsletterSection = () => {
             />
             <button
               type="submit"
-              className="px-8 py-4 bg-primary text-primary-foreground font-sans text-sm tracking-[0.2em] uppercase hover:bg-gold-light transition-colors duration-300"
+              disabled={loading}
+              className="px-8 py-4 bg-primary text-primary-foreground font-sans text-sm tracking-[0.2em] uppercase hover:bg-gold-light transition-colors duration-300 disabled:opacity-50"
             >
-              Subscribe
+              {loading ? "Subscribing..." : "Subscribe"}
             </button>
           </form>
         </div>
