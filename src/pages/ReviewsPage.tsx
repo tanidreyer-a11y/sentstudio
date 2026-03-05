@@ -7,12 +7,12 @@ const reviews = [
   { name: "Blake", rating: 5, text: "I recently tried Scent Studio, and I'm genuinely impressed. Their perfumes are unique, long-lasting, and have a quality that stands out from the rest. Each scent feels carefully crafted and truly unforgettable. If you're looking for something distinctive and refined, I highly recommend Scent Studio.", perfume: "Creed Aventus" },
   { name: "Kealen", rating: 5, text: "My experience with Scent Studio was amazing. The quality of their products and attention to detail are next level. Definitely my go-to spot for unique, long-lasting scents.", perfume: "Dior Sauvage" },
   { name: "Leila", rating: 5, text: "Scent Studio has created a beautiful experience for me. Their scents not only smell phenomenal, but last incredibly long. When I step out of the house wearing their Good Girl fragrance, I get countless compliments and questions about what scent I'm wearing. Their fragrances are also oil-based, benefitting the skin more compared to most perfume brands. I highly recommend buying from Scent Studio!", perfume: "Good Girl" },
-  { name: "Thandi M.", rating: 5, text: "Velvet Rose is absolutely divine! I get compliments every single time I wear it. Scent Studio has the best collection.", perfume: "Velvet Rose" },
-  { name: "James K.", rating: 5, text: "Royal Oud is my go-to. The longevity is incredible — lasts from morning to night. Highly recommend!", perfume: "Royal Oud" },
-  { name: "Lerato N.", rating: 5, text: "The customer service is top-notch. They helped me find the perfect scent through WhatsApp. Sugar Kiss is perfection.", perfume: "Sugar Kiss" },
-  { name: "David P.", rating: 4, text: "Dark Tobacco is unique and classy. I've never smelled anything like it. Great quality at a fair price.", perfume: "Dark Tobacco" },
-  { name: "Nomsa S.", rating: 5, text: "I bought Cherry Blossom Dream as a gift and she loved it! Beautiful packaging too. Will definitely be back.", perfume: "Cherry Blossom Dream" },
-  { name: "Michael R.", rating: 5, text: "Savage Musk is beast mode. The projection is insane and it just works. My new signature.", perfume: "Savage Musk" },
+  { name: "Thandi M.", rating: 5, text: "Velvet Rose is absolutely divine! I get compliments every single time I wear it. Scent Studio has the best collection.", perfume: "Chanel No.5" },
+  { name: "James K.", rating: 5, text: "Royal Oud is my go-to. The longevity is incredible — lasts from morning to night. Highly recommend!", perfume: "Tom Ford Noir" },
+  { name: "Lerato N.", rating: 5, text: "The customer service is top-notch. They helped me find the perfect scent through WhatsApp. Sugar Kiss is perfection.", perfume: "Versace Bright Crystal" },
+  { name: "David P.", rating: 4, text: "Dark Tobacco is unique and classy. I've never smelled anything like it. Great quality at a fair price.", perfume: "Tom Ford Tobacco Vanille" },
+  { name: "Nomsa S.", rating: 5, text: "I bought it as a gift and she loved it! Beautiful packaging too. Will definitely be back.", perfume: "Viktor & Rolf Flowerbomb" },
+  { name: "Michael R.", rating: 5, text: "Beast mode. The projection is insane and it just works. My new signature.", perfume: "Paco Rabanne Invictus" },
 ];
 
 const ReviewsPage = () => {
