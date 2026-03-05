@@ -13,14 +13,24 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   const [current, setCurrent] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const changeTo = useCallback((index: number) => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrent(index);
+      setTimeout(() => setIsAnimating(false), 50);
+    }, 300);
+  }, [isAnimating]);
 
   const next = useCallback(() => {
-    setCurrent((c) => (c + 1) % testimonials.length);
-  }, []);
+    changeTo((current + 1) % testimonials.length);
+  }, [current, changeTo]);
 
   const prev = useCallback(() => {
-    setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
-  }, []);
+    changeTo((current - 1 + testimonials.length) % testimonials.length);
+  }, [current, changeTo]);
 
   useEffect(() => {
     const timer = setInterval(next, 6000);
@@ -39,7 +49,11 @@ const TestimonialsSection = () => {
         </div>
 
         <div className="max-w-3xl mx-auto relative">
-          <div className="min-h-[220px] flex flex-col items-center justify-center text-center px-8 md:px-16">
+          <div
+            className={`min-h-[220px] flex flex-col items-center justify-center text-center px-8 md:px-16 transition-all duration-300 ease-in-out ${
+              isAnimating ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"
+            }`}
+          >
             <div className="flex gap-1 mb-6">
               {Array.from({ length: 5 }).map((_, j) => (
                 <Star key={j} size={16} className="text-primary fill-primary" />
@@ -73,7 +87,7 @@ const TestimonialsSection = () => {
             {testimonials.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setCurrent(i)}
+                onClick={() => changeTo(i)}
                 className={`w-2 h-2 rounded-full transition-colors ${
                   i === current ? "bg-primary" : "bg-border"
                 }`}
