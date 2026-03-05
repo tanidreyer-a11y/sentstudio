@@ -35,7 +35,7 @@ const AboutPage = () => {
               {[
                 { number: "500+", label: "Happy Customers" },
                 { number: "16+", label: "Curated Fragrances" },
-                { number: "100%", label: "Authentic Products" },
+                { number: "100%", label: "Oil-Based Formulas" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
                   <p className="font-display text-3xl text-primary mb-2">{stat.number}</p>
