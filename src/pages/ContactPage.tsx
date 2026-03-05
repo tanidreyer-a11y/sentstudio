@@ -45,8 +45,8 @@ const ContactPage = () => {
 
             <div className="flex flex-col items-center p-8 bg-card border border-border text-center">
               <MapPin className="text-primary mb-4" size={28} />
-              <h3 className="font-display text-lg text-foreground mb-2">Location</h3>
-              <p className="font-body text-sm text-muted-foreground">South Africa</p>
+              <h3 className="font-display text-lg text-foreground mb-2">In-Store</h3>
+              <p className="font-body text-sm text-muted-foreground">Flora Shopping Centre, Conrad Street &amp; Ontdekkers Rd, Florida North, Roodepoort</p>
             </div>
           </div>
 

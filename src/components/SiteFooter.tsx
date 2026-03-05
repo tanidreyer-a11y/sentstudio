@@ -49,7 +49,7 @@ const SiteFooter = () => {
               {[
                 { label: "About", path: "/about" },
                 { label: "Reviews", path: "/reviews" },
-                { label: "VIP Membership", path: "/vip" },
+                
                 { label: "Contact", path: "/contact" },
               ].map((link) => (
                 <Link
@@ -66,8 +66,9 @@ const SiteFooter = () => {
           <div>
             <h4 className="font-sans text-xs tracking-[0.3em] uppercase text-foreground mb-6">Contact</h4>
             <div className="font-body text-base text-muted-foreground space-y-2">
-              <p>Scent Studio</p>
-              <p>South Africa</p>
+              <p>Flora Shopping Centre</p>
+              <p>Conrad St &amp; Ontdekkers Rd</p>
+              <p>Florida North, Roodepoort</p>
               <p className="mt-4 text-sm">scentstudio.fragrance@gmail.com</p>
               <a
                 href="https://wa.me/27761328213"

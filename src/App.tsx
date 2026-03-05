@@ -11,7 +11,7 @@ import CartPage from "./pages/CartPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import ReviewsPage from "./pages/ReviewsPage";
-import VIPPage from "./pages/VIPPage";
+
 import QuizPage from "./pages/QuizPage";
 import FindMyScentPage from "./pages/FindMyScentPage";
 import FindMyScentFab from "./components/FindMyScentFab";
@@ -37,7 +37,7 @@ const App = () => (
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/reviews" element={<ReviewsPage />} />
-            <Route path="/vip" element={<VIPPage />} />
+            
             <Route path="/quiz" element={<QuizPage />} />
             <Route path="/find-my-scent" element={<FindMyScentPage />} />
             <Route path="*" element={<NotFound />} />
