@@ -69,7 +69,7 @@ const SiteFooter = () => {
               <p>Flora Shopping Centre</p>
               <p>Conrad St &amp; Ontdekkers Rd</p>
               <p>Florida North, Roodepoort</p>
-              <p className="mt-4 text-sm">scentstudio.fragrance@gmail.com</p>
+              <a href="mailto:scentstudio.fragrance@gmail.com" className="block mt-4 text-sm hover:text-primary transition-colors">scentstudio.fragrance@gmail.com</a>
               <a
                 href="https://wa.me/27761328213"
                 target="_blank"
