@@ -5,6 +5,7 @@ import AboutSection from "@/components/AboutSection";
 import ValuesSection from "@/components/ValuesSection";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import NewsletterSection from "@/components/NewsletterSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
 import { Link } from "react-router-dom";
 
@@ -53,6 +54,7 @@ const Index = () => {
       <AboutSection />
       <ValuesSection />
       <ProblemSolutionSection />
+      <TestimonialsSection />
       <NewsletterSection />
       <SiteFooter />
     </div>
