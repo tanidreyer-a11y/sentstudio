@@ -26,11 +26,14 @@ const ContactPage = () => {
               <p className="font-body text-sm text-muted-foreground">076 132 8213</p>
             </a>
 
-            <div className="flex flex-col items-center p-8 bg-card border border-border text-center">
+            <a
+              href="mailto:scentstudio.fragrance@gmail.com"
+              className="flex flex-col items-center p-8 bg-card border border-border hover:border-primary transition-colors text-center group"
+            >
               <Mail className="text-primary mb-4" size={28} />
               <h3 className="font-display text-lg text-foreground mb-2">Email</h3>
               <p className="font-body text-sm text-muted-foreground break-all">scentstudio.fragrance@gmail.com</p>
-            </div>
+            </a>
 
             <a
               href="https://instagram.com/scentstudio_floracentre"
@@ -43,11 +46,16 @@ const ContactPage = () => {
               <p className="font-body text-sm text-muted-foreground">@scentstudio_floracentre</p>
             </a>
 
-            <div className="flex flex-col items-center p-8 bg-card border border-border text-center">
+            <a
+              href="https://maps.google.com/?q=Flora+Shopping+Centre,+Conrad+St+%26+Ontdekkers+Rd,+Florida+North,+Roodepoort"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center p-8 bg-card border border-border hover:border-primary transition-colors text-center group"
+            >
               <MapPin className="text-primary mb-4" size={28} />
               <h3 className="font-display text-lg text-foreground mb-2">In-Store</h3>
               <p className="font-body text-sm text-muted-foreground">Flora Shopping Centre, Conrad Street &amp; Ontdekkers Rd, Florida North, Roodepoort</p>
-            </div>
+            </a>
           </div>
 
           <div className="max-w-4xl mx-auto mt-16">
