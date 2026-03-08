@@ -10,9 +10,9 @@ export interface Perfume {
     base: string[];
   };
   prices: {
-    "30ml": number;
-    "50ml": number;
-    "100ml": number;
+    "30ml"?: number;
+    "50ml"?: number;
+    "100ml"?: number;
   };
   image: string;
 }

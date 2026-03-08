@@ -13,7 +13,7 @@ export const womensPerfumes: Perfume[] = [
       middle: ["Iris", "Jasmine", "Rose"],
       base: ["Vanilla", "Sandalwood", "Vetiver"],
     },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    prices: { "30ml": 100, "100ml": 280 },
     image: "/placeholder.svg",
   },
   {
