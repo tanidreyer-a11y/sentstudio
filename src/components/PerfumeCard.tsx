@@ -12,13 +12,16 @@ const PerfumeCard = ({ perfume }: { perfume: Perfume }) => {
   const [wishlisted, setWishlisted] = useState(false);
   const tier = getPricingTier(perfume);
 
+  const defaultSize = perfume.prices["50ml"] != null ? "50ml" : perfume.prices["30ml"] != null ? "30ml" : "100ml";
+  const defaultPrice = perfume.prices[defaultSize] || 0;
+
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     addToCart({
       perfumeId: perfume.id,
       name: perfume.name,
-      size: "50ml",
-      price: perfume.prices["50ml"],
+      size: defaultSize as "30ml" | "50ml" | "100ml",
+      price: defaultPrice,
       gender: perfume.gender,
     });
     toast.success(`${perfume.name} added to cart`);
@@ -71,7 +74,7 @@ const PerfumeCard = ({ perfume }: { perfume: Perfume }) => {
         </h3>
       </Link>
       <p className="font-sans text-sm tracking-wider text-primary font-medium mb-3">
-        From R{perfume.prices["30ml"]}
+        From R{perfume.prices["30ml"] || perfume.prices["50ml"] || perfume.prices["100ml"]}
       </p>
       <button
         onClick={handleAddToCart}
