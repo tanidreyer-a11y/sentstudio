@@ -66,6 +66,7 @@ Deno.serve(async (req) => {
         currency: "ZAR",
         successUrl: `${successUrl}?orderId=${order.id}`,
         cancelUrl: `${cancelUrl}?orderId=${order.id}`,
+        failureUrl: `${cancelUrl}?orderId=${order.id}`,
         metadata: {
           orderId: order.id,
           customerName,
