@@ -15,7 +15,8 @@ const PerfumeDetailPage = () => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const perfume = getPerfumeById(id || "");
-  const [selectedSize, setSelectedSize] = useState<"30ml" | "50ml" | "100ml">("50ml");
+  const availableSizes = (["30ml", "50ml", "100ml"] as const).filter(s => perfume?.prices[s] != null);
+  const [selectedSize, setSelectedSize] = useState<"30ml" | "50ml" | "100ml">(availableSizes.includes("50ml") ? "50ml" : availableSizes[0] || "30ml");
 
   if (!perfume) {
     return (
@@ -30,13 +31,13 @@ const PerfumeDetailPage = () => {
       perfumeId: perfume.id,
       name: perfume.name,
       size: selectedSize,
-      price: perfume.prices[selectedSize],
+      price: perfume.prices[selectedSize] || 0,
       gender: perfume.gender,
     });
     toast.success(`${perfume.name} (${selectedSize}) added to cart`);
   };
 
-  const sizes: ("30ml" | "50ml" | "100ml")[] = ["30ml", "50ml", "100ml"];
+  const sizes = availableSizes;
 
   return (
     <div className="min-h-screen bg-background">
