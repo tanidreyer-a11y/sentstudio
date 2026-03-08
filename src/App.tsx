@@ -16,6 +16,8 @@ import QuizPage from "./pages/QuizPage";
 import FindMyScentPage from "./pages/FindMyScentPage";
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
+import PaymentSuccessPage from "./pages/PaymentSuccessPage";
+import PaymentCancelPage from "./pages/PaymentCancelPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

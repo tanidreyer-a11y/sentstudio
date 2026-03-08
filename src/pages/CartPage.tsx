@@ -1,18 +1,60 @@
 import { useState } from "react";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus, Trash2, Loader2 } from "lucide-react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
 import { useCart } from "@/contexts/CartContext";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const CartPage = () => {
   const { items, removeFromCart, updateQuantity, clearCart, totalPrice, getWhatsAppMessage } = useCart();
   const [customerName, setCustomerName] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const { toast } = useToast();
 
   const handleOrder = () => {
-    if (!customerName.trim()) {
-      return;
-    }
+    if (!customerName.trim()) return;
     window.open(getWhatsAppMessage(customerName.trim()), "_blank");
+  };
+
+  const handlePayOnline = async () => {
+    if (!customerName.trim()) return;
+    setIsProcessing(true);
+
+    try {
+      const origin = window.location.origin;
+      const { data, error } = await supabase.functions.invoke("create-yoco-checkout", {
+        body: {
+          customerName: customerName.trim(),
+          items: items.map((i) => ({
+            name: i.name,
+            size: i.size,
+            quantity: i.quantity,
+            price: i.price,
+            gender: i.gender,
+          })),
+          totalAmount: totalPrice,
+          successUrl: `${origin}/payment/success`,
+          cancelUrl: `${origin}/payment/cancel`,
+        },
+      });
+
+      if (error) throw error;
+      if (data?.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      } else {
+        throw new Error("No checkout URL returned");
+      }
+    } catch (err: any) {
+      console.error("Payment error:", err);
+      toast({
+        title: "Payment Error",
+        description: "Could not initiate payment. Please try WhatsApp ordering instead.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -99,9 +141,30 @@ const CartPage = () => {
                 </div>
 
                 <button
+                  onClick={handlePayOnline}
+                  disabled={!customerName.trim() || isProcessing}
+                  className="w-full py-4 bg-primary text-primary-foreground font-sans text-sm tracking-[0.2em] uppercase hover:bg-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                >
+                  {isProcessing ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      Processing…
+                    </>
+                  ) : (
+                    "Pay Online (Card)"
+                  )}
+                </button>
+
+                <div className="relative flex items-center gap-4">
+                  <div className="flex-1 h-px bg-border" />
+                  <span className="font-sans text-xs tracking-wider text-muted-foreground uppercase">or</span>
+                  <div className="flex-1 h-px bg-border" />
+                </div>
+
+                <button
                   onClick={handleOrder}
                   disabled={!customerName.trim()}
-                  className="w-full py-4 bg-primary text-primary-foreground font-sans text-sm tracking-[0.2em] uppercase hover:bg-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-4 border border-primary text-primary font-sans text-sm tracking-[0.2em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Order via WhatsApp
                 </button>
