@@ -32,6 +32,39 @@ export type Database = {
         }
         Relationships: []
       }
+      orders: {
+        Row: {
+          created_at: string
+          currency: string
+          customer_name: string
+          id: string
+          items: Json
+          status: string
+          total_amount: number
+          yoco_checkout_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          customer_name: string
+          id?: string
+          items: Json
+          status?: string
+          total_amount: number
+          yoco_checkout_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          customer_name?: string
+          id?: string
+          items?: Json
+          status?: string
+          total_amount?: number
+          yoco_checkout_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -16,6 +16,8 @@ import QuizPage from "./pages/QuizPage";
 import FindMyScentPage from "./pages/FindMyScentPage";
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
+import PaymentSuccessPage from "./pages/PaymentSuccessPage";
+import PaymentCancelPage from "./pages/PaymentCancelPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,7 +39,8 @@ const App = () => (
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/reviews" element={<ReviewsPage />} />
-            
+            <Route path="/payment/success" element={<PaymentSuccessPage />} />
+            <Route path="/payment/cancel" element={<PaymentCancelPage />} />
             <Route path="/quiz" element={<QuizPage />} />
             <Route path="/find-my-scent" element={<FindMyScentPage />} />
             <Route path="*" element={<NotFound />} />
