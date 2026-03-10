@@ -101,20 +101,6 @@ export const mensPerfumes: Perfume[] = [
     image: "/placeholder.svg",
   },
   {
-    id: "ysl-la-nuit-de-lhomme",
-    name: "YSL La Nuit de L'Homme",
-    category: "Luxury",
-    gender: "men",
-    description: "A seductive evening scent blending cardamom and lavender with warm tonka bean.",
-    notes: {
-      top: ["Cardamom", "Bergamot"],
-      middle: ["Cedar", "Lavender"],
-      base: ["Vetiver", "Tonka Bean"],
-    },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
-    image: "/placeholder.svg",
-  },
-  {
     id: "hermes-terre-dhermes",
     name: "Hermès Terre d'Hermès",
     category: "Luxury",
