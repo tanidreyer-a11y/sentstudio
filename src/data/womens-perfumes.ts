@@ -87,20 +87,6 @@ export const womensPerfumes: Perfume[] = [
     image: "/placeholder.svg",
   },
   {
-    id: "dg-the-one-women",
-    name: "D&G The One (Women)",
-    category: "Luxury",
-    gender: "women",
-    description: "A warm, sensual fragrance with mandarin, peach, and velvety vanilla.",
-    notes: {
-      top: ["Bergamot", "Mandarin", "Peach"],
-      middle: ["Lily", "Plum", "Jasmine"],
-      base: ["Vanilla", "Musk", "Amber"],
-    },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
-    image: "/placeholder.svg",
-  },
-  {
     id: "gucci-rush",
     name: "Gucci Rush",
     category: "Luxury",
