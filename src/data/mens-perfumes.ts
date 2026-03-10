@@ -243,20 +243,6 @@ export const mensPerfumes: Perfume[] = [
     image: "/placeholder.svg",
   },
   {
-    id: "thierry-mugler-angel-men",
-    name: "Thierry Mugler Angel (Men)",
-    category: "Sweet",
-    gender: "men",
-    description: "A groundbreaking gourmand with lavender, caramel, and rich patchouli.",
-    notes: {
-      top: ["Lavender", "Mint"],
-      middle: ["Caramel", "Coffee", "Honey"],
-      base: ["Vanilla", "Tonka Bean", "Patchouli"],
-    },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
-    image: "/placeholder.svg",
-  },
-  {
     id: "dunhill-desire-red",
     name: "Dunhill Desire Red",
     category: "Sweet",
