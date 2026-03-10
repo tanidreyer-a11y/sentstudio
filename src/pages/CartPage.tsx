@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { Minus, Plus, Trash2, Loader2 } from "lucide-react";
+import { Minus, Plus, Trash2, Loader2, Store, Car, Truck } from "lucide-react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
 import { useCart } from "@/contexts/CartContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
+type DeliveryOption = "pickup" | "uber" | "courier";
+
 const CartPage = () => {
   const { items, removeFromCart, updateQuantity, clearCart, totalPrice, getWhatsAppMessage } = useCart();
   const [customerName, setCustomerName] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [deliveryOption, setDeliveryOption] = useState<DeliveryOption>("pickup");
   const { toast } = useToast();
 
   const handleOrder = () => {
@@ -126,6 +129,57 @@ const CartPage = () => {
                 <div className="flex justify-between items-center">
                   <span className="font-sans text-sm tracking-[0.2em] uppercase text-muted-foreground">Total</span>
                   <span className="font-display text-2xl text-primary">R{totalPrice}</span>
+                </div>
+
+                {/* Delivery Options */}
+                <div>
+                  <label className="font-sans text-xs tracking-[0.3em] uppercase text-muted-foreground block mb-4">
+                    Delivery Method
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryOption("pickup")}
+                      className={`p-4 border text-left transition-colors ${
+                        deliveryOption === "pickup"
+                          ? "border-primary bg-primary/5"
+                          : "border-border hover:border-primary/50"
+                      }`}
+                    >
+                      <Store size={20} className="text-primary mb-2" />
+                      <p className="font-sans text-sm font-medium text-foreground">Pick Up In Store</p>
+                      <p className="font-sans text-xs text-muted-foreground mt-1">Flora Shopping Centre, Roodepoort</p>
+                      <p className="font-sans text-xs text-primary mt-1 font-medium">Free</p>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryOption("uber")}
+                      className={`p-4 border text-left transition-colors ${
+                        deliveryOption === "uber"
+                          ? "border-primary bg-primary/5"
+                          : "border-border hover:border-primary/50"
+                      }`}
+                    >
+                      <Car size={20} className="text-primary mb-2" />
+                      <p className="font-sans text-sm font-medium text-foreground">Uber / Bolt Delivery</p>
+                      <p className="font-sans text-xs text-muted-foreground mt-1">Order your own ride from Flora Centre</p>
+                      <p className="font-sans text-xs text-accent-foreground mt-1 font-medium">Recommended for local</p>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryOption("courier")}
+                      className={`p-4 border text-left transition-colors ${
+                        deliveryOption === "courier"
+                          ? "border-primary bg-primary/5"
+                          : "border-border hover:border-primary/50"
+                      }`}
+                    >
+                      <Truck size={20} className="text-primary mb-2" />
+                      <p className="font-sans text-sm font-medium text-foreground">Aromax Courier</p>
+                      <p className="font-sans text-xs text-muted-foreground mt-1">Long distance & international shipping</p>
+                      <p className="font-sans text-xs text-muted-foreground mt-1 font-medium">Coming Soon</p>
+                    </button>
+                  </div>
                 </div>
 
                 <div>
