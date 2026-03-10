@@ -371,20 +371,6 @@ export const mensPerfumes: Perfume[] = [
 
   // ===== MUSKY =====
   {
-    id: "gucci-guilty-men",
-    name: "Gucci Guilty (Men)",
-    category: "Musky",
-    gender: "men",
-    description: "A contemporary aromatic fougère with bold lemon, lavender, and earthy patchouli.",
-    notes: {
-      top: ["Lemon", "Lavender"],
-      middle: ["Orange Blossom"],
-      base: ["Patchouli", "Cedarwood"],
-    },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
-    image: "/placeholder.svg",
-  },
-  {
     id: "bvlgari-man-in-black",
     name: "Bvlgari Man in Black",
     category: "Musky",
