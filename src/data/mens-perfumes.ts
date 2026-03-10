@@ -595,20 +595,6 @@ export const mensPerfumes: Perfume[] = [
     image: "/placeholder.svg",
   },
   {
-    id: "lattafa-jasoor",
-    name: "Lattafa Jasoor",
-    category: "Musky",
-    gender: "men",
-    description: "A bold Arabian-inspired fragrance with apple, oud, and warm amber.",
-    notes: {
-      top: ["Apple", "Bergamot"],
-      middle: ["Cedar", "Oud"],
-      base: ["Musk", "Amber", "Vanilla"],
-    },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
-    image: "/placeholder.svg",
-  },
-  {
     id: "lattafa-qaaed",
     name: "Lattafa Qaa'ed",
     category: "Musky",
