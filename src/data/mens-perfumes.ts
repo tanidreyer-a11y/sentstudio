@@ -807,20 +807,6 @@ export const mensPerfumes: Perfume[] = [
     image: "/placeholder.svg",
   },
   {
-    id: "hugo-boss-bottled-tonic",
-    name: "Hugo Boss Bottled Tonic",
-    category: "Fresh",
-    gender: "men",
-    description: "A vibrant, energizing citrus fragrance with ginger and vetiver.",
-    notes: {
-      top: ["Lemon", "Grapefruit"],
-      middle: ["Ginger", "Apple"],
-      base: ["Vetiver", "Cedarwood"],
-    },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
-    image: "/placeholder.svg",
-  },
-  {
     id: "jpg-scandal-pour-homme",
     name: "JPG Scandal Pour Homme",
     category: "Fresh",

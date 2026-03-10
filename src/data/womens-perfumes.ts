@@ -667,20 +667,6 @@ export const womensPerfumes: Perfume[] = [
     image: "/placeholder.svg",
   },
   {
-    id: "chloe-love-story",
-    name: "Chloé Love Story",
-    category: "Fresh",
-    gender: "women",
-    description: "A delicate, romantic floral with neroli, orange blossom, and cashmere musk.",
-    notes: {
-      top: ["Neroli", "Pear"],
-      middle: ["Orange Blossom", "Stephanotis"],
-      base: ["Cedar", "Cashmere Musk"],
-    },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
-    image: "/placeholder.svg",
-  },
-  {
     id: "clinique-happy",
     name: "Clinique Happy",
     category: "Fresh",
