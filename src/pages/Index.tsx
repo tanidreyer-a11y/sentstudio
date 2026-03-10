@@ -47,6 +47,17 @@ const Index = () => {
               </div>
             </Link>
           </div>
+
+          {/* Find My Scent CTA */}
+          <div className="text-center mt-12">
+            <p className="font-sans text-sm text-muted-foreground mb-4">Not sure what suits you?</p>
+            <Link
+              to="/find-my-scent"
+              className="inline-block px-10 py-4 border border-primary text-primary font-sans text-sm tracking-[0.2em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+            >
+              Find My Scent
+            </Link>
+          </div>
         </div>
       </section>
 

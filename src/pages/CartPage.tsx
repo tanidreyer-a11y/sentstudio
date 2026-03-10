@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { Minus, Plus, Trash2, Loader2 } from "lucide-react";
+import { Minus, Plus, Trash2, Loader2, Store, Car, Truck } from "lucide-react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
 import { useCart } from "@/contexts/CartContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
+type DeliveryOption = "pickup" | "uber" | "courier";
+
 const CartPage = () => {
   const { items, removeFromCart, updateQuantity, clearCart, totalPrice, getWhatsAppMessage } = useCart();
   const [customerName, setCustomerName] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [deliveryOption, setDeliveryOption] = useState<DeliveryOption>("pickup");
   const { toast } = useToast();
 
   const handleOrder = () => {
