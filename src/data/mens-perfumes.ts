@@ -229,20 +229,6 @@ export const mensPerfumes: Perfume[] = [
     image: "/placeholder.svg",
   },
   {
-    id: "valentino-uomo",
-    name: "Valentino Uomo",
-    category: "Sweet",
-    gender: "men",
-    description: "An elegant Italian fragrance where coffee meets gianduja cream for irresistible warmth.",
-    notes: {
-      top: ["Bergamot", "Myrtle"],
-      middle: ["Coffee", "Gianduja Cream"],
-      base: ["Cedar", "Tonka Bean"],
-    },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
-    image: "/placeholder.svg",
-  },
-  {
     id: "versace-eros",
     name: "Versace Eros",
     category: "Sweet",
