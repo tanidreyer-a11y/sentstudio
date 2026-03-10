@@ -115,20 +115,6 @@ export const mensPerfumes: Perfume[] = [
     image: "/placeholder.svg",
   },
   {
-    id: "dg-the-one-men",
-    name: "D&G The One (Men)",
-    category: "Luxury",
-    gender: "men",
-    description: "A sophisticated oriental spicy fragrance with tobacco warmth and amber depth.",
-    notes: {
-      top: ["Grapefruit", "Coriander", "Basil"],
-      middle: ["Ginger", "Cardamom", "Orange Blossom"],
-      base: ["Amber", "Tobacco", "Cedar"],
-    },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
-    image: "/placeholder.svg",
-  },
-  {
     id: "chanel-bleu-de-chanel",
     name: "Chanel Bleu de Chanel",
     category: "Luxury",
