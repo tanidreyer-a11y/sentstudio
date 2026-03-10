@@ -695,20 +695,6 @@ export const mensPerfumes: Perfume[] = [
 
   // ===== FRESH =====
   {
-    id: "armani-acqua-di-gio",
-    name: "Armani Acqua di Gio",
-    category: "Fresh",
-    gender: "men",
-    description: "A timeless aquatic fragrance capturing the spirit of the Mediterranean.",
-    notes: {
-      top: ["Calabrian Bergamot", "Neroli"],
-      middle: ["Marine Notes", "Persimmon", "Rosemary"],
-      base: ["Patchouli", "Cedarwood", "Musk"],
-    },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
-    image: "/placeholder.svg",
-  },
-  {
     id: "paco-rabanne-one-million-elixir",
     name: "Paco Rabanne One Million Elixir",
     category: "Fresh",
