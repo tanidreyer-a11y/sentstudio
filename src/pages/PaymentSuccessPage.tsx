@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CheckCircle, MessageCircle } from "lucide-react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
 import { useCart } from "@/contexts/CartContext";
-import { supabase } from "@/integrations/supabase/client";
+import { ARAMEX_FEE } from "@/components/DeliveryForm";
+import type { DeliveryDetails } from "@/components/DeliveryForm";
 
 interface OrderItem {
   name: string;
@@ -14,46 +15,56 @@ interface OrderItem {
   gender: string;
 }
 
+interface PendingOrder {
+  items: OrderItem[];
+  delivery: DeliveryDetails;
+  totalPrice: number;
+  deliveryFee: number;
+  grandTotal: number;
+}
+
+const deliveryLabels: Record<string, string> = {
+  pickup: "Customer Pickup",
+  uber: "Uber Pickup Selected",
+  local: "Local Delivery",
+  aramex: "Aramex Courier",
+};
+
 const PaymentSuccessPage = () => {
-  const [searchParams] = useSearchParams();
-  const orderId = searchParams.get("orderId");
   const { clearCart } = useCart();
-  const [order, setOrder] = useState<{
-    customer_name: string;
-    items: OrderItem[];
-    total_amount: number;
-  } | null>(null);
+  const [order, setOrder] = useState<PendingOrder | null>(null);
   const [whatsAppSent, setWhatsAppSent] = useState(false);
 
   useEffect(() => {
     clearCart();
+    const raw = localStorage.getItem("pending_order");
+    if (raw) {
+      try {
+        setOrder(JSON.parse(raw));
+      } catch {}
+      localStorage.removeItem("pending_order");
+    }
   }, []);
-
-  useEffect(() => {
-    if (!orderId) return;
-    const fetchOrder = async () => {
-      const { data } = await supabase
-        .from("orders")
-        .select("customer_name, items, total_amount")
-        .eq("id", orderId)
-        .single();
-      if (data) {
-        setOrder({
-          customer_name: data.customer_name,
-          items: data.items as unknown as OrderItem[],
-          total_amount: data.total_amount,
-        });
-      }
-    };
-    fetchOrder();
-  }, [orderId]);
 
   const getWhatsAppUrl = () => {
     if (!order) return "#";
     const itemsList = order.items
-      .map((i) => `• ${i.name} (${i.size}) x${i.quantity} — R${i.price * i.quantity}`)
+      .map(
+        (i) => `• ${i.name} (${i.size}) x${i.quantity} — R${i.price * i.quantity}`
+      )
       .join("\n");
-    const message = `✅ *Payment Confirmed — Scent Studio*\n\n👤 Customer: ${order.customer_name}\n📋 Order Ref: ${orderId?.slice(0, 8).toUpperCase()}\n\n📦 Items:\n${itemsList}\n\n💰 *Total Paid: R${order.total_amount}*\n\nPayment received via Yoco. Please prepare the order. Thank you!`;
+
+    const d = order.delivery;
+    const needsAddress = d.option === "local" || d.option === "aramex";
+    const addressBlock = needsAddress
+      ? `\n\n📍 Address:\n${d.streetAddress}\n${d.cityArea}\n${d.postalCode}`
+      : "";
+
+    const feeInfo =
+      d.option === "aramex" ? `\n🚚 Delivery Fee: R${ARAMEX_FEE}` : "";
+
+    const message = `✅ *Payment Confirmed — Scent Studio*\n\n👤 Customer: ${d.fullName}\n📞 Phone: ${d.phone}\n\n📦 Items:\n${itemsList}\n\n🚀 Delivery: ${deliveryLabels[d.option]}${addressBlock}${d.instructions ? `\n📝 Instructions: ${d.instructions}` : ""}${feeInfo}\n\n💰 *Total Paid: R${order.grandTotal}*\n\nPayment received via Yoco. Please prepare the order. Thank you!`;
+
     return `https://wa.me/27761328213?text=${encodeURIComponent(message)}`;
   };
 
@@ -72,20 +83,16 @@ const PaymentSuccessPage = () => {
             Payment Successful
           </h1>
           <div className="w-16 h-px bg-primary mx-auto my-8" />
-          <p className="font-body text-lg text-muted-foreground mb-2">
+          <p className="font-body text-lg text-muted-foreground mb-8">
             Thank you for your order! We'll prepare your fragrances with care.
           </p>
-          {orderId && (
-            <p className="font-sans text-xs tracking-wider text-muted-foreground/70 mb-8">
-              Order ref: {orderId.slice(0, 8).toUpperCase()}
-            </p>
-          )}
 
-          {/* WhatsApp Confirmation */}
+          {/* WhatsApp confirmation */}
           {order && !whatsAppSent && (
             <div className="bg-card border border-border p-6 mb-8 max-w-md mx-auto">
               <p className="font-sans text-sm text-muted-foreground mb-4">
-                Tap below to send your order confirmation via WhatsApp so we can start preparing it right away.
+                Tap below to send your order confirmation via WhatsApp so we can
+                start preparing it right away.
               </p>
               <button
                 onClick={handleWhatsAppConfirm}
@@ -101,6 +108,14 @@ const PaymentSuccessPage = () => {
             <div className="bg-card border border-primary/30 p-4 mb-8 max-w-md mx-auto">
               <p className="font-sans text-sm text-primary">
                 ✓ WhatsApp confirmation sent! We'll get back to you shortly.
+              </p>
+            </div>
+          )}
+
+          {!order && (
+            <div className="bg-card border border-border p-4 mb-8 max-w-md mx-auto">
+              <p className="font-sans text-sm text-muted-foreground">
+                Order details unavailable. Please contact us on WhatsApp to confirm.
               </p>
             </div>
           )}
