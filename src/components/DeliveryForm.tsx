@@ -41,13 +41,6 @@ const deliveryOptions: {
     extra: "You arrange",
   },
   {
-    value: "local",
-    icon: MapPin,
-    title: "Local Delivery",
-    description: "We deliver to your door",
-    extra: "Area-based",
-  },
-  {
     value: "aramex",
     icon: Truck,
     title: "Aramex Courier",
