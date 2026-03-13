@@ -1,6 +1,6 @@
 import { Store, Car, Truck, MapPin } from "lucide-react";
 
-export type DeliveryOption = "pickup" | "uber" | "local" | "aramex";
+export type DeliveryOption = "pickup" | "uber" | "aramex";
 
 export interface DeliveryDetails {
   option: DeliveryOption;
