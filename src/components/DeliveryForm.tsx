@@ -49,8 +49,7 @@ const deliveryOptions: {
   },
 ];
 
-const needsAddress = (option: DeliveryOption) =>
-  option === "local" || option === "aramex";
+const needsAddress = (option: DeliveryOption) => option === "aramex";
 
 const DeliveryForm = ({ details, onChange }: DeliveryFormProps) => {
   const update = (partial: Partial<DeliveryDetails>) =>
