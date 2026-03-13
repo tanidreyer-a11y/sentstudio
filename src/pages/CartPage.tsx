@@ -1,46 +1,77 @@
 import { useState } from "react";
-import { Minus, Plus, Trash2, Loader2, Store, Car, Truck } from "lucide-react";
+import { Minus, Plus, Trash2, Loader2 } from "lucide-react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
 import { useCart } from "@/contexts/CartContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-
-type DeliveryOption = "pickup" | "uber" | "courier";
+import DeliveryForm, {
+  type DeliveryDetails,
+  ARAMEX_FEE,
+} from "@/components/DeliveryForm";
 
 const CartPage = () => {
-  const { items, removeFromCart, updateQuantity, clearCart, totalPrice, getWhatsAppMessage } = useCart();
-  const [customerName, setCustomerName] = useState("");
+  const { items, removeFromCart, updateQuantity, clearCart, totalPrice } =
+    useCart();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [deliveryOption, setDeliveryOption] = useState<DeliveryOption>("pickup");
   const { toast } = useToast();
 
-  const handleOrder = () => {
-    if (!customerName.trim()) return;
-    window.open(getWhatsAppMessage(customerName.trim()), "_blank");
-  };
+  const [delivery, setDelivery] = useState<DeliveryDetails>({
+    option: "pickup",
+    fullName: "",
+    phone: "",
+    streetAddress: "",
+    cityArea: "",
+    postalCode: "",
+    instructions: "",
+  });
+
+  const needsAddress =
+    delivery.option === "local" || delivery.option === "aramex";
+
+  const deliveryFee = delivery.option === "aramex" ? ARAMEX_FEE : 0;
+  const grandTotal = totalPrice + deliveryFee;
+
+  const isFormValid =
+    delivery.fullName.trim() &&
+    delivery.phone.trim() &&
+    (!needsAddress ||
+      (delivery.streetAddress.trim() &&
+        delivery.cityArea.trim() &&
+        delivery.postalCode.trim()));
 
   const handlePayOnline = async () => {
-    if (!customerName.trim()) return;
+    if (!isFormValid) return;
     setIsProcessing(true);
 
     try {
+      // Store order details in localStorage for success page
+      const orderData = {
+        items: items.map((i) => ({
+          name: i.name,
+          size: i.size,
+          quantity: i.quantity,
+          price: i.price,
+          gender: i.gender,
+        })),
+        delivery,
+        totalPrice,
+        deliveryFee,
+        grandTotal,
+      };
+      localStorage.setItem("pending_order", JSON.stringify(orderData));
+
       const origin = window.location.origin;
-      const { data, error } = await supabase.functions.invoke("create-yoco-checkout", {
-        body: {
-          customerName: customerName.trim(),
-          items: items.map((i) => ({
-            name: i.name,
-            size: i.size,
-            quantity: i.quantity,
-            price: i.price,
-            gender: i.gender,
-          })),
-          totalAmount: totalPrice,
-          successUrl: `${origin}/payment/success`,
-          cancelUrl: `${origin}/payment/cancel`,
-        },
-      });
+      const { data, error } = await supabase.functions.invoke(
+        "create-yoco-checkout",
+        {
+          body: {
+            amount: grandTotal,
+            successUrl: `${origin}/payment/success`,
+            cancelUrl: `${origin}/payment/cancel`,
+          },
+        }
+      );
 
       if (error) throw error;
       if (data?.checkoutUrl) {
@@ -52,12 +83,41 @@ const CartPage = () => {
       console.error("Payment error:", err);
       toast({
         title: "Payment Error",
-        description: "Could not initiate payment. Please try WhatsApp ordering instead.",
+        description:
+          "Could not initiate payment. Please try WhatsApp ordering instead.",
         variant: "destructive",
       });
     } finally {
       setIsProcessing(false);
     }
+  };
+
+  const getWhatsAppUrl = () => {
+    const itemsList = items
+      .map(
+        (i) =>
+          `• ${i.name} (${i.size}) x${i.quantity} — R${i.price * i.quantity}`
+      )
+      .join("\n");
+
+    const deliveryLabels: Record<string, string> = {
+      pickup: "Store Pickup",
+      uber: "Uber Pickup Selected",
+      local: "Local Delivery",
+      aramex: "Aramex Courier",
+    };
+
+    let addressBlock = "";
+    if (needsAddress) {
+      addressBlock = `\n\n📍 Address:\n${delivery.streetAddress}\n${delivery.cityArea}\n${delivery.postalCode}`;
+    }
+
+    const feeInfo =
+      delivery.option === "aramex" ? `\n🚚 Delivery Fee: R${ARAMEX_FEE}` : "";
+
+    const message = `🛍️ *New Order — Scent Studio*\n\n👤 Customer: ${delivery.fullName}\n📞 Phone: ${delivery.phone}\n\n📦 Items:\n${itemsList}\n\n🚀 Delivery: ${deliveryLabels[delivery.option]}${addressBlock}${delivery.instructions ? `\n📝 Instructions: ${delivery.instructions}` : ""}${feeInfo}\n\n💰 *Total: R${grandTotal}*\n\nPlease confirm availability. Thank you!`;
+
+    return `https://wa.me/27761328213?text=${encodeURIComponent(message)}`;
   };
 
   return (
@@ -66,52 +126,80 @@ const CartPage = () => {
       <div className="pt-24 pb-20">
         <div className="container mx-auto px-6 max-w-3xl">
           <div className="text-center mb-16">
-            <p className="font-sans text-sm tracking-[0.4em] uppercase text-primary mb-4">Your Selection</p>
-            <h1 className="font-display text-4xl md:text-5xl font-light text-foreground">Shopping Cart</h1>
+            <p className="font-sans text-sm tracking-[0.4em] uppercase text-primary mb-4">
+              Your Selection
+            </p>
+            <h1 className="font-display text-4xl md:text-5xl font-light text-foreground">
+              Shopping Cart
+            </h1>
             <div className="w-16 h-px bg-primary mx-auto mt-8" />
           </div>
 
           {items.length === 0 ? (
             <div className="text-center py-20">
-              <p className="font-body text-lg text-muted-foreground">Your cart is empty.</p>
+              <p className="font-body text-lg text-muted-foreground">
+                Your cart is empty.
+              </p>
             </div>
           ) : (
             <>
+              {/* Cart items */}
               <div className="space-y-6 mb-12">
                 {items.map((item) => (
                   <div
                     key={`${item.perfumeId}-${item.size}`}
-                    className="flex items-center gap-6 p-6 bg-card border border-border"
+                    className="flex items-center gap-4 sm:gap-6 p-4 sm:p-6 bg-card border border-border"
                   >
-                    <div className="w-16 h-16 bg-secondary flex items-center justify-center shrink-0">
-                      <span className="font-display text-2xl text-primary/40">{item.name[0]}</span>
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-secondary flex items-center justify-center shrink-0">
+                      <span className="font-display text-xl sm:text-2xl text-primary/40">
+                        {item.name[0]}
+                      </span>
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <p className="font-sans text-[10px] tracking-wider text-muted-foreground/70 uppercase">Inspired by</p>
-                      <h3 className="font-display text-lg text-foreground">{item.name}</h3>
+                      <p className="font-sans text-[10px] tracking-wider text-muted-foreground/70 uppercase">
+                        Inspired by
+                      </p>
+                      <h3 className="font-display text-base sm:text-lg text-foreground truncate">
+                        {item.name}
+                      </h3>
                       <p className="font-sans text-xs tracking-wider text-muted-foreground">
-                        {item.size} · {item.gender === "men" ? "For Him" : "For Her"}
+                        {item.size} ·{" "}
+                        {item.gender === "men" ? "For Him" : "For Her"}
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <button
-                        onClick={() => updateQuantity(item.perfumeId, item.size, item.quantity - 1)}
+                        onClick={() =>
+                          updateQuantity(
+                            item.perfumeId,
+                            item.size,
+                            item.quantity - 1
+                          )
+                        }
                         className="w-8 h-8 border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
                       >
                         <Minus size={14} />
                       </button>
-                      <span className="font-sans text-sm w-6 text-center text-foreground">{item.quantity}</span>
+                      <span className="font-sans text-sm w-6 text-center text-foreground">
+                        {item.quantity}
+                      </span>
                       <button
-                        onClick={() => updateQuantity(item.perfumeId, item.size, item.quantity + 1)}
+                        onClick={() =>
+                          updateQuantity(
+                            item.perfumeId,
+                            item.size,
+                            item.quantity + 1
+                          )
+                        }
                         className="w-8 h-8 border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
                       >
                         <Plus size={14} />
                       </button>
                     </div>
 
-                    <p className="font-sans text-sm tracking-wider text-primary font-medium w-20 text-right">
+                    <p className="font-sans text-sm tracking-wider text-primary font-medium w-16 sm:w-20 text-right">
                       R{item.price * item.quantity}
                     </p>
 
@@ -125,78 +213,45 @@ const CartPage = () => {
                 ))}
               </div>
 
+              {/* Delivery form */}
+              <div className="border-t border-border pt-8 mb-8">
+                <DeliveryForm details={delivery} onChange={setDelivery} />
+              </div>
+
+              {/* Totals & actions */}
               <div className="border-t border-border pt-8 space-y-6">
-                <div className="flex justify-between items-center">
-                  <span className="font-sans text-sm tracking-[0.2em] uppercase text-muted-foreground">Total</span>
-                  <span className="font-display text-2xl text-primary">R{totalPrice}</span>
-                </div>
-
-                {/* Delivery Options */}
-                <div>
-                  <label className="font-sans text-xs tracking-[0.3em] uppercase text-muted-foreground block mb-4">
-                    Delivery Method
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setDeliveryOption("pickup")}
-                      className={`p-4 border text-left transition-colors ${
-                        deliveryOption === "pickup"
-                          ? "border-primary bg-primary/5"
-                          : "border-border hover:border-primary/50"
-                      }`}
-                    >
-                      <Store size={20} className="text-primary mb-2" />
-                      <p className="font-sans text-sm font-medium text-foreground">Pick Up In Store</p>
-                      <p className="font-sans text-xs text-muted-foreground mt-1">Flora Shopping Centre, Roodepoort</p>
-                      <p className="font-sans text-xs text-primary mt-1 font-medium">Free</p>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setDeliveryOption("uber")}
-                      className={`p-4 border text-left transition-colors ${
-                        deliveryOption === "uber"
-                          ? "border-primary bg-primary/5"
-                          : "border-border hover:border-primary/50"
-                      }`}
-                    >
-                      <Car size={20} className="text-primary mb-2" />
-                      <p className="font-sans text-sm font-medium text-foreground">Uber / Bolt Delivery</p>
-                      <p className="font-sans text-xs text-muted-foreground mt-1">Order your own ride from Flora Centre</p>
-                      <p className="font-sans text-xs text-accent-foreground mt-1 font-medium">Recommended for local</p>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setDeliveryOption("courier")}
-                      className={`p-4 border text-left transition-colors ${
-                        deliveryOption === "courier"
-                          ? "border-primary bg-primary/5"
-                          : "border-border hover:border-primary/50"
-                      }`}
-                    >
-                      <Truck size={20} className="text-primary mb-2" />
-                      <p className="font-sans text-sm font-medium text-foreground">Aromax Courier</p>
-                      <p className="font-sans text-xs text-muted-foreground mt-1">Long distance & international shipping</p>
-                      <p className="font-sans text-xs text-muted-foreground mt-1 font-medium">Coming Soon</p>
-                    </button>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="font-sans text-sm text-muted-foreground">
+                      Subtotal
+                    </span>
+                    <span className="font-sans text-sm text-foreground">
+                      R{totalPrice}
+                    </span>
                   </div>
-                </div>
-
-                <div>
-                  <label className="font-sans text-xs tracking-[0.3em] uppercase text-muted-foreground block mb-2">
-                    Your Name
-                  </label>
-                  <input
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder="Enter your name for the order"
-                    className="w-full px-6 py-4 bg-card border border-border font-body text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                  />
+                  {deliveryFee > 0 && (
+                    <div className="flex justify-between items-center">
+                      <span className="font-sans text-sm text-muted-foreground">
+                        Aramex Delivery
+                      </span>
+                      <span className="font-sans text-sm text-foreground">
+                        R{deliveryFee}
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex justify-between items-center pt-2 border-t border-border">
+                    <span className="font-sans text-sm tracking-[0.2em] uppercase text-muted-foreground">
+                      Total
+                    </span>
+                    <span className="font-display text-2xl text-primary">
+                      R{grandTotal}
+                    </span>
+                  </div>
                 </div>
 
                 <button
                   onClick={handlePayOnline}
-                  disabled={!customerName.trim() || isProcessing}
+                  disabled={!isFormValid || isProcessing}
                   className="w-full py-4 bg-primary text-primary-foreground font-sans text-sm tracking-[0.2em] uppercase hover:bg-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 >
                   {isProcessing ? (
@@ -205,19 +260,24 @@ const CartPage = () => {
                       Processing…
                     </>
                   ) : (
-                    "Pay Online (Card)"
+                    `Pay Online — R${grandTotal}`
                   )}
                 </button>
 
                 <div className="relative flex items-center gap-4">
                   <div className="flex-1 h-px bg-border" />
-                  <span className="font-sans text-xs tracking-wider text-muted-foreground uppercase">or</span>
+                  <span className="font-sans text-xs tracking-wider text-muted-foreground uppercase">
+                    or
+                  </span>
                   <div className="flex-1 h-px bg-border" />
                 </div>
 
                 <button
-                  onClick={handleOrder}
-                  disabled={!customerName.trim()}
+                  onClick={() => {
+                    if (!isFormValid) return;
+                    window.open(getWhatsAppUrl(), "_blank");
+                  }}
+                  disabled={!isFormValid}
                   className="w-full py-4 border border-primary text-primary font-sans text-sm tracking-[0.2em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Order via WhatsApp

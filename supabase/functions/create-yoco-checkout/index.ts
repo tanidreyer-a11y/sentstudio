@@ -1,5 +1,3 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
@@ -12,9 +10,9 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { customerName, items, totalAmount, successUrl, cancelUrl } = await req.json();
+    const { amount, successUrl, cancelUrl } = await req.json();
 
-    if (!customerName || !items?.length || !totalAmount) {
+    if (!amount || !successUrl || !cancelUrl) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -29,32 +27,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Create order in database
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-    );
-
-    const { data: order, error: orderError } = await supabase
-      .from("orders")
-      .insert({
-        customer_name: customerName,
-        items,
-        total_amount: totalAmount,
-        status: "pending",
-      })
-      .select("id")
-      .single();
-
-    if (orderError) {
-      console.error("Order creation error:", orderError);
-      return new Response(JSON.stringify({ error: "Failed to create order" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-
-    // Create Yoco checkout
+    // Create Yoco checkout — no database storage
     const yocoRes = await fetch("https://payments.yoco.com/api/checkouts", {
       method: "POST",
       headers: {
@@ -62,15 +35,11 @@ Deno.serve(async (req) => {
         Authorization: `Bearer ${YOCO_SECRET_KEY}`,
       },
       body: JSON.stringify({
-        amount: totalAmount * 100, // Yoco expects cents
+        amount: Math.round(amount * 100), // Yoco expects cents
         currency: "ZAR",
-        successUrl: `${successUrl}?orderId=${order.id}`,
-        cancelUrl: `${cancelUrl}?orderId=${order.id}`,
-        failureUrl: `${cancelUrl}?orderId=${order.id}`,
-        metadata: {
-          orderId: order.id,
-          customerName,
-        },
+        successUrl,
+        cancelUrl,
+        failureUrl: cancelUrl,
       }),
     });
 
@@ -84,14 +53,8 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Update order with Yoco checkout ID
-    await supabase
-      .from("orders")
-      .update({ yoco_checkout_id: yocoData.id })
-      .eq("id", order.id);
-
     return new Response(
-      JSON.stringify({ checkoutUrl: yocoData.redirectUrl, orderId: order.id }),
+      JSON.stringify({ checkoutUrl: yocoData.redirectUrl }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err) {
