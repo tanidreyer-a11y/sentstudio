@@ -26,9 +26,7 @@ const CartPage = () => {
     instructions: "",
   });
 
-  const needsAddress =
-    delivery.option === "local" || delivery.option === "aramex";
-
+  const needsAddress = delivery.option === "aramex";
   const deliveryFee = delivery.option === "aramex" ? ARAMEX_FEE : 0;
   const grandTotal = totalPrice + deliveryFee;
 

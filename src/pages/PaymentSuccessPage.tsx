@@ -55,7 +55,7 @@ const PaymentSuccessPage = () => {
       .join("\n");
 
     const d = order.delivery;
-    const needsAddress = d.option === "local" || d.option === "aramex";
+    const needsAddress = d.option === "aramex";
     const addressBlock = needsAddress
       ? `\n\n📍 Address:\n${d.streetAddress}\n${d.cityArea}\n${d.postalCode}`
       : "";
