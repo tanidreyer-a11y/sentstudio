@@ -92,10 +92,13 @@ const CartPage = () => {
 
   const getWhatsAppUrl = () => {
     const itemsList = items
-      .map(
-        (i) =>
-          `• ${i.name} (${i.size}) x${i.quantity} — R${i.price * i.quantity}`
-      )
+      .map((i) => {
+        const base = `• ${i.name} (${i.size}) x${i.quantity} — R${i.price * i.quantity}`;
+        if (i.customBlend) {
+          return `${base}\n  Blend: ${i.customBlend.fragrances.join(" + ")} | Oil: ${i.customBlend.oilConcentration}%`;
+        }
+        return base;
+      })
       .join("\n");
 
     const deliveryLabels: Record<string, string> = {
