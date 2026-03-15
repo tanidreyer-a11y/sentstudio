@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import FeaturedCollection from "@/components/FeaturedCollection";
+import SignatureFragranceSection from "@/components/SignatureFragranceSection";
 import AboutSection from "@/components/AboutSection";
 import ValuesSection from "@/components/ValuesSection";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
@@ -25,35 +26,35 @@ const Index = () => {
       </div>
 
       {/* For Him / For Her Links */}
-      <section className="py-20 bg-background">
+      <section className="bg-background py-20">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <Link
               to="/catalog/men"
-              className="group relative overflow-hidden bg-secondary h-64 flex items-center justify-center border border-border hover:border-primary transition-colors duration-500"
+              className="group relative flex h-64 items-center justify-center overflow-hidden border border-border bg-secondary transition-colors duration-500 hover:border-primary"
             >
               <div className="text-center">
-                <p className="font-sans text-xs tracking-[0.4em] uppercase text-muted-foreground mb-2">Collection</p>
-                <h3 className="font-display text-3xl font-light text-foreground group-hover:text-primary transition-colors">For Him</h3>
+                <p className="mb-2 font-sans text-xs uppercase tracking-[0.4em] text-muted-foreground">Collection</p>
+                <h3 className="font-display text-3xl font-light text-foreground transition-colors group-hover:text-primary">For Him</h3>
               </div>
             </Link>
             <Link
               to="/catalog/women"
-              className="group relative overflow-hidden bg-secondary h-64 flex items-center justify-center border border-border hover:border-primary transition-colors duration-500"
+              className="group relative flex h-64 items-center justify-center overflow-hidden border border-border bg-secondary transition-colors duration-500 hover:border-primary"
             >
               <div className="text-center">
-                <p className="font-sans text-xs tracking-[0.4em] uppercase text-muted-foreground mb-2">Collection</p>
-                <h3 className="font-display text-3xl font-light text-foreground group-hover:text-primary transition-colors">For Her</h3>
+                <p className="mb-2 font-sans text-xs uppercase tracking-[0.4em] text-muted-foreground">Collection</p>
+                <h3 className="font-display text-3xl font-light text-foreground transition-colors group-hover:text-primary">For Her</h3>
               </div>
             </Link>
           </div>
 
           {/* Find My Scent CTA */}
-          <div className="text-center mt-12">
-            <p className="font-sans text-sm text-muted-foreground mb-4">Not sure what suits you?</p>
+          <div className="mt-12 text-center">
+            <p className="mb-4 font-sans text-sm text-muted-foreground">Not sure what suits you?</p>
             <Link
               to="/find-my-scent"
-              className="inline-block px-10 py-4 border border-primary text-primary font-sans text-sm tracking-[0.2em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+              className="inline-block border border-primary px-10 py-4 font-sans text-sm uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:bg-primary hover:text-primary-foreground"
             >
               Find My Scent
             </Link>
@@ -62,6 +63,7 @@ const Index = () => {
       </section>
 
       <FeaturedCollection />
+      <SignatureFragranceSection />
       <AboutSection />
       <ValuesSection />
       <ProblemSolutionSection />

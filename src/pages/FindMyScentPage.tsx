@@ -533,7 +533,7 @@ const FindMyScentPage = () => {
                           {msg.options.map((opt) => (
                             <button
                               key={opt.value}
-                              onClick={() => handleOptionClick(opt.value, opt.label)}
+                              onClick={() => handleOptionClick(opt.value)}
                               className="rounded-full border border-border bg-card/50 px-4 py-2 font-sans text-xs tracking-wider text-muted-foreground transition-all duration-300 hover:border-primary hover:text-primary"
                             >
                               {opt.label}
