@@ -72,8 +72,8 @@ const SignatureFragranceSection = () => {
 
   const handleCreateBlend = () => {
     const blendList = selectedFragrances.length > 0 ? selectedFragrances.join(", ") : "Not selected yet";
-    const message = `Hi Scent Studio ✨%0A%0AI'd like to create my Signature Fragrance:%0A• Bottle size: ${selectedSize}%0A• Fragrances: ${blendList}%0A• Oil concentration: ${oilConcentration}%25%0A%0APlease guide me with the next step.`;
-    window.open(`https://wa.me/27761328213?text=${message}`, "_blank");
+    const message = `Hi Scent Studio ✨\n\nI'd like to create my Signature Fragrance:\n• Bottle size: ${selectedSize}\n• Fragrances: ${blendList}\n• Oil concentration: ${oilConcentration}%\n\nPlease guide me with the next step.`;
+    window.open(`https://wa.me/27761328213?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   return (
