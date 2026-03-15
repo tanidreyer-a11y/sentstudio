@@ -7,6 +7,11 @@ export interface CartItem {
   price: number;
   gender: "men" | "women";
   quantity: number;
+  /** Custom blend metadata (only for signature fragrance items) */
+  customBlend?: {
+    fragrances: string[];
+    oilConcentration: number;
+  };
 }
 
 interface CartContextType {
