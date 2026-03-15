@@ -509,27 +509,32 @@ const FindMyScentPage = () => {
           </div>
 
           {/* Chat area */}
-          <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-1" style={{ maxHeight: "calc(100vh - 320px)" }}>
+          <div
+            ref={chatContainerRef}
+            className="mb-4 flex-1 space-y-4 overflow-y-auto pr-1"
+            style={{ maxHeight: "calc(100vh - 320px)" }}
+          >
             {messages.map((msg, i) => (
               <div key={i}>
                 {msg.role === "assistant" ? (
-                  <div className="flex gap-3 items-start">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Sparkles className="w-4 h-4 text-primary" />
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/20">
+                      <Sparkles className="h-4 w-4 text-primary" />
                     </div>
                     <div className="flex-1 space-y-3">
-                      <div className="bg-card border border-border rounded-2xl rounded-tl-sm px-4 py-3 max-w-[85%]">
-                        <p className="font-body text-sm md:text-base text-foreground leading-relaxed whitespace-pre-line"
-                          dangerouslySetInnerHTML={{ __html: msg.content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }}
+                      <div className="max-w-[85%] rounded-2xl rounded-tl-sm border border-border bg-card px-4 py-3">
+                        <p
+                          className="whitespace-pre-line font-body text-sm leading-relaxed text-foreground md:text-base"
+                          dangerouslySetInnerHTML={{ __html: msg.content.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") }}
                         />
                       </div>
                       {msg.options && (
-                        <div className="flex flex-wrap gap-2 max-w-[85%]">
+                        <div className="flex max-w-[85%] flex-wrap gap-2">
                           {msg.options.map((opt) => (
                             <button
                               key={opt.value}
                               onClick={() => handleOptionClick(opt.value, opt.label)}
-                              className="px-4 py-2 border border-border bg-card/50 rounded-full font-sans text-xs tracking-wider text-muted-foreground hover:border-primary hover:text-primary transition-all duration-300"
+                              className="rounded-full border border-border bg-card/50 px-4 py-2 font-sans text-xs tracking-wider text-muted-foreground transition-all duration-300 hover:border-primary hover:text-primary"
                             >
                               {opt.label}
                             </button>
@@ -541,14 +546,13 @@ const FindMyScentPage = () => {
                   </div>
                 ) : (
                   <div className="flex justify-end">
-                    <div className="bg-primary/15 border border-primary/20 rounded-2xl rounded-tr-sm px-4 py-3 max-w-[75%]">
-                      <p className="font-body text-sm md:text-base text-foreground">{msg.content}</p>
+                    <div className="max-w-[75%] rounded-2xl rounded-tr-sm border border-primary/20 bg-primary/15 px-4 py-3">
+                      <p className="font-body text-sm text-foreground md:text-base">{msg.content}</p>
                     </div>
                   </div>
                 )}
               </div>
             ))}
-            <div ref={messagesEndRef} />
           </div>
 
           {/* Input */}
