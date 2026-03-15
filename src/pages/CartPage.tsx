@@ -155,16 +155,35 @@ const CartPage = () => {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <p className="font-sans text-[10px] tracking-wider text-muted-foreground/70 uppercase">
-                        Inspired by
-                      </p>
-                      <h3 className="font-display text-base sm:text-lg text-foreground truncate">
-                        {item.name}
-                      </h3>
-                      <p className="font-sans text-xs tracking-wider text-muted-foreground">
-                        {item.size} ·{" "}
-                        {item.gender === "men" ? "For Him" : "For Her"}
-                      </p>
+                      {item.customBlend ? (
+                        <>
+                          <p className="font-sans text-[10px] tracking-wider text-primary/70 uppercase">
+                            Signature Blend
+                          </p>
+                          <h3 className="font-display text-base sm:text-lg text-foreground truncate">
+                            Custom Blend
+                          </h3>
+                          <p className="font-sans text-xs tracking-wider text-muted-foreground">
+                            {item.size} · {item.customBlend.oilConcentration}% oil
+                          </p>
+                          <p className="font-body text-xs text-muted-foreground/80 truncate">
+                            {item.customBlend.fragrances.join(" + ")}
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="font-sans text-[10px] tracking-wider text-muted-foreground/70 uppercase">
+                            Inspired by
+                          </p>
+                          <h3 className="font-display text-base sm:text-lg text-foreground truncate">
+                            {item.name}
+                          </h3>
+                          <p className="font-sans text-xs tracking-wider text-muted-foreground">
+                            {item.size} ·{" "}
+                            {item.gender === "men" ? "For Him" : "For Her"}
+                          </p>
+                        </>
+                      )}
                     </div>
 
                     <div className="flex items-center gap-2 sm:gap-3">
