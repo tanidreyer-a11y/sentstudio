@@ -1,9 +1,12 @@
 import { useMemo, useState } from "react";
-import { Sparkles, Droplets, FlaskConical } from "lucide-react";
+import { Sparkles, Droplets, FlaskConical, Search, ShoppingCart, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
+import { Input } from "@/components/ui/input";
 import { perfumes } from "@/data/perfumes";
+import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/hooks/use-toast";
 import heroPerfumeBg from "@/assets/hero-perfume-bg.jpeg";
 import bottleWomen from "@/assets/bottle-women-30ml.jpeg";
 
@@ -43,15 +46,37 @@ const packages: Array<{
   },
 ];
 
+type GenderFilter = "all" | "men" | "women";
+type CategoryFilter = "all" | "Luxury" | "Fresh" | "Musky" | "Sweet";
+
 const SignatureFragranceSection = () => {
   const [selectedSize, setSelectedSize] = useState<BottleSize>("50ml");
   const [selectedFragrances, setSelectedFragrances] = useState<string[]>([]);
   const [oilConcentration, setOilConcentration] = useState(20);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [genderFilter, setGenderFilter] = useState<GenderFilter>("all");
+  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("all");
+  const { addToCart } = useCart();
+  const { toast } = useToast();
 
-  const fragranceLibrary = useMemo(
-    () => [...new Set(perfumes.map((perfume) => perfume.name))].sort((a, b) => a.localeCompare(b)),
-    []
-  );
+  const fragranceLibrary = useMemo(() => {
+    let filtered = perfumes;
+    if (genderFilter !== "all") filtered = filtered.filter((p) => p.gender === genderFilter);
+    if (categoryFilter !== "all") filtered = filtered.filter((p) => p.category === categoryFilter);
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      filtered = filtered.filter(
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.notes.top.some((n) => n.toLowerCase().includes(q)) ||
+          p.notes.middle.some((n) => n.toLowerCase().includes(q)) ||
+          p.notes.base.some((n) => n.toLowerCase().includes(q))
+      );
+    }
+    // Deduplicate by name and sort
+    const unique = [...new Map(filtered.map((p) => [p.name, p])).values()];
+    return unique.sort((a, b) => a.name.localeCompare(b.name));
+  }, [searchQuery, genderFilter, categoryFilter]);
 
   const limits = blendLimits[selectedSize];
 
@@ -70,11 +95,43 @@ const SignatureFragranceSection = () => {
     });
   };
 
-  const handleCreateBlend = () => {
-    const blendList = selectedFragrances.length > 0 ? selectedFragrances.join(", ") : "Not selected yet";
-    const message = `Hi Scent Studio ✨\n\nI'd like to create my Signature Fragrance:\n• Bottle size: ${selectedSize}\n• Fragrances: ${blendList}\n• Oil concentration: ${oilConcentration}%\n\nPlease guide me with the next step.`;
-    window.open(`https://wa.me/27761328213?text=${encodeURIComponent(message)}`, "_blank");
+  const handleAddToCart = () => {
+    if (selectedFragrances.length === 0) {
+      toast({ title: "Select Fragrances", description: "Please select at least one fragrance for your blend.", variant: "destructive" });
+      return;
+    }
+
+    const blendName = `Custom Blend (${selectedFragrances.join(" + ")})`;
+    addToCart({
+      perfumeId: `custom-blend-${Date.now()}`,
+      name: blendName,
+      size: selectedSize,
+      price: limits.price,
+      gender: "women", // neutral default
+      customBlend: {
+        fragrances: selectedFragrances,
+        oilConcentration,
+      },
+    });
+
+    toast({ title: "Added to Cart ✨", description: `Your ${selectedSize} signature blend has been added.` });
+    setSelectedFragrances([]);
+    setOilConcentration(limits.minOil + Math.round((limits.maxOil - limits.minOil) / 2));
   };
+
+  const genderOptions: { value: GenderFilter; label: string }[] = [
+    { value: "all", label: "All" },
+    { value: "men", label: "For Him" },
+    { value: "women", label: "For Her" },
+  ];
+
+  const categoryOptions: { value: CategoryFilter; label: string }[] = [
+    { value: "all", label: "All" },
+    { value: "Luxury", label: "Luxury" },
+    { value: "Fresh", label: "Fresh" },
+    { value: "Musky", label: "Musky" },
+    { value: "Sweet", label: "Sweet" },
+  ];
 
   return (
     <section className="relative overflow-hidden bg-background py-24">
@@ -84,6 +141,7 @@ const SignatureFragranceSection = () => {
       <div className="absolute inset-0 bg-background/85" />
 
       <div className="relative container mx-auto space-y-14 px-6">
+        {/* Hero intro */}
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
           <div>
             <p className="mb-3 font-sans text-xs uppercase tracking-[0.35em] text-primary">Signature Fragrance</p>
@@ -106,6 +164,7 @@ const SignatureFragranceSection = () => {
           </div>
         </div>
 
+        {/* Package cards */}
         <div className="grid gap-6 md:grid-cols-3">
           {packages.map((pkg) => {
             const isActive = selectedSize === pkg.size;
@@ -142,6 +201,7 @@ const SignatureFragranceSection = () => {
           })}
         </div>
 
+        {/* Customization Builder */}
         <Card className="border-border bg-card/80 shadow-xl backdrop-blur-sm">
           <CardContent className="space-y-8 p-6 md:p-8">
             <div>
@@ -151,6 +211,7 @@ const SignatureFragranceSection = () => {
 
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div className="space-y-6">
+                {/* Step 1 – Bottle Size */}
                 <div>
                   <p className="mb-3 font-sans text-xs uppercase tracking-[0.25em] text-muted-foreground">1. Choose Bottle Size</p>
                   <div className="grid grid-cols-3 gap-2">
@@ -170,35 +231,86 @@ const SignatureFragranceSection = () => {
                   </div>
                 </div>
 
+                {/* Step 2 – Fragrance Picker with Search & Filters */}
                 <div>
                   <p className="mb-3 font-sans text-xs uppercase tracking-[0.25em] text-muted-foreground">
                     2. Select Fragrances from the Full Fragrance List
                   </p>
+
+                  {/* Search input */}
+                  <div className="relative mb-3">
+                    <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <Input
+                      placeholder="Search fragrances or notes…"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-9 font-body text-sm"
+                    />
+                  </div>
+
+                  {/* Filter chips */}
+                  <div className="mb-3 flex flex-wrap gap-2">
+                    {genderOptions.map((opt) => (
+                      <button
+                        key={opt.value}
+                        onClick={() => setGenderFilter(opt.value)}
+                        className={`rounded-full border px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.18em] transition-colors ${
+                          genderFilter === opt.value
+                            ? "border-primary bg-primary/15 text-primary"
+                            : "border-border text-muted-foreground hover:border-primary/60"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                    <span className="mx-1 self-center text-border">|</span>
+                    {categoryOptions.map((opt) => (
+                      <button
+                        key={opt.value}
+                        onClick={() => setCategoryFilter(opt.value)}
+                        className={`rounded-full border px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.18em] transition-colors ${
+                          categoryFilter === opt.value
+                            ? "border-primary bg-primary/15 text-primary"
+                            : "border-border text-muted-foreground hover:border-primary/60"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Fragrance list */}
                   <div className="max-h-56 space-y-2 overflow-y-auto rounded-xl border border-border bg-background/60 p-3">
-                    {fragranceLibrary.map((name) => {
-                      const selected = selectedFragrances.includes(name);
-                      const disabled = !selected && selectedFragrances.length >= limits.maxFragrances;
-                      return (
-                        <button
-                          key={name}
-                          onClick={() => toggleFragrance(name)}
-                          disabled={disabled}
-                          className={`w-full rounded-md border px-3 py-2 text-left font-body text-sm transition-colors ${
-                            selected
-                              ? "border-primary bg-primary/15 text-foreground"
-                              : "border-border bg-card text-muted-foreground hover:border-primary hover:text-foreground"
-                          } ${disabled ? "cursor-not-allowed opacity-50" : ""}`}
-                        >
-                          {name}
-                        </button>
-                      );
-                    })}
+                    {fragranceLibrary.length === 0 ? (
+                      <p className="py-4 text-center font-body text-sm text-muted-foreground">No fragrances match your search.</p>
+                    ) : (
+                      fragranceLibrary.map((p) => {
+                        const selected = selectedFragrances.includes(p.name);
+                        const disabled = !selected && selectedFragrances.length >= limits.maxFragrances;
+                        return (
+                          <button
+                            key={p.id}
+                            onClick={() => toggleFragrance(p.name)}
+                            disabled={disabled}
+                            className={`flex w-full items-center justify-between rounded-md border px-3 py-2 text-left font-body text-sm transition-colors ${
+                              selected
+                                ? "border-primary bg-primary/15 text-foreground"
+                                : "border-border bg-card text-muted-foreground hover:border-primary hover:text-foreground"
+                            } ${disabled ? "cursor-not-allowed opacity-50" : ""}`}
+                          >
+                            <span>{p.name}</span>
+                            {selected && <Check className="h-3.5 w-3.5 text-primary" />}
+                          </button>
+                        );
+                      })
+                    )}
                   </div>
                   <p className="mt-2 font-body text-sm text-muted-foreground">
                     Selected {selectedFragrances.length}/{limits.maxFragrances} fragrances.
                   </p>
                 </div>
 
+                {/* Step 3 – Oil Concentration */}
                 <div>
                   <p className="mb-3 font-sans text-xs uppercase tracking-[0.25em] text-muted-foreground">
                     3. Choose Oil Concentration
@@ -225,6 +337,7 @@ const SignatureFragranceSection = () => {
                 </p>
               </div>
 
+              {/* Preview panel */}
               <div className="space-y-4 rounded-xl border border-border bg-background/50 p-5">
                 <p className="font-sans text-xs uppercase tracking-[0.25em] text-primary">4. Preview Your Blend</p>
                 <div className="space-y-3">
@@ -250,14 +363,20 @@ const SignatureFragranceSection = () => {
                       <p className="font-body text-sm text-muted-foreground">Pick fragrances to preview your blend identity.</p>
                     )}
                   </div>
+
+                  <div className="flex items-center justify-between rounded-lg border border-border bg-card/60 px-4 py-3">
+                    <span className="font-sans text-xs uppercase tracking-[0.2em] text-muted-foreground">Price</span>
+                    <span className="font-display text-2xl text-primary">R{limits.price}</span>
+                  </div>
                 </div>
 
                 <Button
                   size="lg"
-                  onClick={handleCreateBlend}
-                  className="mt-2 w-full font-sans text-xs uppercase tracking-[0.2em]"
+                  onClick={handleAddToCart}
+                  className="mt-2 w-full gap-2 font-sans text-xs uppercase tracking-[0.2em]"
                 >
-                  Create My Signature Fragrance
+                  <ShoppingCart className="h-4 w-4" />
+                  Add Signature Blend to Cart
                 </Button>
                 <p className="text-center font-body text-sm text-muted-foreground">Your scent. Your identity. Your signature</p>
               </div>
