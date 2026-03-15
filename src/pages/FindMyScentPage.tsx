@@ -186,12 +186,14 @@ const FindMyScentPage = () => {
   const [intensity, setIntensity] = useState("");
   const [occasion, setOccasion] = useState("");
   const [amplifier, setAmplifier] = useState("");
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const chatContainer = chatContainerRef.current;
+    if (!chatContainer) return;
+    chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: "smooth" });
   }, [messages]);
 
   const addMessages = (...msgs: ChatMessage[]) => {
