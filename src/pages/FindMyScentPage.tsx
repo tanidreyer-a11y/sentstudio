@@ -187,8 +187,6 @@ const FindMyScentPage = () => {
   const [occasion, setOccasion] = useState("");
   const [amplifier, setAmplifier] = useState("");
   const chatContainerRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
-  const { addToCart } = useCart();
 
   useEffect(() => {
     const chatContainer = chatContainerRef.current;
