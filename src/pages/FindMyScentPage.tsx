@@ -483,7 +483,7 @@ const FindMyScentPage = () => {
     setInput("");
   };
 
-  const handleOptionClick = (value: string, label: string) => {
+  const handleOptionClick = (value: string) => {
     processStep(value);
   };
 
