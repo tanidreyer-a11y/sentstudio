@@ -134,38 +134,38 @@ const SignatureFragranceSection = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-background py-24">
+    <section className="relative overflow-hidden bg-background py-12 md:py-24">
       <div className="absolute inset-0 opacity-20">
         <img src={heroPerfumeBg} alt="Luxury fragrance atmosphere" className="h-full w-full object-cover" loading="lazy" />
       </div>
       <div className="absolute inset-0 bg-background/85" />
 
-      <div className="relative container mx-auto space-y-14 px-6">
+      <div className="relative container mx-auto space-y-8 px-4 md:space-y-14 md:px-6">
         {/* Hero intro */}
-        <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-          <div>
-            <p className="mb-3 font-sans text-xs uppercase tracking-[0.35em] text-primary">Signature Fragrance</p>
-            <h2 className="font-display text-4xl font-light text-foreground md:text-5xl">Craft Your Own Fragrance</h2>
-            <p className="mt-6 max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">
+        <div className="grid items-center gap-6 md:gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="text-center lg:text-left">
+            <p className="mb-2 font-sans text-[0.65rem] uppercase tracking-[0.35em] text-primary md:mb-3 md:text-xs">Signature Fragrance</p>
+            <h2 className="font-display text-2xl font-light text-foreground sm:text-3xl md:text-5xl">Craft Your Own Fragrance</h2>
+            <p className="mt-4 max-w-2xl font-body text-sm leading-relaxed text-muted-foreground md:mt-6 md:text-lg">
               Create a fragrance that is uniquely yours.
-              <br />
+              <br className="hidden md:block" />
               Choose your favourite scents from our fragrance library and blend them into a personalised signature perfume.
               Whether you prefer something bold, fresh, or seductive, this is your chance to craft a scent that tells your
               story.
             </p>
           </div>
 
-          <div className="relative overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-xl backdrop-blur-sm">
-            <img src={bottleWomen} alt="Signature perfume bottle" className="h-72 w-full rounded-lg object-cover" loading="lazy" />
-            <div className="absolute bottom-8 left-8 right-8 rounded-lg border border-border bg-background/75 px-4 py-3 backdrop-blur-sm">
-              <p className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-primary">Luxury Blend Experience</p>
-              <p className="mt-1 font-body text-sm text-foreground">Glass bottle elegance, built around your story and mood.</p>
+          <div className="relative overflow-hidden rounded-xl border border-border bg-card/70 p-3 shadow-xl backdrop-blur-sm md:p-4">
+            <img src={bottleWomen} alt="Signature perfume bottle" className="h-48 w-full rounded-lg object-cover sm:h-60 md:h-72" loading="lazy" />
+            <div className="absolute bottom-6 left-6 right-6 rounded-lg border border-border bg-background/75 px-3 py-2 backdrop-blur-sm md:bottom-8 md:left-8 md:right-8 md:px-4 md:py-3">
+              <p className="font-sans text-[0.55rem] uppercase tracking-[0.3em] text-primary md:text-[0.65rem]">Luxury Blend Experience</p>
+              <p className="mt-0.5 font-body text-xs text-foreground md:mt-1 md:text-sm">Glass bottle elegance, built around your story and mood.</p>
             </div>
           </div>
         </div>
 
         {/* Package cards */}
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
           {packages.map((pkg) => {
             const isActive = selectedSize === pkg.size;
             return (
@@ -176,21 +176,21 @@ const SignatureFragranceSection = () => {
                 }`}
               >
                 {pkg.highlight && (
-                  <span className="absolute right-4 top-4 rounded-full border border-primary/40 bg-primary/15 px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.2em] text-primary">
+                  <span className="absolute right-3 top-3 rounded-full border border-primary/40 bg-primary/15 px-2 py-0.5 font-sans text-[0.55rem] uppercase tracking-[0.2em] text-primary md:right-4 md:top-4 md:px-3 md:py-1 md:text-[0.6rem]">
                     {pkg.highlight}
                   </span>
                 )}
-                <CardContent className="space-y-4 p-6">
+                <CardContent className="space-y-3 p-4 md:space-y-4 md:p-6">
                   <button onClick={() => handleSizeSelect(pkg.size)} className="w-full text-left">
-                    <p className="font-sans text-xs uppercase tracking-[0.3em] text-muted-foreground">{pkg.size}</p>
-                    <p className="mt-2 font-display text-3xl text-foreground">R{blendLimits[pkg.size].price}</p>
-                    <p className="mt-2 font-body text-base text-foreground">{pkg.title}</p>
-                    <p className="mt-1 font-body text-sm text-muted-foreground">{pkg.description}</p>
+                    <p className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground md:text-xs">{pkg.size}</p>
+                    <p className="mt-1 font-display text-2xl text-foreground md:mt-2 md:text-3xl">R{blendLimits[pkg.size].price}</p>
+                    <p className="mt-1 font-body text-sm text-foreground md:mt-2 md:text-base">{pkg.title}</p>
+                    <p className="mt-0.5 font-body text-xs text-muted-foreground md:mt-1 md:text-sm">{pkg.description}</p>
                   </button>
-                  <ul className="space-y-2">
+                  <ul className="space-y-1.5 md:space-y-2">
                     {pkg.points.map((point) => (
-                      <li key={point} className="flex items-start gap-2 font-body text-sm text-muted-foreground">
-                        <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                      <li key={point} className="flex items-start gap-2 font-body text-xs text-muted-foreground md:text-sm">
+                        <Sparkles className="mt-0.5 h-3 w-3 shrink-0 text-primary md:h-3.5 md:w-3.5" />
                         <span>{point}</span>
                       </li>
                     ))}
@@ -203,13 +203,13 @@ const SignatureFragranceSection = () => {
 
         {/* Customization Builder */}
         <Card className="border-border bg-card/80 shadow-xl backdrop-blur-sm">
-          <CardContent className="space-y-8 p-6 md:p-8">
+          <CardContent className="space-y-6 p-4 md:space-y-8 md:p-8">
             <div>
-              <p className="font-sans text-xs uppercase tracking-[0.3em] text-primary">Customization Builder</p>
-              <h3 className="mt-2 font-display text-3xl font-light text-foreground">Build Your Signature Blend</h3>
+              <p className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-primary md:text-xs">Customization Builder</p>
+              <h3 className="mt-1 font-display text-xl font-light text-foreground sm:text-2xl md:mt-2 md:text-3xl">Build Your Signature Blend</h3>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="grid gap-6 md:gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div className="space-y-6">
                 {/* Step 1 – Bottle Size */}
                 <div>
@@ -249,12 +249,12 @@ const SignatureFragranceSection = () => {
                   </div>
 
                   {/* Filter chips */}
-                  <div className="mb-3 flex flex-wrap gap-2">
+                  <div className="mb-3 flex flex-wrap gap-1.5 md:gap-2">
                     {genderOptions.map((opt) => (
                       <button
                         key={opt.value}
                         onClick={() => setGenderFilter(opt.value)}
-                        className={`rounded-full border px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.18em] transition-colors ${
+                        className={`rounded-full border px-2 py-0.5 font-sans text-[0.55rem] uppercase tracking-[0.15em] transition-colors md:px-3 md:py-1 md:text-[0.6rem] md:tracking-[0.18em] ${
                           genderFilter === opt.value
                             ? "border-primary bg-primary/15 text-primary"
                             : "border-border text-muted-foreground hover:border-primary/60"
@@ -263,12 +263,12 @@ const SignatureFragranceSection = () => {
                         {opt.label}
                       </button>
                     ))}
-                    <span className="mx-1 self-center text-border">|</span>
+                    <span className="mx-0.5 self-center text-border md:mx-1">|</span>
                     {categoryOptions.map((opt) => (
                       <button
                         key={opt.value}
                         onClick={() => setCategoryFilter(opt.value)}
-                        className={`rounded-full border px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.18em] transition-colors ${
+                        className={`rounded-full border px-2 py-0.5 font-sans text-[0.55rem] uppercase tracking-[0.15em] transition-colors md:px-3 md:py-1 md:text-[0.6rem] md:tracking-[0.18em] ${
                           categoryFilter === opt.value
                             ? "border-primary bg-primary/15 text-primary"
                             : "border-border text-muted-foreground hover:border-primary/60"
