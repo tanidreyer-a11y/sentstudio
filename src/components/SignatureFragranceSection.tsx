@@ -134,32 +134,32 @@ const SignatureFragranceSection = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-background py-24">
+    <section className="relative overflow-hidden bg-background py-12 md:py-24">
       <div className="absolute inset-0 opacity-20">
         <img src={heroPerfumeBg} alt="Luxury fragrance atmosphere" className="h-full w-full object-cover" loading="lazy" />
       </div>
       <div className="absolute inset-0 bg-background/85" />
 
-      <div className="relative container mx-auto space-y-14 px-6">
+      <div className="relative container mx-auto space-y-8 px-4 md:space-y-14 md:px-6">
         {/* Hero intro */}
-        <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-          <div>
-            <p className="mb-3 font-sans text-xs uppercase tracking-[0.35em] text-primary">Signature Fragrance</p>
-            <h2 className="font-display text-4xl font-light text-foreground md:text-5xl">Craft Your Own Fragrance</h2>
-            <p className="mt-6 max-w-2xl font-body text-lg leading-relaxed text-muted-foreground">
+        <div className="grid items-center gap-6 md:gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="text-center lg:text-left">
+            <p className="mb-2 font-sans text-[0.65rem] uppercase tracking-[0.35em] text-primary md:mb-3 md:text-xs">Signature Fragrance</p>
+            <h2 className="font-display text-2xl font-light text-foreground sm:text-3xl md:text-5xl">Craft Your Own Fragrance</h2>
+            <p className="mt-4 max-w-2xl font-body text-sm leading-relaxed text-muted-foreground md:mt-6 md:text-lg">
               Create a fragrance that is uniquely yours.
-              <br />
+              <br className="hidden md:block" />
               Choose your favourite scents from our fragrance library and blend them into a personalised signature perfume.
               Whether you prefer something bold, fresh, or seductive, this is your chance to craft a scent that tells your
               story.
             </p>
           </div>
 
-          <div className="relative overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-xl backdrop-blur-sm">
-            <img src={bottleWomen} alt="Signature perfume bottle" className="h-72 w-full rounded-lg object-cover" loading="lazy" />
-            <div className="absolute bottom-8 left-8 right-8 rounded-lg border border-border bg-background/75 px-4 py-3 backdrop-blur-sm">
-              <p className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-primary">Luxury Blend Experience</p>
-              <p className="mt-1 font-body text-sm text-foreground">Glass bottle elegance, built around your story and mood.</p>
+          <div className="relative overflow-hidden rounded-xl border border-border bg-card/70 p-3 shadow-xl backdrop-blur-sm md:p-4">
+            <img src={bottleWomen} alt="Signature perfume bottle" className="h-48 w-full rounded-lg object-cover sm:h-60 md:h-72" loading="lazy" />
+            <div className="absolute bottom-6 left-6 right-6 rounded-lg border border-border bg-background/75 px-3 py-2 backdrop-blur-sm md:bottom-8 md:left-8 md:right-8 md:px-4 md:py-3">
+              <p className="font-sans text-[0.55rem] uppercase tracking-[0.3em] text-primary md:text-[0.65rem]">Luxury Blend Experience</p>
+              <p className="mt-0.5 font-body text-xs text-foreground md:mt-1 md:text-sm">Glass bottle elegance, built around your story and mood.</p>
             </div>
           </div>
         </div>
