@@ -165,7 +165,7 @@ const SignatureFragranceSection = () => {
         </div>
 
         {/* Package cards */}
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
           {packages.map((pkg) => {
             const isActive = selectedSize === pkg.size;
             return (
@@ -176,21 +176,21 @@ const SignatureFragranceSection = () => {
                 }`}
               >
                 {pkg.highlight && (
-                  <span className="absolute right-4 top-4 rounded-full border border-primary/40 bg-primary/15 px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.2em] text-primary">
+                  <span className="absolute right-3 top-3 rounded-full border border-primary/40 bg-primary/15 px-2 py-0.5 font-sans text-[0.55rem] uppercase tracking-[0.2em] text-primary md:right-4 md:top-4 md:px-3 md:py-1 md:text-[0.6rem]">
                     {pkg.highlight}
                   </span>
                 )}
-                <CardContent className="space-y-4 p-6">
+                <CardContent className="space-y-3 p-4 md:space-y-4 md:p-6">
                   <button onClick={() => handleSizeSelect(pkg.size)} className="w-full text-left">
-                    <p className="font-sans text-xs uppercase tracking-[0.3em] text-muted-foreground">{pkg.size}</p>
-                    <p className="mt-2 font-display text-3xl text-foreground">R{blendLimits[pkg.size].price}</p>
-                    <p className="mt-2 font-body text-base text-foreground">{pkg.title}</p>
-                    <p className="mt-1 font-body text-sm text-muted-foreground">{pkg.description}</p>
+                    <p className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground md:text-xs">{pkg.size}</p>
+                    <p className="mt-1 font-display text-2xl text-foreground md:mt-2 md:text-3xl">R{blendLimits[pkg.size].price}</p>
+                    <p className="mt-1 font-body text-sm text-foreground md:mt-2 md:text-base">{pkg.title}</p>
+                    <p className="mt-0.5 font-body text-xs text-muted-foreground md:mt-1 md:text-sm">{pkg.description}</p>
                   </button>
-                  <ul className="space-y-2">
+                  <ul className="space-y-1.5 md:space-y-2">
                     {pkg.points.map((point) => (
-                      <li key={point} className="flex items-start gap-2 font-body text-sm text-muted-foreground">
-                        <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                      <li key={point} className="flex items-start gap-2 font-body text-xs text-muted-foreground md:text-sm">
+                        <Sparkles className="mt-0.5 h-3 w-3 shrink-0 text-primary md:h-3.5 md:w-3.5" />
                         <span>{point}</span>
                       </li>
                     ))}
