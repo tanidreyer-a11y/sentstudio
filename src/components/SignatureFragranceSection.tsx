@@ -249,12 +249,12 @@ const SignatureFragranceSection = () => {
                   </div>
 
                   {/* Filter chips */}
-                  <div className="mb-3 flex flex-wrap gap-2">
+                  <div className="mb-3 flex flex-wrap gap-1.5 md:gap-2">
                     {genderOptions.map((opt) => (
                       <button
                         key={opt.value}
                         onClick={() => setGenderFilter(opt.value)}
-                        className={`rounded-full border px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.18em] transition-colors ${
+                        className={`rounded-full border px-2 py-0.5 font-sans text-[0.55rem] uppercase tracking-[0.15em] transition-colors md:px-3 md:py-1 md:text-[0.6rem] md:tracking-[0.18em] ${
                           genderFilter === opt.value
                             ? "border-primary bg-primary/15 text-primary"
                             : "border-border text-muted-foreground hover:border-primary/60"
@@ -263,12 +263,12 @@ const SignatureFragranceSection = () => {
                         {opt.label}
                       </button>
                     ))}
-                    <span className="mx-1 self-center text-border">|</span>
+                    <span className="mx-0.5 self-center text-border md:mx-1">|</span>
                     {categoryOptions.map((opt) => (
                       <button
                         key={opt.value}
                         onClick={() => setCategoryFilter(opt.value)}
-                        className={`rounded-full border px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.18em] transition-colors ${
+                        className={`rounded-full border px-2 py-0.5 font-sans text-[0.55rem] uppercase tracking-[0.15em] transition-colors md:px-3 md:py-1 md:text-[0.6rem] md:tracking-[0.18em] ${
                           categoryFilter === opt.value
                             ? "border-primary bg-primary/15 text-primary"
                             : "border-border text-muted-foreground hover:border-primary/60"
