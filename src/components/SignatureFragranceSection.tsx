@@ -203,13 +203,13 @@ const SignatureFragranceSection = () => {
 
         {/* Customization Builder */}
         <Card className="border-border bg-card/80 shadow-xl backdrop-blur-sm">
-          <CardContent className="space-y-8 p-6 md:p-8">
+          <CardContent className="space-y-6 p-4 md:space-y-8 md:p-8">
             <div>
-              <p className="font-sans text-xs uppercase tracking-[0.3em] text-primary">Customization Builder</p>
-              <h3 className="mt-2 font-display text-3xl font-light text-foreground">Build Your Signature Blend</h3>
+              <p className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-primary md:text-xs">Customization Builder</p>
+              <h3 className="mt-1 font-display text-xl font-light text-foreground sm:text-2xl md:mt-2 md:text-3xl">Build Your Signature Blend</h3>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="grid gap-6 md:gap-8 lg:grid-cols-[1.2fr_0.8fr]">
               <div className="space-y-6">
                 {/* Step 1 – Bottle Size */}
                 <div>
