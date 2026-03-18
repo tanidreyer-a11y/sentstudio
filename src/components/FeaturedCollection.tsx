@@ -17,7 +17,8 @@ const featuredWomen = [
 ];
 
 const FeaturedCard = ({ perfume }: { perfume: { id: string; name: string; category: string; gender: "men" | "women" } }) => {
-  const image = getPerfumeImage(perfume.gender, perfume.category);
+  const fullPerfume = getPerfumeById(perfume.id);
+  const image = getPerfumeImage(perfume.gender, perfume.category, fullPerfume?.notes?.base);
   return (
     <Link to={`/perfume/${perfume.id}`} className="group cursor-pointer">
       <div className="relative overflow-hidden mb-6 bg-card aspect-[3/4] flex items-center justify-center">
