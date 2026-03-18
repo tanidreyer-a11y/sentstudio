@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { getPerfumeImage } from "@/lib/perfume-images";
+import { getPerfumeById } from "@/data/perfumes";
 
 const featuredMen = [
   { id: "michael-kors", name: "Michael Kors", category: "Luxury" as const, gender: "men" as const },
@@ -16,7 +17,8 @@ const featuredWomen = [
 ];
 
 const FeaturedCard = ({ perfume }: { perfume: { id: string; name: string; category: string; gender: "men" | "women" } }) => {
-  const image = getPerfumeImage(perfume.gender, perfume.category);
+  const fullPerfume = getPerfumeById(perfume.id);
+  const image = getPerfumeImage(perfume.gender, perfume.category, fullPerfume?.notes?.base);
   return (
     <Link to={`/perfume/${perfume.id}`} className="group cursor-pointer">
       <div className="relative overflow-hidden mb-6 bg-card aspect-[3/4] flex items-center justify-center">
