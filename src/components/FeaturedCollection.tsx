@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { getPerfumeImage } from "@/lib/perfume-images";
+import { getPerfumeById } from "@/data/perfumes";
 
 const featuredMen = [
   { id: "michael-kors", name: "Michael Kors", category: "Luxury" as const, gender: "men" as const },
