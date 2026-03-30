@@ -55,9 +55,9 @@ const PerfumeDetailPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             {/* Image */}
             <div className="bg-card aspect-square flex items-center justify-center border border-border overflow-hidden">
-              {getPerfumeImage(perfume.gender, perfume.category, perfume.notes.base) ? (
+              {getPerfumeImage(perfume.gender, perfume.category) ? (
                 <img
-                  src={getPerfumeImage(perfume.gender, perfume.category, perfume.notes.base)}
+                  src={getPerfumeImage(perfume.gender, perfume.category)}
                   alt={perfume.name}
                   className="w-full h-full object-cover"
                 />

@@ -668,7 +668,7 @@ const ResultCard = ({
     window.open(`https://wa.me/27761328213?text=${encodeURIComponent(message)}`, "_blank");
   };
 
-  const image = getPerfumeImage(perfume.gender, perfume.category, perfume.notes?.base);
+  const image = getPerfumeImage(perfume.gender, perfume.category);
 
   return (
     <div className="bg-card border border-border rounded-xl overflow-hidden">
