@@ -156,7 +156,7 @@ const SignatureFragranceSection = () => {
           </div>
 
           <div className="relative overflow-hidden rounded-xl border border-border bg-card/70 p-3 shadow-xl backdrop-blur-sm md:p-4">
-            <img src={bottleWomen} alt="Signature perfume bottle" className="h-48 w-full rounded-lg object-cover sm:h-60 md:h-72" loading="lazy" />
+            <img src={signatureBg} alt="Signature perfume bottle" className="h-48 w-full rounded-lg object-cover sm:h-60 md:h-72" loading="lazy" />
             <div className="absolute bottom-6 left-6 right-6 rounded-lg border border-border bg-background/75 px-3 py-2 backdrop-blur-sm md:bottom-8 md:left-8 md:right-8 md:px-4 md:py-3">
               <p className="font-sans text-[0.55rem] uppercase tracking-[0.3em] text-primary md:text-[0.65rem]">Luxury Blend Experience</p>
               <p className="mt-0.5 font-body text-xs text-foreground md:mt-1 md:text-sm">Glass bottle elegance, built around your story and mood.</p>
