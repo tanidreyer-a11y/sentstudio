@@ -8,7 +8,7 @@ import { perfumes } from "@/data/perfumes";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import heroPerfumeBg from "@/assets/hero-perfume-bg.jpeg";
-import bottleWomen from "@/assets/bottle-women-30ml.jpeg";
+import signatureBg from "@/assets/signature-bg.png";
 
 type BottleSize = "30ml" | "50ml" | "100ml";
 
