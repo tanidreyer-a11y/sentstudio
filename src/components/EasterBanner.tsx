@@ -7,7 +7,7 @@ const EasterBanner = () => {
   return (
     <div className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-3 text-center">
-        <Link to="/catalog" className="group inline-block">
+        <a href="#collection" className="group inline-block">
           <p className="font-sans text-xs tracking-[0.2em] uppercase sm:text-sm">
             🐣 {EASTER_PROMO.description}{" "}
             <span className="underline underline-offset-4 opacity-80 group-hover:opacity-100 transition-opacity">
