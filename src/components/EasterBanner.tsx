@@ -14,7 +14,7 @@ const EasterBanner = () => {
               Shop Now →
             </span>
           </p>
-        </Link>
+        </a>
       </div>
     </div>
   );
