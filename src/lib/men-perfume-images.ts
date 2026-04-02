@@ -58,6 +58,35 @@ import tomFordOudWood from "@/assets/men/tom-ford-oud-wood.jpg";
 import yslKouros from "@/assets/men/ysl-kouros.jpg";
 import yslM7 from "@/assets/men/ysl-m7.jpg";
 
+// Fresh
+import pacoRabanneOneMillionElixir from "@/assets/men/paco-rabanne-one-million-elixir.jpg";
+import calvinKleinCk1 from "@/assets/men/calvin-klein-ck1.jpg";
+import versaceDylanBlue from "@/assets/men/versace-dylan-blue.jpg";
+import davidoffCoolWater from "@/assets/men/davidoff-cool-water.jpg";
+import montBlancLegend from "@/assets/men/mont-blanc-legend.jpg";
+import montBlancExplorer from "@/assets/men/mont-blanc-explorer.jpg";
+import isseyMiyake from "@/assets/men/issey-miyake-leau-dissey.jpg";
+import lacosteEssential from "@/assets/men/lacoste-essential.jpg";
+import jpgScandalPourHomme from "@/assets/men/jpg-scandal-pour-homme.jpg";
+import dunhillDesireBlue from "@/assets/men/dunhill-desire-blue.jpg";
+import azzaroWanted from "@/assets/men/azzaro-wanted.jpg";
+import creedSilverMountain from "@/assets/men/creed-silver-mountain-water.jpg";
+import dieselOnlyTheBrave from "@/assets/men/diesel-only-the-brave.jpg";
+import dgLightBlueMen from "@/assets/men/dg-light-blue-men.jpg";
+import ferrariBlack from "@/assets/men/ferrari-black.jpg";
+import hugoBossOrange from "@/assets/men/hugo-boss-orange.jpg";
+import hugoBossGreen from "@/assets/men/hugo-boss-green.jpg";
+import lacosteBlue from "@/assets/men/lacoste-blue.jpg";
+import hugoBossDarkBlue from "@/assets/men/hugo-boss-dark-blue.jpg";
+import lvImagination from "@/assets/men/louis-vuitton-imagination.jpg";
+import pacoRabannePhantom from "@/assets/men/paco-rabanne-phantom.jpg";
+import mercedesBenzSign from "@/assets/men/mercedes-benz-sign.jpg";
+import yslYMan from "@/assets/men/ysl-y-man.jpg";
+import adidasOriginal from "@/assets/men/adidas-original.jpg";
+import alchemy540 from "@/assets/men/alchemy-540.jpg";
+import halfetiLeather from "@/assets/men/halfeti-leather.jpg";
+import intenseSatinOud from "@/assets/men/intense-satin-oud.jpg";
+
 export function registerAllMenPerfumeImages() {
   // Luxury
   registerPerfumeImage("dior-sauvage", diorSauvage);
