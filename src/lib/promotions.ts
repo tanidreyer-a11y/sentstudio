@@ -13,7 +13,7 @@ export const EASTER_PROMO: Promotion = {
   id: "easter-2026",
   label: "Easter Weekend Special 🐣",
   description: "3 × 30ml for R270 · 10% off when you buy 2+ items",
-  startDate: new Date("2026-04-03T00:00:00+02:00"), // SAST
+  startDate: new Date("2026-04-02T00:00:00+02:00"), // SAST
   endDate: new Date("2026-04-06T23:59:59+02:00"),
 };
 
