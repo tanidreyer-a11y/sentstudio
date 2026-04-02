@@ -8,6 +8,7 @@ import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
+import EasterBanner from "@/components/EasterBanner";
 import { Link } from "react-router-dom";
 import collectionMen from "@/assets/collection-men.jpeg";
 import collectionWomen from "@/assets/collection-women.jpeg";
@@ -16,6 +17,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <EasterBanner />
       <HeroSection />
 
       {/* Legal Disclaimer Banner */}

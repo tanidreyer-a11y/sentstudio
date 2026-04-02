@@ -249,6 +249,16 @@ const CartPage = () => {
                       R{totalPrice}
                     </span>
                   </div>
+                  {discounts.map((d, idx) => (
+                    <div key={idx} className="flex justify-between items-center">
+                      <span className="font-sans text-sm text-green-600">
+                        {d.label}
+                      </span>
+                      <span className="font-sans text-sm text-green-600">
+                        −R{d.amount}
+                      </span>
+                    </div>
+                  ))}
                   {deliveryFee > 0 && (
                     <div className="flex justify-between items-center">
                       <span className="font-sans text-sm text-muted-foreground">
