@@ -69,6 +69,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
   const totalPrice = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
+  const discounts = useMemo(() => calculateEasterDiscounts(items), [items]);
+  const totalDiscount = discounts.reduce((s, d) => s + d.amount, 0);
+  const finalPrice = totalPrice - totalDiscount;
+
   const getWhatsAppMessage = (customerName: string) => {
     const itemsList = items
       .map(
