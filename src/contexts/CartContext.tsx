@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useMemo, ReactNode } from "react";
+import { calculateEasterDiscounts, type CartDiscount } from "@/lib/promotions";
 
 export interface CartItem {
   perfumeId: string;
