@@ -17,8 +17,10 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <EasterBanner />
       <HeroSection />
+
+      {/* Easter Promo Banner */}
+      <EasterBanner />
 
       {/* Legal Disclaimer Banner */}
       <div className="bg-secondary border-y border-border">
