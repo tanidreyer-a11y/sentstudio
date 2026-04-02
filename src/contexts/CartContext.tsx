@@ -23,6 +23,9 @@ interface CartContextType {
   clearCart: () => void;
   totalItems: number;
   totalPrice: number;
+  discounts: CartDiscount[];
+  totalDiscount: number;
+  finalPrice: number;
   getWhatsAppMessage: (customerName: string) => string;
 }
 
