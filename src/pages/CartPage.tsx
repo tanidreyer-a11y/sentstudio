@@ -11,7 +11,7 @@ import DeliveryForm, {
 } from "@/components/DeliveryForm";
 
 const CartPage = () => {
-  const { items, removeFromCart, updateQuantity, clearCart, totalPrice } =
+  const { items, removeFromCart, updateQuantity, clearCart, totalPrice, discounts, totalDiscount, finalPrice } =
     useCart();
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
@@ -28,7 +28,7 @@ const CartPage = () => {
 
   const needsAddress = delivery.option === "aramex";
   const deliveryFee = delivery.option === "aramex" ? ARAMEX_FEE : 0;
-  const grandTotal = totalPrice + deliveryFee;
+  const grandTotal = finalPrice + deliveryFee;
 
   const isFormValid =
     delivery.fullName.trim() &&
@@ -116,7 +116,11 @@ const CartPage = () => {
     const feeInfo =
       delivery.option === "aramex" ? `\n🚚 Delivery Fee: R${ARAMEX_FEE}` : "";
 
-    const message = `🛍️ *New Order — Scent Studio*\n\n👤 Customer: ${delivery.fullName}\n📞 Phone: ${delivery.phone}\n\n📦 Items:\n${itemsList}\n\n🚀 Delivery: ${deliveryLabels[delivery.option]}${addressBlock}${delivery.instructions ? `\n📝 Instructions: ${delivery.instructions}` : ""}${feeInfo}\n\n💰 *Total: R${grandTotal}*\n\nPlease confirm availability. Thank you!`;
+    const discountInfo = discounts.length > 0
+      ? `\n\n🎉 Discounts:\n${discounts.map((d) => `  − ${d.label}: -R${d.amount}`).join("\n")}`
+      : "";
+
+    const message = `🛍️ *New Order — Scent Studio*\n\n👤 Customer: ${delivery.fullName}\n📞 Phone: ${delivery.phone}\n\n📦 Items:\n${itemsList}${discountInfo}\n\n🚀 Delivery: ${deliveryLabels[delivery.option]}${addressBlock}${delivery.instructions ? `\n📝 Instructions: ${delivery.instructions}` : ""}${feeInfo}\n\n💰 *Total: R${grandTotal}*\n\nPlease confirm availability. Thank you!`;
 
     return `https://wa.me/27761328213?text=${encodeURIComponent(message)}`;
   };
@@ -249,6 +253,16 @@ const CartPage = () => {
                       R{totalPrice}
                     </span>
                   </div>
+                  {discounts.map((d, idx) => (
+                    <div key={idx} className="flex justify-between items-center">
+                      <span className="font-sans text-sm text-green-600">
+                        {d.label}
+                      </span>
+                      <span className="font-sans text-sm text-green-600">
+                        −R{d.amount}
+                      </span>
+                    </div>
+                  ))}
                   {deliveryFee > 0 && (
                     <div className="flex justify-between items-center">
                       <span className="font-sans text-sm text-muted-foreground">

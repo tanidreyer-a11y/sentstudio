@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useMemo, ReactNode } from "react";
+import { calculateEasterDiscounts, type CartDiscount } from "@/lib/promotions";
 
 export interface CartItem {
   perfumeId: string;
@@ -22,6 +23,9 @@ interface CartContextType {
   clearCart: () => void;
   totalItems: number;
   totalPrice: number;
+  discounts: CartDiscount[];
+  totalDiscount: number;
+  finalPrice: number;
   getWhatsAppMessage: (customerName: string) => string;
 }
 
@@ -65,6 +69,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
   const totalPrice = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
+  const discounts = useMemo(() => calculateEasterDiscounts(items), [items]);
+  const totalDiscount = discounts.reduce((s, d) => s + d.amount, 0);
+  const finalPrice = totalPrice - totalDiscount;
+
   const getWhatsAppMessage = (customerName: string) => {
     const itemsList = items
       .map(
@@ -80,7 +88,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <CartContext.Provider
-      value={{ items, addToCart, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice, getWhatsAppMessage }}
+      value={{ items, addToCart, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice, discounts, totalDiscount, finalPrice, getWhatsAppMessage }}
     >
       {children}
     </CartContext.Provider>
