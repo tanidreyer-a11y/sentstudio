@@ -1,0 +1,119 @@
+import { registerPerfumeImage } from "./perfume-images";
+
+// Luxury
+import diorSauvage from "@/assets/men/dior-sauvage.jpg";
+import diorSauvageElixir from "@/assets/men/dior-sauvage-elixir.jpg";
+import michaelKors from "@/assets/men/michael-kors.jpg";
+import mfkBaccaratRouge540 from "@/assets/men/mfk-baccarat-rouge-540.jpg";
+import tedLapidus from "@/assets/men/ted-lapidus-pour-homme.jpg";
+import pacoRabanneInvictus from "@/assets/men/paco-rabanne-invictus.jpg";
+import tomFordBlackOrchid from "@/assets/men/tom-ford-black-orchid.jpg";
+import hermesTerre from "@/assets/men/hermes-terre-dhermes.jpg";
+import chanelBleu from "@/assets/men/chanel-bleu-de-chanel.jpg";
+import hugoBossBottled from "@/assets/men/hugo-boss-bottled.jpg";
+import mfkGrandSoir from "@/assets/men/mfk-grand-soir.jpg";
+import tomFordFabulous from "@/assets/men/tom-ford-fabulous.jpg";
+import tomFordNoir from "@/assets/men/tom-ford-noir.jpg";
+import vanCleefTsar from "@/assets/men/van-cleef-tsar.jpg";
+import carolinaHerrera212 from "@/assets/men/carolina-herrera-212-vip-men.jpg";
+
+// Sweet
+import pacoRabanneOneMillion from "@/assets/men/paco-rabanne-one-million.jpg";
+import dieselFuelForLife from "@/assets/men/diesel-fuel-for-life.jpg";
+import versaceEros from "@/assets/men/versace-eros.jpg";
+import dunhillDesireRed from "@/assets/men/dunhill-desire-red.jpg";
+import azzaroMostWanted from "@/assets/men/azzaro-most-wanted.jpg";
+import diorTobacolor from "@/assets/men/dior-tobacolor.jpg";
+import armaniStronger from "@/assets/men/emporio-armani-stronger-with-you.jpg";
+import jpgLeMale from "@/assets/men/jpg-le-male.jpg";
+import joopJoop from "@/assets/men/joop-joop.jpg";
+import pacoRabanneBlackXs from "@/assets/men/paco-rabanne-black-xs.jpg";
+import tomFordTobaccoVanille from "@/assets/men/tom-ford-tobacco-vanille.jpg";
+import viktorRolfSpicebomb from "@/assets/men/viktor-rolf-spicebomb.jpg";
+import pacoRabannePureXs from "@/assets/men/paco-rabanne-pure-xs.jpg";
+
+// Musky
+import bvlgariManInBlack from "@/assets/men/bvlgari-man-in-black.jpg";
+import creedAventus from "@/assets/men/creed-aventus.jpg";
+import aramis900 from "@/assets/men/aramis-900.jpg";
+import aramisNewWest from "@/assets/men/aramis-new-west.jpg";
+import montaleBlackAoud from "@/assets/men/montale-black-aoud.jpg";
+import montaleWhiteOud from "@/assets/men/montale-white-oud.jpg";
+import montaleArabianWhiteOud from "@/assets/men/montale-arabian-white-oud.jpg";
+import dunhillDesireBlack from "@/assets/men/dunhill-desire-black.jpg";
+import avroyShlainEndangered from "@/assets/men/avroy-shlain-endangered.jpg";
+import bathBodyWorksWhiskey from "@/assets/men/bath-body-works-whiskey-reserve.jpg";
+import diorFahrenheit from "@/assets/men/dior-fahrenheit.jpg";
+import diorOudIspahan from "@/assets/men/dior-oud-ispahan.jpg";
+import dieselBadBoy from "@/assets/men/diesel-bad-boy.jpg";
+import gucciIntenseOud from "@/assets/men/gucci-intense-oud.jpg";
+import guyLarocheDrakkarNoir from "@/assets/men/guy-laroche-drakkar-noir.jpg";
+import initioOud from "@/assets/men/initio-oud-for-greatness.jpg";
+import lattafaQaaed from "@/assets/men/lattafa-qaaed.jpg";
+import lvOmbreNomade from "@/assets/men/louis-vuitton-ombre-nomade.jpg";
+import maisonCrivelliOud from "@/assets/men/maison-crivelli-oud-maracuja.jpg";
+import mfkOudSatinMood from "@/assets/men/mfk-oud-satin-mood.jpg";
+import tomFordOmbreLeather from "@/assets/men/tom-ford-ombre-leather.jpg";
+import tomFordOudWood from "@/assets/men/tom-ford-oud-wood.jpg";
+import yslKouros from "@/assets/men/ysl-kouros.jpg";
+import yslM7 from "@/assets/men/ysl-m7.jpg";
+
+export function registerAllMenPerfumeImages() {
+  // Luxury
+  registerPerfumeImage("dior-sauvage", diorSauvage);
+  registerPerfumeImage("dior-sauvage-elixir", diorSauvageElixir);
+  registerPerfumeImage("michael-kors", michaelKors);
+  registerPerfumeImage("mfk-baccarat-rouge-540", mfkBaccaratRouge540);
+  registerPerfumeImage("ted-lapidus-pour-homme", tedLapidus);
+  registerPerfumeImage("paco-rabanne-invictus", pacoRabanneInvictus);
+  registerPerfumeImage("tom-ford-black-orchid", tomFordBlackOrchid);
+  registerPerfumeImage("hermes-terre-dhermes", hermesTerre);
+  registerPerfumeImage("chanel-bleu-de-chanel", chanelBleu);
+  registerPerfumeImage("hugo-boss-bottled", hugoBossBottled);
+  registerPerfumeImage("mfk-grand-soir", mfkGrandSoir);
+  registerPerfumeImage("tom-ford-fabulous", tomFordFabulous);
+  registerPerfumeImage("tom-ford-noir", tomFordNoir);
+  registerPerfumeImage("van-cleef-tsar", vanCleefTsar);
+  registerPerfumeImage("carolina-herrera-212-vip-men", carolinaHerrera212);
+
+  // Sweet
+  registerPerfumeImage("paco-rabanne-one-million", pacoRabanneOneMillion);
+  registerPerfumeImage("diesel-fuel-for-life", dieselFuelForLife);
+  registerPerfumeImage("versace-eros", versaceEros);
+  registerPerfumeImage("dunhill-desire-red", dunhillDesireRed);
+  registerPerfumeImage("azzaro-most-wanted", azzaroMostWanted);
+  registerPerfumeImage("dior-tobacolor", diorTobacolor);
+  registerPerfumeImage("emporio-armani-stronger-with-you", armaniStronger);
+  registerPerfumeImage("jpg-le-male", jpgLeMale);
+  registerPerfumeImage("joop-joop", joopJoop);
+  registerPerfumeImage("paco-rabanne-black-xs", pacoRabanneBlackXs);
+  registerPerfumeImage("tom-ford-tobacco-vanille", tomFordTobaccoVanille);
+  registerPerfumeImage("viktor-rolf-spicebomb", viktorRolfSpicebomb);
+  registerPerfumeImage("paco-rabanne-pure-xs", pacoRabannePureXs);
+
+  // Musky
+  registerPerfumeImage("bvlgari-man-in-black", bvlgariManInBlack);
+  registerPerfumeImage("creed-aventus", creedAventus);
+  registerPerfumeImage("aramis-900", aramis900);
+  registerPerfumeImage("aramis-new-west", aramisNewWest);
+  registerPerfumeImage("montale-black-aoud", montaleBlackAoud);
+  registerPerfumeImage("montale-white-oud", montaleWhiteOud);
+  registerPerfumeImage("montale-arabian-white-oud", montaleArabianWhiteOud);
+  registerPerfumeImage("dunhill-desire-black", dunhillDesireBlack);
+  registerPerfumeImage("avroy-shlain-endangered", avroyShlainEndangered);
+  registerPerfumeImage("bath-body-works-whiskey-reserve", bathBodyWorksWhiskey);
+  registerPerfumeImage("dior-fahrenheit", diorFahrenheit);
+  registerPerfumeImage("dior-oud-ispahan", diorOudIspahan);
+  registerPerfumeImage("diesel-bad-boy", dieselBadBoy);
+  registerPerfumeImage("gucci-intense-oud", gucciIntenseOud);
+  registerPerfumeImage("guy-laroche-drakkar-noir", guyLarocheDrakkarNoir);
+  registerPerfumeImage("initio-oud-for-greatness", initioOud);
+  registerPerfumeImage("lattafa-qaaed", lattafaQaaed);
+  registerPerfumeImage("louis-vuitton-ombre-nomade", lvOmbreNomade);
+  registerPerfumeImage("maison-crivelli-oud-maracuja", maisonCrivelliOud);
+  registerPerfumeImage("mfk-oud-satin-mood", mfkOudSatinMood);
+  registerPerfumeImage("tom-ford-ombre-leather", tomFordOmbreLeather);
+  registerPerfumeImage("tom-ford-oud-wood", tomFordOudWood);
+  registerPerfumeImage("ysl-kouros", yslKouros);
+  registerPerfumeImage("ysl-m7", yslM7);
+}
