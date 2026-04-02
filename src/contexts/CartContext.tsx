@@ -88,7 +88,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <CartContext.Provider
-      value={{ items, addToCart, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice, getWhatsAppMessage }}
+      value={{ items, addToCart, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice, discounts, totalDiscount, finalPrice, getWhatsAppMessage }}
     >
       {children}
     </CartContext.Provider>
