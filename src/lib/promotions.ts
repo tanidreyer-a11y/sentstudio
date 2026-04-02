@@ -12,7 +12,7 @@ export interface Promotion {
 export const EASTER_PROMO: Promotion = {
   id: "easter-2026",
   label: "Easter Weekend Special 🐣",
-  description: "3 × 30ml for R270 · 10% off when you buy 2+ items",
+  description: "3 × 30ml for R270 · 10% off when you buy 3+ items",
   startDate: new Date("2026-04-02T00:00:00+02:00"), // SAST
   endDate: new Date("2026-04-06T23:59:59+02:00"),
 };
@@ -78,13 +78,13 @@ export const calculateEasterDiscounts = (
 
   // --- 2. 10% off for 2+ products ---
   const totalProducts = items.reduce((s, i) => s + i.quantity, 0);
-  if (totalProducts >= 2) {
+  if (totalProducts >= 3) {
     const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
     const afterBundle = subtotal - bundleSavings;
     const bulkSaving = Math.round(afterBundle * (BULK_DISCOUNT_PERCENT / 100));
     if (bulkSaving > 0) {
       discounts.push({
-        label: `10% off (2+ items)`,
+        label: `10% off (3+ items)`,
         amount: bulkSaving,
       });
     }
