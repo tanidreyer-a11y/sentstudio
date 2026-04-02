@@ -84,7 +84,7 @@ export const calculateEasterDiscounts = (
     const bulkSaving = Math.round(afterBundle * (BULK_DISCOUNT_PERCENT / 100));
     if (bulkSaving > 0) {
       discounts.push({
-        label: `10% off (2+ items)`,
+        label: `10% off (3+ items)`,
         amount: bulkSaving,
       });
     }
