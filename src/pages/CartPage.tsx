@@ -11,7 +11,7 @@ import DeliveryForm, {
 } from "@/components/DeliveryForm";
 
 const CartPage = () => {
-  const { items, removeFromCart, updateQuantity, clearCart, totalPrice } =
+  const { items, removeFromCart, updateQuantity, clearCart, totalPrice, discounts, totalDiscount, finalPrice } =
     useCart();
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
