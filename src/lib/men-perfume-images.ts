@@ -145,4 +145,35 @@ export function registerAllMenPerfumeImages() {
   registerPerfumeImage("tom-ford-oud-wood", tomFordOudWood);
   registerPerfumeImage("ysl-kouros", yslKouros);
   registerPerfumeImage("ysl-m7", yslM7);
+  registerPerfumeImage("halfeti-leather", halfetiLeather);
+  registerPerfumeImage("intense-satin-oud", intenseSatinOud);
+
+  // Fresh
+  registerPerfumeImage("paco-rabanne-one-million-elixir", pacoRabanneOneMillionElixir);
+  registerPerfumeImage("calvin-klein-ck1", calvinKleinCk1);
+  registerPerfumeImage("versace-dylan-blue", versaceDylanBlue);
+  registerPerfumeImage("davidoff-cool-water", davidoffCoolWater);
+  registerPerfumeImage("mont-blanc-legend", montBlancLegend);
+  registerPerfumeImage("mont-blanc-explorer", montBlancExplorer);
+  registerPerfumeImage("issey-miyake-leau-dissey", isseyMiyake);
+  registerPerfumeImage("lacoste-essential", lacosteEssential);
+  registerPerfumeImage("jpg-scandal-pour-homme", jpgScandalPourHomme);
+  registerPerfumeImage("dunhill-desire-blue", dunhillDesireBlue);
+  registerPerfumeImage("azzaro-wanted", azzaroWanted);
+  registerPerfumeImage("creed-silver-mountain-water", creedSilverMountain);
+  registerPerfumeImage("diesel-only-the-brave", dieselOnlyTheBrave);
+  registerPerfumeImage("dg-light-blue-men", dgLightBlueMen);
+  registerPerfumeImage("ferrari-black", ferrariBlack);
+  registerPerfumeImage("hugo-boss-orange", hugoBossOrange);
+  registerPerfumeImage("hugo-boss-green", hugoBossGreen);
+  registerPerfumeImage("lacoste-blue", lacosteBlue);
+  registerPerfumeImage("hugo-boss-dark-blue", hugoBossDarkBlue);
+  registerPerfumeImage("louis-vuitton-imagination", lvImagination);
+  registerPerfumeImage("paco-rabanne-phantom", pacoRabannePhantom);
+  registerPerfumeImage("mercedes-benz-sign", mercedesBenzSign);
+  registerPerfumeImage("ysl-y-man", yslYMan);
+  registerPerfumeImage("adidas-original", adidasOriginal);
+
+  // Luxury (new)
+  registerPerfumeImage("alchemy-540", alchemy540);
 }
