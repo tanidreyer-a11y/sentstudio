@@ -78,7 +78,7 @@ export const calculateEasterDiscounts = (
 
   // --- 2. 10% off for 2+ products ---
   const totalProducts = items.reduce((s, i) => s + i.quantity, 0);
-  if (totalProducts >= 2) {
+  if (totalProducts >= 3) {
     const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
     const afterBundle = subtotal - bundleSavings;
     const bulkSaving = Math.round(afterBundle * (BULK_DISCOUNT_PERCENT / 100));
