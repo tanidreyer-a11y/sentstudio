@@ -32,7 +32,7 @@ const Index = () => {
       </div>
 
       {/* For Him / For Her Links */}
-      <section className="bg-background py-12 md:py-20">
+      <section id="shop-collection" className="bg-background py-12 md:py-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 md:gap-8">
             <Link
