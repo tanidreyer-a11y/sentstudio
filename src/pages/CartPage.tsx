@@ -28,7 +28,7 @@ const CartPage = () => {
 
   const needsAddress = delivery.option === "aramex";
   const deliveryFee = delivery.option === "aramex" ? ARAMEX_FEE : 0;
-  const grandTotal = totalPrice + deliveryFee;
+  const grandTotal = finalPrice + deliveryFee;
 
   const isFormValid =
     delivery.fullName.trim() &&
