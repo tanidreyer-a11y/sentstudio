@@ -9,8 +9,6 @@ import NewsletterSection from "@/components/NewsletterSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
 import EasterBanner from "@/components/EasterBanner";
-import LiveTrafficSignal from "@/components/LiveTrafficSignal";
-import ExclusiveCollection from "@/components/ExclusiveCollection";
 import { Link } from "react-router-dom";
 import collectionMen from "@/assets/collection-men.jpeg";
 import collectionWomen from "@/assets/collection-women.jpeg";
@@ -71,24 +69,18 @@ const Index = () => {
             </Link>
           </div>
 
-          {/* Live Traffic Signal + Find My Scent */}
-          <div className="mt-8 space-y-6 text-center md:mt-12">
-            <LiveTrafficSignal />
-            <div>
-              <p className="mb-3 font-sans text-xs text-muted-foreground sm:mb-4 sm:text-sm">Not sure what suits you?</p>
-              <Link
-                to="/find-my-scent"
-                className="inline-block border border-primary px-8 py-3 font-sans text-xs uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:bg-primary hover:text-primary-foreground sm:px-10 sm:py-4 sm:text-sm"
-              >
-                Find My Scent
-              </Link>
-            </div>
+          {/* Find My Scent CTA */}
+          <div className="mt-8 text-center md:mt-12">
+            <p className="mb-3 font-sans text-xs text-muted-foreground sm:mb-4 sm:text-sm">Not sure what suits you?</p>
+            <Link
+              to="/find-my-scent"
+              className="inline-block border border-primary px-8 py-3 font-sans text-xs uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:bg-primary hover:text-primary-foreground sm:px-10 sm:py-4 sm:text-sm"
+            >
+              Find My Scent
+            </Link>
           </div>
         </div>
       </section>
-
-      {/* Exclusive Premium Collection */}
-      <ExclusiveCollection />
 
       <SignatureFragranceSection />
       <FeaturedCollection />

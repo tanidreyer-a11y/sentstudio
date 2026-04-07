@@ -55,7 +55,8 @@ import maisonCrivelliOud from "@/assets/men/maison-crivelli-oud-maracuja.jpg";
 import mfkOudSatinMood from "@/assets/men/mfk-oud-satin-mood.jpg";
 import tomFordOmbreLeather from "@/assets/men/tom-ford-ombre-leather.jpg";
 import tomFordOudWood from "@/assets/men/tom-ford-oud-wood.jpg";
-import manceraRedTobacco from "@/assets/men/mancera-red-tobacco.jpg";
+import yslKouros from "@/assets/men/ysl-kouros.jpg";
+import yslM7 from "@/assets/men/ysl-m7.jpg";
 
 // Fresh
 import pacoRabanneOneMillionElixir from "@/assets/men/paco-rabanne-one-million-elixir.jpg";
@@ -80,6 +81,7 @@ import hugoBossDarkBlue from "@/assets/men/hugo-boss-dark-blue.jpg";
 import lvImagination from "@/assets/men/louis-vuitton-imagination.jpg";
 import pacoRabannePhantom from "@/assets/men/paco-rabanne-phantom.jpg";
 import mercedesBenzSign from "@/assets/men/mercedes-benz-sign.jpg";
+import yslYMan from "@/assets/men/ysl-y-man.jpg";
 import adidasOriginal from "@/assets/men/adidas-original.jpg";
 import alchemy540 from "@/assets/men/alchemy-540.jpg";
 import halfetiLeather from "@/assets/men/halfeti-leather.jpg";
@@ -141,7 +143,8 @@ export function registerAllMenPerfumeImages() {
   registerPerfumeImage("mfk-oud-satin-mood", mfkOudSatinMood);
   registerPerfumeImage("tom-ford-ombre-leather", tomFordOmbreLeather);
   registerPerfumeImage("tom-ford-oud-wood", tomFordOudWood);
-  registerPerfumeImage("mancera-red-tobacco", manceraRedTobacco);
+  registerPerfumeImage("ysl-kouros", yslKouros);
+  registerPerfumeImage("ysl-m7", yslM7);
   registerPerfumeImage("halfeti-leather", halfetiLeather);
   registerPerfumeImage("intense-satin-oud", intenseSatinOud);
 
@@ -168,7 +171,7 @@ export function registerAllMenPerfumeImages() {
   registerPerfumeImage("louis-vuitton-imagination", lvImagination);
   registerPerfumeImage("paco-rabanne-phantom", pacoRabannePhantom);
   registerPerfumeImage("mercedes-benz-sign", mercedesBenzSign);
-  
+  registerPerfumeImage("ysl-y-man", yslYMan);
   registerPerfumeImage("adidas-original", adidasOriginal);
 
   // Luxury (new)

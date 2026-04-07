@@ -1,6 +1,6 @@
-import { Store, Car, Truck, Package } from "lucide-react";
+import { Store, Car, Truck } from "lucide-react";
 
-export type DeliveryOption = "pickup" | "uber" | "aramex" | "postnet";
+export type DeliveryOption = "pickup" | "uber" | "aramex";
 
 export interface DeliveryDetails {
   option: DeliveryOption;
@@ -18,7 +18,6 @@ interface DeliveryFormProps {
 }
 
 const ARAMEX_FEE = 99;
-const POSTNET_FEE = 109;
 
 const deliveryOptions: {
   value: DeliveryOption;
@@ -48,16 +47,9 @@ const deliveryOptions: {
     description: "Nationwide via Pick n Pay drop-off",
     extra: `+ R${ARAMEX_FEE}`,
   },
-  {
-    value: "postnet",
-    icon: Package,
-    title: "PostNet",
-    description: "Collect from any PostNet branch nationwide",
-    extra: `+ R${POSTNET_FEE}`,
-  },
 ];
 
-const needsAddress = (option: DeliveryOption) => option === "aramex" || option === "postnet";
+const needsAddress = (option: DeliveryOption) => option === "aramex";
 
 const DeliveryForm = ({ details, onChange }: DeliveryFormProps) => {
   const update = (partial: Partial<DeliveryDetails>) =>
@@ -196,5 +188,5 @@ const Field = ({
   </div>
 );
 
-export { ARAMEX_FEE, POSTNET_FEE };
+export { ARAMEX_FEE };
 export default DeliveryForm;
