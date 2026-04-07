@@ -107,6 +107,7 @@ const CartPage = () => {
       uber: "Uber Pickup Selected",
       local: "Local Delivery",
       aramex: "Aramex Courier",
+      postnet: "PostNet Courier",
     };
 
     let addressBlock = "";
@@ -115,7 +116,7 @@ const CartPage = () => {
     }
 
     const feeInfo =
-      delivery.option === "aramex" ? `\n🚚 Delivery Fee: R${ARAMEX_FEE}` : "";
+      delivery.option === "aramex" ? `\n🚚 Delivery Fee: R${ARAMEX_FEE}` : delivery.option === "postnet" ? `\n🚚 Delivery Fee: R${POSTNET_FEE}` : "";
 
     const discountInfo = discounts.length > 0
       ? `\n\n🎉 Discounts:\n${discounts.map((d) => `  − ${d.label}: -R${d.amount}`).join("\n")}`
