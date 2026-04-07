@@ -10,7 +10,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
 import EasterBanner from "@/components/EasterBanner";
 import LiveTrafficSignal from "@/components/LiveTrafficSignal";
-import ExclusiveCollection from "@/components/ExclusiveCollection";
+
 import { Link } from "react-router-dom";
 import collectionMen from "@/assets/collection-men.jpeg";
 import collectionWomen from "@/assets/collection-women.jpeg";
@@ -97,7 +97,7 @@ const Index = () => {
         </div>
       </section>
 
-      <ExclusiveCollection />
+      
       <SignatureFragranceSection />
       <FeaturedCollection />
       <AboutSection />
