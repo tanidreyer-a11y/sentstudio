@@ -13,6 +13,7 @@ import ContactPage from "./pages/ContactPage";
 import ReviewsPage from "./pages/ReviewsPage";
 
 import QuizPage from "./pages/QuizPage";
+import ExclusivePage from "./pages/ExclusivePage";
 import FindMyScentPage from "./pages/FindMyScentPage";
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/payment/success" element={<PaymentSuccessPage />} />
             <Route path="/payment/cancel" element={<PaymentCancelPage />} />
             <Route path="/quiz" element={<QuizPage />} />
+            <Route path="/exclusive" element={<ExclusivePage />} />
             <Route path="/find-my-scent" element={<FindMyScentPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

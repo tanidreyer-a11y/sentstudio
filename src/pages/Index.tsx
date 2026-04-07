@@ -71,6 +71,16 @@ const Index = () => {
             </Link>
           </div>
 
+          {/* Exclusive Collection CTA */}
+          <div className="mt-6 text-center">
+            <Link
+              to="/exclusive"
+              className="inline-block border border-primary bg-primary/5 px-8 py-3 font-sans text-xs uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:bg-primary hover:text-primary-foreground sm:px-10 sm:py-4 sm:text-sm"
+            >
+              ✦ Exclusive Collection
+            </Link>
+          </div>
+
           {/* Live Traffic Signal */}
           <LiveTrafficSignal />
 
