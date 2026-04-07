@@ -1,16 +1,42 @@
 import { Link } from "react-router-dom";
-import { Heart } from "lucide-react";
+import { Heart, Eye, ShoppingBag } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { Perfume } from "@/data/perfumes";
 import { getPerfumeImage } from "@/lib/perfume-images";
 import { getPricingTier, tierLabel } from "@/lib/pricing-tiers";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { toast } from "sonner";
+
+const useTrafficSignal = (perfumeId: string) => {
+  const seed = useMemo(() => {
+    let h = 0;
+    for (let i = 0; i < perfumeId.length; i++) {
+      h = (Math.imul(31, h) + perfumeId.charCodeAt(i)) | 0;
+    }
+    return Math.abs(h);
+  }, [perfumeId]);
+
+  const [viewers, setViewers] = useState(() => (seed % 30) + 5);
+  const [sold, setSold] = useState(() => (seed % 8) + 1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setViewers((prev) => Math.max(3, Math.min(40, prev + Math.floor(Math.random() * 5) - 2)));
+      if (Math.random() < 0.25) {
+        setSold((prev) => Math.max(1, Math.min(12, prev + (Math.random() < 0.5 ? 1 : -1))));
+      }
+    }, 4000 + (seed % 3000));
+    return () => clearInterval(interval);
+  }, [seed]);
+
+  return { viewers, sold };
+};
 
 const PerfumeCard = ({ perfume }: { perfume: Perfume }) => {
   const { addToCart } = useCart();
   const [wishlisted, setWishlisted] = useState(false);
   const tier = getPricingTier(perfume);
+  const { viewers, sold } = useTrafficSignal(perfume.id);
 
   const defaultSize = perfume.prices["50ml"] != null ? "50ml" : perfume.prices["30ml"] != null ? "30ml" : "100ml";
   const defaultPrice = perfume.prices[defaultSize] || 0;
@@ -53,6 +79,22 @@ const PerfumeCard = ({ perfume }: { perfume: Perfume }) => {
               {tierLabel[tier]}
             </span>
           )}
+          {/* Live traffic signal overlay */}
+          <div className="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur-sm px-2 py-1.5 flex items-center justify-between text-[10px]">
+            <span className="flex items-center gap-1 text-muted-foreground">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+              </span>
+              <Eye size={10} />
+              <span className="text-foreground font-medium">{viewers}</span>
+            </span>
+            <span className="flex items-center gap-1 text-muted-foreground">
+              <ShoppingBag size={10} className="text-primary" />
+              <span className="text-foreground font-medium">{sold}</span>
+              <span className="hidden sm:inline">sold/hr</span>
+            </span>
+          </div>
         </div>
       </Link>
 
