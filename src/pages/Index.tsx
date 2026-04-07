@@ -9,6 +9,8 @@ import NewsletterSection from "@/components/NewsletterSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
 import EasterBanner from "@/components/EasterBanner";
+import LiveTrafficSignal from "@/components/LiveTrafficSignal";
+import ExclusiveCollection from "@/components/ExclusiveCollection";
 import { Link } from "react-router-dom";
 import collectionMen from "@/assets/collection-men.jpeg";
 import collectionWomen from "@/assets/collection-women.jpeg";
@@ -69,8 +71,11 @@ const Index = () => {
             </Link>
           </div>
 
+          {/* Live Traffic Signal */}
+          <LiveTrafficSignal />
+
           {/* Find My Scent CTA */}
-          <div className="mt-8 text-center md:mt-12">
+          <div className="mt-4 text-center">
             <p className="mb-3 font-sans text-xs text-muted-foreground sm:mb-4 sm:text-sm">Not sure what suits you?</p>
             <Link
               to="/find-my-scent"
@@ -82,6 +87,7 @@ const Index = () => {
         </div>
       </section>
 
+      <ExclusiveCollection />
       <SignatureFragranceSection />
       <FeaturedCollection />
       <AboutSection />
