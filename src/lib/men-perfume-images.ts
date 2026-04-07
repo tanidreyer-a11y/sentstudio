@@ -54,6 +54,7 @@ import lvOmbreNomade from "@/assets/men/louis-vuitton-ombre-nomade.jpg";
 import maisonCrivelliOud from "@/assets/men/maison-crivelli-oud-maracuja.jpg";
 import mfkOudSatinMood from "@/assets/men/mfk-oud-satin-mood.jpg";
 import tomFordOmbreLeather from "@/assets/men/tom-ford-ombre-leather.jpg";
+import tomFordOudWood from "@/assets/men/tom-ford-oud-wood.jpg";
 import manceraRedTobacco from "@/assets/men/mancera-red-tobacco.jpg";
 
 // Fresh
