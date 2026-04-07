@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import DeliveryForm, {
   type DeliveryDetails,
   ARAMEX_FEE,
+  POSTNET_FEE,
 } from "@/components/DeliveryForm";
 
 const CartPage = () => {
@@ -26,8 +27,8 @@ const CartPage = () => {
     instructions: "",
   });
 
-  const needsAddress = delivery.option === "aramex";
-  const deliveryFee = delivery.option === "aramex" ? ARAMEX_FEE : 0;
+  const needsAddress = delivery.option === "aramex" || delivery.option === "postnet";
+  const deliveryFee = delivery.option === "aramex" ? ARAMEX_FEE : delivery.option === "postnet" ? POSTNET_FEE : 0;
   const grandTotal = finalPrice + deliveryFee;
 
   const isFormValid =
@@ -106,6 +107,7 @@ const CartPage = () => {
       uber: "Uber Pickup Selected",
       local: "Local Delivery",
       aramex: "Aramex Courier",
+      postnet: "PostNet Collection",
     };
 
     let addressBlock = "";
@@ -114,7 +116,8 @@ const CartPage = () => {
     }
 
     const feeInfo =
-      delivery.option === "aramex" ? `\n🚚 Delivery Fee: R${ARAMEX_FEE}` : "";
+      delivery.option === "aramex" ? `\n🚚 Delivery Fee: R${ARAMEX_FEE}` :
+      delivery.option === "postnet" ? `\n🚚 PostNet Fee: R${POSTNET_FEE}` : "";
 
     const discountInfo = discounts.length > 0
       ? `\n\n🎉 Discounts:\n${discounts.map((d) => `  − ${d.label}: -R${d.amount}`).join("\n")}`
@@ -266,7 +269,7 @@ const CartPage = () => {
                   {deliveryFee > 0 && (
                     <div className="flex justify-between items-center">
                       <span className="font-sans text-sm text-muted-foreground">
-                        Aramex Delivery
+                        {delivery.option === "postnet" ? "PostNet" : "Aramex"} Delivery
                       </span>
                       <span className="font-sans text-sm text-foreground">
                         R{deliveryFee}
