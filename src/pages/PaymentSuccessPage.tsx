@@ -4,7 +4,7 @@ import { CheckCircle, MessageCircle } from "lucide-react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
 import { useCart } from "@/contexts/CartContext";
-import { ARAMEX_FEE } from "@/components/DeliveryForm";
+import { ARAMEX_FEE, POSTNET_FEE } from "@/components/DeliveryForm";
 import type { DeliveryDetails } from "@/components/DeliveryForm";
 
 interface OrderItem {
@@ -28,6 +28,7 @@ const deliveryLabels: Record<string, string> = {
   uber: "Uber Pickup Selected",
   local: "Local Delivery",
   aramex: "Aramex Courier",
+  postnet: "PostNet Courier",
 };
 
 const PaymentSuccessPage = () => {
@@ -55,13 +56,13 @@ const PaymentSuccessPage = () => {
       .join("\n");
 
     const d = order.delivery;
-    const needsAddress = d.option === "aramex";
+    const needsAddress = d.option === "aramex" || d.option === "postnet";
     const addressBlock = needsAddress
       ? `\n\n📍 Address:\n${d.streetAddress}\n${d.cityArea}\n${d.postalCode}`
       : "";
 
     const feeInfo =
-      d.option === "aramex" ? `\n🚚 Delivery Fee: R${ARAMEX_FEE}` : "";
+      d.option === "aramex" ? `\n🚚 Delivery Fee: R${ARAMEX_FEE}` : d.option === "postnet" ? `\n🚚 Delivery Fee: R${POSTNET_FEE}` : "";
 
     const message = `✅ *Payment Confirmed — Scent Studio*\n\n👤 Customer: ${d.fullName}\n📞 Phone: ${d.phone}\n\n📦 Items:\n${itemsList}\n\n🚀 Delivery: ${deliveryLabels[d.option]}${addressBlock}${d.instructions ? `\n📝 Instructions: ${d.instructions}` : ""}${feeInfo}\n\n💰 *Total Paid: R${order.grandTotal}*\n\nPayment received via Yoco. Please prepare the order. Thank you!`;
 
