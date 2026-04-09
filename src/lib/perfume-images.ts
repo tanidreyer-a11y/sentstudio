@@ -7,11 +7,7 @@ import womenMusky from "@/assets/women-musky.jpeg";
 import womenSweet from "@/assets/women-sweet.jpeg";
 import menSweet from "@/assets/men-sweet.jpeg";
 
-// Per-perfume images (men) - keyed by perfume ID
-const menPerfumeImages: Record<string, string> = {};
-
-// Category fallback images
-const categoryMap: Record<string, string> = {
+const imageMap: Record<string, string> = {
   "men-Luxury": menLuxury,
   "men-Fresh": menFresh,
   "men-Musky": menMusky,
@@ -22,19 +18,6 @@ const categoryMap: Record<string, string> = {
   "women-Sweet": womenSweet,
 };
 
-export const registerPerfumeImage = (id: string, image: string) => {
-  menPerfumeImages[id] = image;
-};
-
-export const getPerfumeImageById = (id: string): string => {
-  return menPerfumeImages[id] || "";
-};
-
-export const getPerfumeImage = (gender: "men" | "women", category: string, perfumeId?: string): string => {
-  // Check for individual perfume image first
-  if (perfumeId && menPerfumeImages[perfumeId]) {
-    return menPerfumeImages[perfumeId];
-  }
-  // Fall back to category image
-  return categoryMap[`${gender}-${category}`] || "";
+export const getPerfumeImage = (gender: "men" | "women", category: string): string => {
+  return imageMap[`${gender}-${category}`] || "";
 };

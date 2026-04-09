@@ -31,9 +31,9 @@ const PerfumeCard = ({ perfume }: { perfume: Perfume }) => {
     <div className="group relative">
       <Link to={`/perfume/${perfume.id}`}>
         <div className="relative overflow-hidden mb-4 bg-card aspect-[3/4] flex items-center justify-center">
-          {getPerfumeImage(perfume.gender, perfume.category, perfume.id) ? (
+          {getPerfumeImage(perfume.gender, perfume.category) ? (
             <img
-              src={getPerfumeImage(perfume.gender, perfume.category, perfume.id)}
+              src={getPerfumeImage(perfume.gender, perfume.category)}
               alt={perfume.name}
               className="w-full h-full object-cover"
               loading="lazy"
