@@ -196,5 +196,5 @@ const Field = ({
   </div>
 );
 
-export { ARAMEX_FEE };
+export { ARAMEX_FEE, POSTNET_FEE };
 export default DeliveryForm;
