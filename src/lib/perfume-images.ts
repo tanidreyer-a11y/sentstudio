@@ -26,10 +26,3 @@ export const getPerfumeImage = (gender: "men" | "women", category: string, perfu
   // Fall back to gender image
   return genderMap[gender] || "";
 };
-  // Check for individual perfume image first
-  if (perfumeId && menPerfumeImages[perfumeId]) {
-    return menPerfumeImages[perfumeId];
-  }
-  // Fall back to category image
-  return categoryMap[`${gender}-${category}`] || "";
-};
