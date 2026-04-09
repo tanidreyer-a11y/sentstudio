@@ -8,7 +8,7 @@ import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
-import EasterBanner from "@/components/EasterBanner";
+import LiveTrafficSignal from "@/components/LiveTrafficSignal";
 import { Link } from "react-router-dom";
 import collectionMen from "@/assets/collection-men.jpeg";
 import collectionWomen from "@/assets/collection-women.jpeg";
@@ -18,9 +18,6 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <HeroSection />
-
-      {/* Easter Promo Banner */}
-      <EasterBanner />
 
       {/* Legal Disclaimer Banner */}
       <div className="bg-secondary border-y border-border">
@@ -69,15 +66,33 @@ const Index = () => {
             </Link>
           </div>
 
-          {/* Find My Scent CTA */}
-          <div className="mt-8 text-center md:mt-12">
-            <p className="mb-3 font-sans text-xs text-muted-foreground sm:mb-4 sm:text-sm">Not sure what suits you?</p>
+          {/* Exclusive Collection Entry */}
+          <div className="mt-6 md:mt-8">
             <Link
-              to="/find-my-scent"
-              className="inline-block border border-primary px-8 py-3 font-sans text-xs uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:bg-primary hover:text-primary-foreground sm:px-10 sm:py-4 sm:text-sm"
+              to="/exclusive"
+              className="group relative flex h-40 items-center justify-center overflow-hidden border border-primary/30 bg-gradient-to-r from-card via-card to-card transition-all duration-500 hover:border-primary sm:h-48"
             >
-              Find My Scent
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 group-hover:from-primary/10 group-hover:to-primary/10 transition-colors duration-500" />
+              <div className="relative text-center">
+                <p className="mb-1.5 font-sans text-[0.6rem] uppercase tracking-[0.4em] text-primary sm:mb-2 sm:text-xs">Premium & Ultra Premium</p>
+                <h3 className="font-display text-2xl font-light text-foreground transition-colors group-hover:text-primary sm:text-3xl">Exclusive Collection</h3>
+                <p className="mt-2 font-sans text-xs text-muted-foreground">From R130 · For the discerning connoisseur</p>
+              </div>
             </Link>
+          </div>
+
+          {/* Explore Collection CTA + Find My Scent + Live Traffic */}
+          <div className="mt-8 text-center space-y-6 md:mt-12">
+            <div>
+              <p className="mb-3 font-sans text-xs text-muted-foreground sm:mb-4 sm:text-sm">Not sure what suits you?</p>
+              <Link
+                to="/find-my-scent"
+                className="inline-block border border-primary px-8 py-3 font-sans text-xs uppercase tracking-[0.2em] text-primary transition-colors duration-300 hover:bg-primary hover:text-primary-foreground sm:px-10 sm:py-4 sm:text-sm"
+              >
+                Find My Scent
+              </Link>
+            </div>
+            <LiveTrafficSignal />
           </div>
         </div>
       </section>
