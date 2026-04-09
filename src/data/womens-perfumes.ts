@@ -271,20 +271,6 @@ export const womensPerfumes: Perfume[] = [
     image: "/placeholder.svg",
   },
   {
-    id: "ysl-black-opium",
-    name: "YSL Black Opium",
-    category: "Sweet",
-    gender: "women",
-    description: "An addictive, rock 'n' roll fragrance with coffee, vanilla, and white flowers.",
-    notes: {
-      top: ["Pear", "Pink Pepper", "Orange Blossom"],
-      middle: ["Coffee", "Jasmine", "Bitter Almond"],
-      base: ["Vanilla", "Patchouli", "Cedar"],
-    },
-    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
-    image: "/placeholder.svg",
-  },
-  {
     id: "thierry-mugler-alien",
     name: "Thierry Mugler Alien",
     category: "Sweet",
