@@ -271,6 +271,20 @@ export const womensPerfumes: Perfume[] = [
     image: "/placeholder.svg",
   },
   {
+    id: "ysl-black-opium",
+    name: "YSL Black Opium",
+    category: "Sweet",
+    gender: "women",
+    description: "An addictive, rock 'n' roll fragrance with coffee, vanilla, and white flowers.",
+    notes: {
+      top: ["Pear", "Pink Pepper", "Orange Blossom"],
+      middle: ["Coffee", "Jasmine", "Bitter Almond"],
+      base: ["Vanilla", "Patchouli", "Cedar"],
+    },
+    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    image: "/placeholder.svg",
+  },
+  {
     id: "thierry-mugler-alien",
     name: "Thierry Mugler Alien",
     category: "Sweet",
@@ -522,6 +536,20 @@ export const womensPerfumes: Perfume[] = [
       base: ["Vanilla", "Benzoin", "Frankincense"],
     },
     prices: { "30ml": 130, "50ml": 180, "100ml": 320 },
+    image: "/placeholder.svg",
+  },
+  {
+    id: "gucci-guilty-women",
+    name: "Gucci Guilty (Women)",
+    category: "Musky",
+    gender: "women",
+    description: "A bold, modern floral with mandarin, lilac, and earthy patchouli amber.",
+    notes: {
+      top: ["Mandarin", "Pink Pepper", "Bergamot"],
+      middle: ["Lilac", "Geranium"],
+      base: ["Patchouli", "Amber"],
+    },
+    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
     image: "/placeholder.svg",
   },
   {
