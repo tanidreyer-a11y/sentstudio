@@ -115,7 +115,9 @@ const CartPage = () => {
     }
 
     const feeInfo =
-      delivery.option === "aramex" ? `\n🚚 Delivery Fee: R${ARAMEX_FEE}` : "";
+      (delivery.option === "aramex" || delivery.option === "postnet")
+        ? `\n🚚 Delivery Fee: R${deliveryFee}`
+        : "";
 
     const discountInfo = discounts.length > 0
       ? `\n\n🎉 Discounts:\n${discounts.map((d) => `  − ${d.label}: -R${d.amount}`).join("\n")}`
