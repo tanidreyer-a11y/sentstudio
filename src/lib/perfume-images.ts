@@ -1,40 +1,28 @@
-import menLuxury from "@/assets/men-luxury.jpeg";
-import menFresh from "@/assets/men-fresh.jpeg";
-import menMusky from "@/assets/men-musky.jpeg";
-import womenLuxury from "@/assets/women-luxury.jpeg";
-import womenFresh from "@/assets/women-fresh.jpeg";
-import womenMusky from "@/assets/women-musky.jpeg";
-import womenSweet from "@/assets/women-sweet.jpeg";
-import menSweet from "@/assets/men-sweet.jpeg";
+import menBottle from "@/assets/men-bottle-black.jpg";
+import womenBottle from "@/assets/women-bottle-ivory.jpg";
 
-// Per-perfume images (men) - keyed by perfume ID
-const menPerfumeImages: Record<string, string> = {};
+// Per-perfume images - keyed by perfume ID
+const perfumeImages: Record<string, string> = {};
 
-// Category fallback images
-const categoryMap: Record<string, string> = {
-  "men-Luxury": menLuxury,
-  "men-Fresh": menFresh,
-  "men-Musky": menMusky,
-  "men-Sweet": menSweet,
-  "women-Luxury": womenLuxury,
-  "women-Fresh": womenFresh,
-  "women-Musky": womenMusky,
-  "women-Sweet": womenSweet,
+// Gender fallback images
+const genderMap: Record<string, string> = {
+  men: menBottle,
+  women: womenBottle,
 };
 
 export const registerPerfumeImage = (id: string, image: string) => {
-  menPerfumeImages[id] = image;
+  perfumeImages[id] = image;
 };
 
 export const getPerfumeImageById = (id: string): string => {
-  return menPerfumeImages[id] || "";
+  return perfumeImages[id] || "";
 };
 
 export const getPerfumeImage = (gender: "men" | "women", category: string, perfumeId?: string): string => {
   // Check for individual perfume image first
-  if (perfumeId && menPerfumeImages[perfumeId]) {
-    return menPerfumeImages[perfumeId];
+  if (perfumeId && perfumeImages[perfumeId]) {
+    return perfumeImages[perfumeId];
   }
-  // Fall back to category image
-  return categoryMap[`${gender}-${category}`] || "";
+  // Fall back to gender image
+  return genderMap[gender] || "";
 };
