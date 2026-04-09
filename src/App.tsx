@@ -14,6 +14,7 @@ import ReviewsPage from "./pages/ReviewsPage";
 
 import QuizPage from "./pages/QuizPage";
 import FindMyScentPage from "./pages/FindMyScentPage";
+import ExclusivePage from "./pages/ExclusivePage";
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
@@ -43,6 +44,8 @@ const App = () => (
             <Route path="/payment/cancel" element={<PaymentCancelPage />} />
             <Route path="/quiz" element={<QuizPage />} />
             <Route path="/find-my-scent" element={<FindMyScentPage />} />
+            <Route path="/exclusive" element={<ExclusivePage />} />
+            <Route path="*" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
