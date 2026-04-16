@@ -39,7 +39,7 @@ const HeroSection = () => {
           Premium oil-based fragrances inspired by the world's most iconic designer scents.
           Long-lasting, affordable, and crafted for the discerning connoisseur.
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up-delay-3">
+        <div className="flex flex-col items-center justify-center gap-4 animate-fade-up-delay-3">
           <a
             href="#shop-collection"
             className="font-sans text-sm tracking-[0.2em] uppercase px-10 py-4 border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500"
