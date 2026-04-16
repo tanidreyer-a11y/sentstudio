@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import exclusiveBg from "@/assets/exclusive-bg.png";
 import HeroSection from "@/components/HeroSection";
 import FeaturedCollection from "@/components/FeaturedCollection";
 import SignatureFragranceSection from "@/components/SignatureFragranceSection";
@@ -70,9 +71,15 @@ const Index = () => {
           <div className="mt-6 md:mt-8">
             <Link
               to="/exclusive"
-              className="group relative flex h-40 items-center justify-center overflow-hidden border border-primary/30 bg-gradient-to-r from-card via-card to-card transition-all duration-500 hover:border-primary sm:h-48"
+              className="group relative flex h-40 items-center justify-center overflow-hidden border border-primary/30 transition-all duration-500 hover:border-primary sm:h-48"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 group-hover:from-primary/10 group-hover:to-primary/10 transition-colors duration-500" />
+              <img
+                src={exclusiveBg}
+                alt="Exclusive collection"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-background/60 transition-colors duration-500 group-hover:bg-background/50" />
               <div className="relative text-center">
                 <p className="mb-1.5 font-sans text-[0.6rem] uppercase tracking-[0.4em] text-primary sm:mb-2 sm:text-xs">Premium & Ultra Premium</p>
                 <h3 className="font-display text-2xl font-light text-foreground transition-colors group-hover:text-primary sm:text-3xl">Exclusive Collection</h3>
