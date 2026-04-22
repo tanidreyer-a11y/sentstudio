@@ -10,6 +10,7 @@ import NewsletterSection from "@/components/NewsletterSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
 import LiveTrafficSignal from "@/components/LiveTrafficSignal";
+import JournalPreview from "@/components/JournalPreview";
 import { Link } from "react-router-dom";
 import collectionMen from "@/assets/collection-men.jpeg";
 import collectionWomen from "@/assets/collection-women.jpeg";
@@ -102,6 +103,7 @@ const Index = () => {
       <ProblemSolutionSection />
       <TestimonialsSection />
       <NewsletterSection />
+      <JournalPreview />
       <SiteFooter />
     </div>
   );
