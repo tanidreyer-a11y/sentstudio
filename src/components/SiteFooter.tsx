@@ -49,7 +49,7 @@ const SiteFooter = () => {
               {[
                 { label: "About", path: "/about" },
                 { label: "Reviews", path: "/reviews" },
-                
+              { label: "Journal", path: "/blog" },
                 { label: "Contact", path: "/contact" },
               ].map((link) => (
                 <Link
