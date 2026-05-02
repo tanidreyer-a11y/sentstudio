@@ -1,4 +1,5 @@
 import blogOilVsAlcohol from "@/assets/blog-oil-vs-alcohol.jpg";
+import blogPerfumeFadesFast from "@/assets/blog-perfume-fades-fast.jpg";
 
 export interface BlogPost {
   slug: string;
@@ -14,6 +15,64 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "why-does-my-perfume-fade-so-fast",
+    title: "Why Does My Perfume Fade So Fast? (And How to Fix It)",
+    excerpt:
+      "If your fragrance disappears by lunchtime, you're not imagining it. Here's why perfume fades fast in South African weather — and the simple fixes that make it last.",
+    metaDescription:
+      "Why does your perfume fade so fast? A South African guide to fragrance longevity, skin chemistry, climate effects and how to make affordable perfumes last all day.",
+    date: "2026-04-29",
+    readingTime: "5 min read",
+    image: blogPerfumeFadesFast,
+    imageAlt: "Amber perfume bottle on cream silk lit by warm golden afternoon light",
+    contentHtml: `
+      <p>You spray your favourite perfume in the morning, step out the door, and by mid-afternoon — nothing. No trail, no whisper, no scent at all. Sound familiar? It is one of the most common frustrations we hear from South African fragrance lovers, and the good news is that there is almost always a fixable reason behind it.</p>
+      <p>This guide explains exactly why your perfume fades so fast, what our climate has to do with it, and the small changes that turn a 2-hour scent into an all-day signature.</p>
+
+      <h2>1. Your skin type changes everything</h2>
+      <p>Dry skin is the number one reason perfume disappears quickly. Fragrance molecules need moisture to cling to — when your skin is dry, those molecules evaporate into the air instead of settling in. People with naturally oily skin almost always get longer wear from the same bottle.</p>
+      <p><strong>The fix:</strong> Apply an unscented moisturiser or a light body oil to your pulse points <em>before</em> spraying. This single habit can double how long your scent lasts.</p>
+
+      <h2>2. South African heat is brutal on fragrance</h2>
+      <p>Hot, dry weather — the kind we get across most of Gauteng, the Free State and the Northern Cape — accelerates evaporation. Alcohol-based eau de toilettes especially flash off the skin within an hour or two when temperatures climb above 25°C.</p>
+      <p><strong>The fix:</strong> Switch to <strong>oil-based perfumes</strong> for daytime wear. Without alcohol as a carrier, the scent does not evaporate the same way. Oil perfumes were literally invented in hot climates for exactly this reason.</p>
+
+      <h2>3. You're spraying the wrong places</h2>
+      <p>Spraying onto clothes or into the air does very little. Fragrance is activated by body heat, which is why pulse points work — the warmth of your blood vessels gradually releases the scent throughout the day.</p>
+      <p><strong>The fix:</strong> Apply directly to: inner wrists, the side of the neck, behind the ears, the inner elbow, and behind the knees. Do not rub your wrists together — it crushes the top notes.</p>
+
+      <h2>4. You've gone "nose blind"</h2>
+      <p>Sometimes your perfume has not actually faded — you have just stopped smelling it. Your nose adapts to scents you wear regularly, a phenomenon called olfactory fatigue. Ask a friend or partner mid-afternoon. You might be surprised.</p>
+      <p><strong>The fix:</strong> Rotate two or three different fragrances through your week so your nose stays sensitive to each one.</p>
+
+      <h2>5. You bought a weak formulation</h2>
+      <p>Not all perfumes are created equal. Many cheap supermarket sprays contain very low concentrations of fragrance oil — sometimes under 5%. Designer eau de toilettes sit around 5–15%. A quality oil-based <em>inspired perfume</em> often runs 20% or higher in pure fragrance concentration, which is why it lasts so much longer.</p>
+      <p><strong>The fix:</strong> Look for "perfume oil," "extrait" or "parfum" rather than "eau de toilette" or "body mist" if longevity matters to you.</p>
+
+      <h2>6. You're storing your perfume badly</h2>
+      <p>Sunlight, heat and humidity break down fragrance compounds over time. A bottle left on a sunny bathroom shelf can lose its character within months — even if it still smells "fine" to you.</p>
+      <p><strong>The fix:</strong> Store bottles in a cool, dark drawer or cupboard. Bedrooms work better than bathrooms.</p>
+
+      <h2>The quick longevity checklist</h2>
+      <ul>
+        <li><strong>Moisturise</strong> before applying.</li>
+        <li>Apply to <strong>warm pulse points</strong>, not clothes.</li>
+        <li><strong>Do not rub</strong> — dab and let it settle.</li>
+        <li>Choose <strong>oil-based perfumes</strong> for hot weather and long days.</li>
+        <li>Layer with a <strong>matching body oil</strong> if you really want it to anchor.</li>
+        <li>Store away from <strong>heat and sunlight</strong>.</li>
+      </ul>
+
+      <h2>Why oil-based perfumes solve most of this</h2>
+      <p>Most of the problems above point in the same direction: alcohol-based sprays simply struggle in our climate. Oil-based <em>long-lasting fragrances</em> sit on the skin instead of flashing off it, release slowly through the day, and do not need re-application every few hours.</p>
+      <p>At Scent Studio, every fragrance we craft is oil-based and built around the realities of South African weather and South African budgets. You get the character of iconic designer scents — without the designer price tag, and without the midday fade.</p>
+
+      <h2>The bottom line</h2>
+      <p>If your perfume fades fast, it is rarely your fault. It is usually a mix of dry skin, hot weather, the wrong application points and a formulation that was never designed to last. Adjust those four things — or switch to a quality oil-based perfume — and you will notice the difference within a single day of wear.</p>
+      <p>Not sure which oil-based scent will suit you best? Our short scent quiz takes about a minute and points you to the fragrance family that fits your personality and lifestyle.</p>
+    `,
+  },
   {
     slug: "oil-based-perfumes-vs-alcohol-perfumes",
     title: "Oil-Based Perfumes vs Alcohol Perfumes: Which Lasts Longer?",
