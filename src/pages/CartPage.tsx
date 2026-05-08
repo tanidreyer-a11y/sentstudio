@@ -3,6 +3,7 @@ import { Minus, Plus, Trash2, Loader2 } from "lucide-react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
 import { useCart } from "@/contexts/CartContext";
+import { MOTHERS_DAY_CODE, isMothersDayActive } from "@/lib/promotions";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import DeliveryForm, {
@@ -12,7 +13,7 @@ import DeliveryForm, {
 } from "@/components/DeliveryForm";
 
 const CartPage = () => {
-  const { items, removeFromCart, updateQuantity, clearCart, totalPrice, discounts, totalDiscount, finalPrice } =
+  const { items, removeFromCart, updateQuantity, clearCart, totalPrice, discounts, totalDiscount, finalPrice, promoCode, setPromoCode } =
     useCart();
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
@@ -243,6 +244,25 @@ const CartPage = () => {
               {/* Delivery form */}
               <div className="border-t border-border pt-8 mb-8">
                 <DeliveryForm details={delivery} onChange={setDelivery} />
+              </div>
+
+              {/* Promo code */}
+              <div className="border-t border-border pt-8 mb-8">
+                <label className="block font-sans text-xs tracking-[0.2em] uppercase text-muted-foreground mb-3">
+                  Promo Code
+                </label>
+                <input
+                  type="text"
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
+                  placeholder="Enter code (e.g. #MUM)"
+                  className="w-full px-4 py-3 bg-background border border-border font-sans text-sm text-foreground focus:outline-none focus:border-primary transition-colors"
+                />
+                {isMothersDayActive() && (
+                  <p className="font-body text-xs text-muted-foreground mt-2">
+                    💐 Mother's Day Special: Use <span className="text-primary font-medium">{MOTHERS_DAY_CODE}</span> for 10% off when you buy 2+ perfumes (one must be a women's fragrance).
+                  </p>
+                )}
               </div>
 
               {/* Totals & actions */}
