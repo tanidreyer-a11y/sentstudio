@@ -1,5 +1,9 @@
 import { createContext, useContext, useState, useMemo, ReactNode } from "react";
-import { calculateEasterDiscounts, type CartDiscount } from "@/lib/promotions";
+import {
+  calculateEasterDiscounts,
+  calculateMothersDayDiscount,
+  type CartDiscount,
+} from "@/lib/promotions";
 
 export interface CartItem {
   perfumeId: string;
@@ -26,6 +30,8 @@ interface CartContextType {
   discounts: CartDiscount[];
   totalDiscount: number;
   finalPrice: number;
+  promoCode: string;
+  setPromoCode: (code: string) => void;
   getWhatsAppMessage: (customerName: string) => string;
 }
 
@@ -33,6 +39,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [promoCode, setPromoCode] = useState("");
 
   const addToCart = (item: Omit<CartItem, "quantity">) => {
     setItems((prev) => {
@@ -69,7 +76,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
   const totalPrice = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
-  const discounts = useMemo(() => calculateEasterDiscounts(items), [items]);
+  const discounts = useMemo(
+    () => [
+      ...calculateEasterDiscounts(items),
+      ...calculateMothersDayDiscount(items, promoCode),
+    ],
+    [items, promoCode]
+  );
   const totalDiscount = discounts.reduce((s, d) => s + d.amount, 0);
   const finalPrice = totalPrice - totalDiscount;
 
@@ -88,7 +101,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <CartContext.Provider
-      value={{ items, addToCart, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice, discounts, totalDiscount, finalPrice, getWhatsAppMessage }}
+      value={{ items, addToCart, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice, discounts, totalDiscount, finalPrice, promoCode, setPromoCode, getWhatsAppMessage }}
     >
       {children}
     </CartContext.Provider>
