@@ -22,13 +22,13 @@ const Header = () => {
 
   return (
     <>
-      {isMothersDayActive() && (
-        <div className="fixed top-0 left-0 right-0 z-[60] bg-primary text-primary-foreground text-center py-2 px-4 font-sans text-[11px] sm:text-xs tracking-[0.15em] uppercase">
-          💐 Mother's Day Weekend — 10% off 2+ perfumes (incl. one for her) · Code{" "}
-          <span className="font-semibold">{MOTHERS_DAY_CODE}</span>
-        </div>
-      )}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+        {isMothersDayActive() && (
+          <div className="bg-primary text-primary-foreground text-center py-2 px-4 font-sans text-[10px] sm:text-xs tracking-[0.15em] uppercase">
+            💐 Mother's Day Weekend — 10% off 2+ perfumes (incl. one for her) · Code{" "}
+            <span className="font-semibold">{MOTHERS_DAY_CODE}</span>
+          </div>
+        )}
         <div className="container mx-auto px-6 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center bg-[#131110] text-secondary-foreground mx-[9px] my-[9px] text-6xl">
             <img
