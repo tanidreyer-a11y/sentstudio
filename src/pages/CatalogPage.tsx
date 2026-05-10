@@ -22,7 +22,6 @@ const CatalogPage = () => {
     : allPerfumes.filter((p) => p.category === activeCategory);
 
   const isContinuousMenMuskyRow = view === "scroll" && validGender === "men" && activeCategory === "Musky";
-  const panoramaSegments = isContinuousMenMuskyRow ? filteredPerfumes.length : 0;
 
   const getOverride = (perfume: Perfume, idx: number) =>
     isContinuousMenMuskyRow
