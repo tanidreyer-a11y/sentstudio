@@ -5,7 +5,7 @@ import SiteFooter from "@/components/SiteFooter";
 import PerfumeCard from "@/components/PerfumeCard";
 import { getPerfumesByGender } from "@/data/perfumes";
 import type { Perfume } from "@/data/perfumes";
-import { getMenMuskyScene, menMuskyPanorama } from "@/lib/perfume-images";
+import { getMenMuskyPanoramaSlice, getMenMuskyScene } from "@/lib/perfume-images";
 import { Grid3X3, Rows3 } from "lucide-react";
 
 const categories = ["All", "Luxury", "Fresh", "Musky", "Sweet"] as const;
@@ -26,7 +26,7 @@ const CatalogPage = () => {
 
   const getOverride = (perfume: Perfume, idx: number) =>
     isContinuousMenMuskyRow
-      ? menMuskyPanorama
+      ? getMenMuskyPanoramaSlice(idx)
       : perfume.gender === "men" && perfume.category === "Musky"
       ? getMenMuskyScene(idx)
       : undefined;
@@ -91,11 +91,6 @@ const CatalogPage = () => {
                   <PerfumeCard
                     perfume={perfume}
                     imageOverride={getOverride(perfume, idx)}
-                    useBackgroundImage={isContinuousMenMuskyRow}
-                    imageStyle={isContinuousMenMuskyRow ? {
-                      backgroundSize: `${panoramaSegments * 100}% 100%`,
-                      backgroundPosition: `${panoramaSegments <= 1 ? 50 : (idx / (panoramaSegments - 1)) * 100}% center`,
-                    } : undefined}
                   />
                 </div>
               ))}
