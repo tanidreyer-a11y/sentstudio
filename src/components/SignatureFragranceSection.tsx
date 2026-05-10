@@ -134,7 +134,7 @@ const SignatureFragranceSection = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-background py-12 md:py-24">
+    <section id="signature" className="relative overflow-hidden bg-background py-12 md:py-24 scroll-mt-24">
       <div className="absolute inset-0 opacity-20">
         <img src={heroPerfumeBg} alt="Luxury fragrance atmosphere" className="h-full w-full object-cover" loading="lazy" />
       </div>
