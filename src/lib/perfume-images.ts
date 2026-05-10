@@ -13,8 +13,17 @@ import muskyScene4 from "@/assets/musky-scene-4.jpg";
 
 export const menMuskyScenes = [muskyScene1, muskyScene2, muskyScene3, muskyScene4];
 
+const menMuskyPanoramaSlices = Object.entries(
+  import.meta.glob("../assets/musky-panorama-slices/*.jpg", { eager: true, import: "default" }),
+)
+  .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
+  .map(([, image]) => image as string);
+
 export const getMenMuskyScene = (index: number): string =>
   menMuskyScenes[index % menMuskyScenes.length];
+
+export const getMenMuskyPanoramaSlice = (index: number): string =>
+  menMuskyPanoramaSlices[index % menMuskyPanoramaSlices.length];
 
 const imageMap: Record<string, string> = {
   "men-Luxury": menLuxury,

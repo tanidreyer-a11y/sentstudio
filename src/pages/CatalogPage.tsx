@@ -5,7 +5,7 @@ import SiteFooter from "@/components/SiteFooter";
 import PerfumeCard from "@/components/PerfumeCard";
 import { getPerfumesByGender } from "@/data/perfumes";
 import type { Perfume } from "@/data/perfumes";
-import { getMenMuskyScene } from "@/lib/perfume-images";
+import { getMenMuskyPanoramaSlice, getMenMuskyScene } from "@/lib/perfume-images";
 import { Grid3X3, Rows3 } from "lucide-react";
 
 const categories = ["All", "Luxury", "Fresh", "Musky", "Sweet"] as const;
@@ -21,8 +21,12 @@ const CatalogPage = () => {
     ? allPerfumes
     : allPerfumes.filter((p) => p.category === activeCategory);
 
+  const isContinuousMenMuskyRow = view === "scroll" && validGender === "men" && activeCategory === "Musky";
+
   const getOverride = (perfume: Perfume, idx: number) =>
-    perfume.gender === "men" && perfume.category === "Musky"
+    isContinuousMenMuskyRow
+      ? getMenMuskyPanoramaSlice(idx)
+      : perfume.gender === "men" && perfume.category === "Musky"
       ? getMenMuskyScene(idx)
       : undefined;
 
@@ -79,12 +83,17 @@ const CatalogPage = () => {
           </div>
 
           {view === "scroll" ? (
-            <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+            <div className="overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+              <div className={`flex ${isContinuousMenMuskyRow ? "gap-0" : "gap-6"}`}>
               {filteredPerfumes.map((perfume, idx) => (
                 <div key={perfume.id} className="flex-shrink-0 w-56 sm:w-64 snap-start">
-                  <PerfumeCard perfume={perfume} imageOverride={getOverride(perfume, idx)} />
+                  <PerfumeCard
+                    perfume={perfume}
+                    imageOverride={getOverride(perfume, idx)}
+                  />
                 </div>
               ))}
+              </div>
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
