@@ -7,7 +7,7 @@ import { getPricingTier, tierLabel } from "@/lib/pricing-tiers";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const PerfumeCard = ({ perfume }: { perfume: Perfume }) => {
+const PerfumeCard = ({ perfume, imageOverride }: { perfume: Perfume; imageOverride?: string }) => {
   const { addToCart } = useCart();
   const [wishlisted, setWishlisted] = useState(false);
   const tier = getPricingTier(perfume);
@@ -31,9 +31,9 @@ const PerfumeCard = ({ perfume }: { perfume: Perfume }) => {
     <div className="group relative">
       <Link to={`/perfume/${perfume.id}`}>
         <div className="relative overflow-hidden mb-4 bg-card aspect-[3/4] flex items-center justify-center">
-          {getPerfumeImage(perfume.gender, perfume.category) ? (
+          {(imageOverride || getPerfumeImage(perfume.gender, perfume.category)) ? (
             <img
-              src={getPerfumeImage(perfume.gender, perfume.category)}
+              src={imageOverride || getPerfumeImage(perfume.gender, perfume.category)}
               alt={perfume.name}
               className="w-full h-full object-cover"
               loading="lazy"
