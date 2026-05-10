@@ -84,21 +84,18 @@ const CatalogPage = () => {
           </div>
 
           {view === "scroll" ? (
-            <div className={`overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide ${isContinuousMenMuskyRow ? "" : ""}`}>
+            <div className="overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
               <div className={`flex ${isContinuousMenMuskyRow ? "gap-0" : "gap-6"}`}>
               {filteredPerfumes.map((perfume, idx) => (
-                <div key={perfume.id} className={`flex-shrink-0 snap-start ${isContinuousMenMuskyRow ? "w-56 sm:w-64" : "w-56 sm:w-64"}`}>
+                <div key={perfume.id} className="flex-shrink-0 w-56 sm:w-64 snap-start">
                   <PerfumeCard
                     perfume={perfume}
                     imageOverride={getOverride(perfume, idx)}
-                    imageClassName={isContinuousMenMuskyRow ? "max-w-none" : undefined}
+                    useBackgroundImage={isContinuousMenMuskyRow}
                     imageStyle={isContinuousMenMuskyRow ? {
-                      width: `${panoramaSegments * 100}%`,
-                      maxWidth: "none",
-                      objectFit: "cover",
-                      objectPosition: `${panoramaSegments <= 1 ? 50 : (idx / (panoramaSegments - 1)) * 100}% center`,
+                      backgroundSize: `${panoramaSegments * 100}% 100%`,
+                      backgroundPosition: `${panoramaSegments <= 1 ? 50 : (idx / (panoramaSegments - 1)) * 100}% center`,
                     } : undefined}
-                    cardClassName={isContinuousMenMuskyRow ? "[&>a>div]:mb-5" : undefined}
                   />
                 </div>
               ))}
