@@ -1,13 +1,21 @@
+import { CSSProperties, useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { Perfume } from "@/data/perfumes";
 import { getPerfumeImage } from "@/lib/perfume-images";
 import { getPricingTier, tierLabel } from "@/lib/pricing-tiers";
-import { useState } from "react";
 import { toast } from "sonner";
 
-const PerfumeCard = ({ perfume, imageOverride }: { perfume: Perfume; imageOverride?: string }) => {
+type PerfumeCardProps = {
+  perfume: Perfume;
+  imageOverride?: string;
+  imageStyle?: CSSProperties;
+  imageClassName?: string;
+  cardClassName?: string;
+};
+
+const PerfumeCard = ({ perfume, imageOverride, imageStyle, imageClassName, cardClassName }: PerfumeCardProps) => {
   const { addToCart } = useCart();
   const [wishlisted, setWishlisted] = useState(false);
   const tier = getPricingTier(perfume);
@@ -28,14 +36,15 @@ const PerfumeCard = ({ perfume, imageOverride }: { perfume: Perfume; imageOverri
   };
 
   return (
-    <div className="group relative">
+    <div className={`group relative ${cardClassName ?? ""}`.trim()}>
       <Link to={`/perfume/${perfume.id}`}>
         <div className="relative overflow-hidden mb-4 bg-card aspect-[3/4] flex items-center justify-center">
           {(imageOverride || getPerfumeImage(perfume.gender, perfume.category)) ? (
             <img
               src={imageOverride || getPerfumeImage(perfume.gender, perfume.category)}
               alt={perfume.name}
-              className="w-full h-full object-cover"
+              className={`w-full h-full object-cover ${imageClassName ?? ""}`.trim()}
+              style={imageStyle}
               loading="lazy"
             />
           ) : (
