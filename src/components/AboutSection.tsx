@@ -1,27 +1,50 @@
+import { Sparkles, Compass, Gem } from "lucide-react";
+
+const points = [
+  {
+    icon: Sparkles,
+    title: "Intimate Self-Expression",
+    text: "Fragrance is the most personal way to tell your story.",
+  },
+  {
+    icon: Gem,
+    title: "Designer-Inspired Oils",
+    text: "The scent profiles you love — at a fraction of the price, with longer-lasting intensity.",
+  },
+  {
+    icon: Compass,
+    title: "Expertly Guided",
+    text: "Our consultants help you discover the fragrance that truly fits you.",
+  },
+];
+
 const AboutSection = () => {
   return (
-    <section id="about" className="py-28 bg-secondary">
+    <section id="about" className="py-20 md:py-28 bg-secondary">
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="font-sans text-sm tracking-[0.4em] uppercase text-primary mb-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12 md:mb-14">
+          <p className="font-sans text-xs md:text-sm tracking-[0.4em] uppercase text-primary mb-4">
             Our Philosophy
           </p>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-foreground mb-10">
+          <h2 className="font-display text-3xl md:text-5xl font-light text-foreground mb-6">
             The Essence of<br />
             <span className="italic">True Luxury</span>
           </h2>
-          <div className="w-16 h-px bg-primary mx-auto mb-10" />
-          <p className="font-body text-lg md:text-xl text-secondary-foreground/80 leading-relaxed mb-8">
-            At Scent Studio, we believe that fragrance is the most intimate form of self-expression.
-            Our collection features premium oil-based perfumes inspired by the world's most beloved
-            designer fragrances — crafted to deliver the same captivating scent profiles at a
-            fraction of the price, with longer-lasting intensity.
-          </p>
-          <p className="font-body text-lg md:text-xl text-secondary-foreground/80 leading-relaxed">
-            Our expert consultants guide you through a sensory journey, helping you discover
-            the fragrance that speaks to your unique identity. Visit our atelier and experience
-            the art of perfumery.
-          </p>
+          <div className="w-16 h-px bg-primary mx-auto" />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-6">
+            {points.map(({ icon: Icon, title, text }) => (
+              <div key={title} className="flex flex-col items-center text-center p-6 border border-border rounded-lg bg-card">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-primary" />
+                </div>
+                <h3 className="font-display text-lg font-medium text-foreground mb-2">{title}</h3>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed">{text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
