@@ -10,11 +10,14 @@ import muskyScene1 from "@/assets/musky-scene-1.jpg";
 import muskyScene2 from "@/assets/musky-scene-2.jpg";
 import muskyScene3 from "@/assets/musky-scene-3.jpg";
 import muskyScene4 from "@/assets/musky-scene-4.jpg";
+import muskyPanorama from "@/assets/musky-panorama.jpg";
 
 export const menMuskyScenes = [muskyScene1, muskyScene2, muskyScene3, muskyScene4];
 
 export const getMenMuskyScene = (index: number): string =>
   menMuskyScenes[index % menMuskyScenes.length];
+
+export const menMuskyPanorama = muskyPanorama;
 
 const imageMap: Record<string, string> = {
   "men-Luxury": menLuxury,
