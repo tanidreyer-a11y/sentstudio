@@ -10,11 +10,42 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
 import LiveTrafficSignal from "@/components/LiveTrafficSignal";
 import JournalPreview from "@/components/JournalPreview";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Sparkles } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import collectionMen from "@/assets/collection-men.jpeg";
 import collectionWomen from "@/assets/collection-women.jpeg";
 
 const Index = () => {
+  const navigate = useNavigate();
+  const [hintOpen, setHintOpen] = useState(false);
+  const [pendingPath, setPendingPath] = useState<string | null>(null);
+
+  const handleCategoryClick = (e: React.MouseEvent, path: string) => {
+    if (sessionStorage.getItem("findMyScentHintSeen")) return; // let Link navigate normally
+    e.preventDefault();
+    sessionStorage.setItem("findMyScentHintSeen", "1");
+    setPendingPath(path);
+    setHintOpen(true);
+  };
+
+  const continueToPath = () => {
+    setHintOpen(false);
+    if (pendingPath) navigate(pendingPath);
+  };
+
+  const goToFindMyScent = () => {
+    setHintOpen(false);
+    navigate("/find-my-scent");
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -35,6 +66,7 @@ const Index = () => {
           <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 md:gap-8">
             <Link
               to="/catalog/men"
+              onClick={(e) => handleCategoryClick(e, "/catalog/men")}
               className="group relative flex h-56 items-center justify-center overflow-hidden border border-border transition-colors duration-500 hover:border-primary sm:h-64"
             >
               <img
@@ -51,6 +83,7 @@ const Index = () => {
             </Link>
             <Link
               to="/catalog/women"
+              onClick={(e) => handleCategoryClick(e, "/catalog/women")}
               className="group relative flex h-56 items-center justify-center overflow-hidden border border-border transition-colors duration-500 hover:border-primary sm:h-64"
             >
               <img
@@ -71,6 +104,7 @@ const Index = () => {
           <div className="mt-6 md:mt-8">
             <Link
               to="/exclusive"
+              onClick={(e) => handleCategoryClick(e, "/exclusive")}
               className="group relative flex h-40 items-center justify-center overflow-hidden border border-primary/30 transition-all duration-500 hover:border-primary sm:h-48"
             >
               <img
