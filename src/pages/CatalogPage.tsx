@@ -5,6 +5,7 @@ import SiteFooter from "@/components/SiteFooter";
 import PerfumeCard from "@/components/PerfumeCard";
 import { getPerfumesByGender } from "@/data/perfumes";
 import type { Perfume } from "@/data/perfumes";
+import { Grid3X3, Rows3 } from "lucide-react";
 
 const categories = ["All", "Luxury", "Fresh", "Musky", "Sweet"] as const;
 
@@ -13,6 +14,7 @@ const CatalogPage = () => {
   const validGender = gender === "men" || gender === "women" ? gender : "men";
   const allPerfumes = getPerfumesByGender(validGender);
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [view, setView] = useState<"scroll" | "grid">("scroll");
 
   const filteredPerfumes = activeCategory === "All"
     ? allPerfumes
@@ -50,11 +52,41 @@ const CatalogPage = () => {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {filteredPerfumes.map((perfume) => (
-              <PerfumeCard key={perfume.id} perfume={perfume} />
-            ))}
+          {/* View toggle */}
+          <div className="flex justify-end mb-6">
+            <div className="flex border border-border">
+              <button
+                onClick={() => setView("scroll")}
+                className={`p-2 transition-colors ${view === "scroll" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                aria-label="Horizontal scroll view"
+              >
+                <Rows3 size={18} />
+              </button>
+              <button
+                onClick={() => setView("grid")}
+                className={`p-2 transition-colors ${view === "grid" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                aria-label="Grid view"
+              >
+                <Grid3X3 size={18} />
+              </button>
+            </div>
           </div>
+
+          {view === "scroll" ? (
+            <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+              {filteredPerfumes.map((perfume) => (
+                <div key={perfume.id} className="flex-shrink-0 w-56 sm:w-64 snap-start">
+                  <PerfumeCard perfume={perfume} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+              {filteredPerfumes.map((perfume) => (
+                <PerfumeCard key={perfume.id} perfume={perfume} />
+              ))}
+            </div>
+          )}
 
           {filteredPerfumes.length === 0 && (
             <p className="text-center text-muted-foreground font-body text-lg mt-8">
