@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { getPerfumeImage } from "@/lib/perfume-images";
+import { Grid3X3, Rows3 } from "lucide-react";
 
 const featuredMen = [
   { id: "michael-kors", name: "Michael Kors", category: "Luxury" as const, gender: "men" as const },
@@ -18,8 +20,11 @@ const featuredWomen = [
 const FeaturedCard = ({ perfume }: { perfume: { id: string; name: string; category: string; gender: "men" | "women" } }) => {
   const image = getPerfumeImage(perfume.gender, perfume.category);
   return (
-    <Link to={`/perfume/${perfume.id}`} className="group cursor-pointer">
-      <div className="relative overflow-hidden mb-6 bg-card aspect-[3/4] flex items-center justify-center">
+    <Link
+      to={`/perfume/${perfume.id}`}
+      className="group cursor-pointer flex-shrink-0 w-56 sm:w-64 snap-start"
+    >
+      <div className="relative overflow-hidden mb-4 bg-card aspect-[3/4] flex items-center justify-center">
         {image ? (
           <img
             src={image}
@@ -28,7 +33,7 @@ const FeaturedCard = ({ perfume }: { perfume: { id: string; name: string; catego
             loading="lazy"
           />
         ) : (
-          <span className="font-display text-6xl font-light text-primary/80">
+          <span className="font-display text-5xl font-light text-primary/80">
             {perfume.name.charAt(0)}
           </span>
         )}
@@ -38,7 +43,7 @@ const FeaturedCard = ({ perfume }: { perfume: { id: string; name: string; catego
         {perfume.category}
       </p>
       <p className="font-sans text-[10px] tracking-wider text-muted-foreground/70 uppercase mb-0.5">Inspired by</p>
-      <h3 className="font-display text-xl font-medium text-foreground mb-1 group-hover:text-primary transition-colors">
+      <h3 className="font-display text-base font-medium text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-1">
         {perfume.name}
       </h3>
       <p className="font-sans text-sm tracking-wider text-primary font-medium">
@@ -49,6 +54,7 @@ const FeaturedCard = ({ perfume }: { perfume: { id: string; name: string; catego
 };
 
 const FeaturedCollection = () => {
+  const [view, setView] = useState<"scroll" | "grid">("scroll");
   return (
     <section id="collection" className="py-28 bg-background">
       <div className="container mx-auto px-6">
@@ -65,24 +71,60 @@ const FeaturedCollection = () => {
           <div className="w-16 h-px bg-primary mx-auto mt-8" />
         </div>
 
+        {/* View toggle */}
+        <div className="flex justify-end mb-8">
+          <div className="flex border border-border">
+            <button
+              onClick={() => setView("scroll")}
+              className={`p-2 transition-colors ${view === "scroll" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              aria-label="Horizontal scroll view"
+            >
+              <Rows3 size={18} />
+            </button>
+            <button
+              onClick={() => setView("grid")}
+              className={`p-2 transition-colors ${view === "grid" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              aria-label="Grid view"
+            >
+              <Grid3X3 size={18} />
+            </button>
+          </div>
+        </div>
+
         {/* Men's Featured */}
         <div className="mb-16">
-          <h3 className="font-display text-2xl font-light text-foreground mb-8 text-center">For Him</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredMen.map((p) => (
-              <FeaturedCard key={p.id} perfume={p} />
-            ))}
-          </div>
+          <h3 className="font-display text-2xl font-light text-foreground mb-6">For Him</h3>
+          {view === "scroll" ? (
+            <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+              {featuredMen.map((p) => (
+                <FeaturedCard key={p.id} perfume={p} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+              {featuredMen.map((p) => (
+                <FeaturedCard key={p.id} perfume={p} />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Women's Featured */}
         <div>
-          <h3 className="font-display text-2xl font-light text-foreground mb-8 text-center">For Her</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredWomen.map((p) => (
-              <FeaturedCard key={p.id} perfume={p} />
-            ))}
-          </div>
+          <h3 className="font-display text-2xl font-light text-foreground mb-6">For Her</h3>
+          {view === "scroll" ? (
+            <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+              {featuredWomen.map((p) => (
+                <FeaturedCard key={p.id} perfume={p} />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+              {featuredWomen.map((p) => (
+                <FeaturedCard key={p.id} perfume={p} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
