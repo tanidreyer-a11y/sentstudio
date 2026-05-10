@@ -285,7 +285,7 @@ const FindMyScentPage = () => {
         { role: "user", content: text },
         {
           role: "assistant",
-          content: `Got it — that tells me a lot about what your skin craves.\n\nWhat occasion will you be wearing this most?`,
+          content: `Wonderful — that gives me a clear sense of your style.\n\nWhat occasion will you be wearing this most?`,
           options: [
             { label: "A) Everyday / Work", value: "A" },
             { label: "B) Gym / Casual", value: "B" },
