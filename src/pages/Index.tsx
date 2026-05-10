@@ -10,11 +10,42 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
 import LiveTrafficSignal from "@/components/LiveTrafficSignal";
 import JournalPreview from "@/components/JournalPreview";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Sparkles } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import collectionMen from "@/assets/collection-men.jpeg";
 import collectionWomen from "@/assets/collection-women.jpeg";
 
 const Index = () => {
+  const navigate = useNavigate();
+  const [hintOpen, setHintOpen] = useState(false);
+  const [pendingPath, setPendingPath] = useState<string | null>(null);
+
+  const handleCategoryClick = (e: React.MouseEvent, path: string) => {
+    if (sessionStorage.getItem("findMyScentHintSeen")) return; // let Link navigate normally
+    e.preventDefault();
+    sessionStorage.setItem("findMyScentHintSeen", "1");
+    setPendingPath(path);
+    setHintOpen(true);
+  };
+
+  const continueToPath = () => {
+    setHintOpen(false);
+    if (pendingPath) navigate(pendingPath);
+  };
+
+  const goToFindMyScent = () => {
+    setHintOpen(false);
+    navigate("/find-my-scent");
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -35,6 +66,7 @@ const Index = () => {
           <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 md:gap-8">
             <Link
               to="/catalog/men"
+              onClick={(e) => handleCategoryClick(e, "/catalog/men")}
               className="group relative flex h-56 items-center justify-center overflow-hidden border border-border transition-colors duration-500 hover:border-primary sm:h-64"
             >
               <img
@@ -51,6 +83,7 @@ const Index = () => {
             </Link>
             <Link
               to="/catalog/women"
+              onClick={(e) => handleCategoryClick(e, "/catalog/women")}
               className="group relative flex h-56 items-center justify-center overflow-hidden border border-border transition-colors duration-500 hover:border-primary sm:h-64"
             >
               <img
@@ -71,6 +104,7 @@ const Index = () => {
           <div className="mt-6 md:mt-8">
             <Link
               to="/exclusive"
+              onClick={(e) => handleCategoryClick(e, "/exclusive")}
               className="group relative flex h-40 items-center justify-center overflow-hidden border border-primary/30 transition-all duration-500 hover:border-primary sm:h-48"
             >
               <img
@@ -103,6 +137,38 @@ const Index = () => {
       <NewsletterSection />
       <JournalPreview />
       <SiteFooter />
+
+      <Dialog open={hintOpen} onOpenChange={setHintOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/15">
+              <Sparkles className="h-6 w-6 text-primary" />
+            </div>
+            <DialogTitle className="text-center font-display text-2xl font-light">
+              Not sure which scent suits you?
+            </DialogTitle>
+            <DialogDescription className="text-center font-body text-sm leading-relaxed">
+              Try our <span className="text-primary font-medium">Find My Scent</span> stylist —
+              answer a few quick questions and we'll match you with your perfect fragrance in under 60 seconds.
+              You'll find this helper anytime in the bottom-right corner.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row-reverse">
+            <button
+              onClick={goToFindMyScent}
+              className="w-full rounded-md bg-primary px-4 py-2.5 font-sans text-xs uppercase tracking-[0.15em] text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              Find My Scent
+            </button>
+            <button
+              onClick={continueToPath}
+              className="w-full rounded-md border border-border px-4 py-2.5 font-sans text-xs uppercase tracking-[0.15em] text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+            >
+              Continue Browsing
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
