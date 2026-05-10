@@ -16,6 +16,9 @@ const Header = () => {
   { label: "Home", path: "/" },
   { label: "Men", path: "/catalog/men" },
   { label: "Women", path: "/catalog/women" },
+  { label: "Exclusive", path: "/exclusive" },
+  { label: "Craft Your Own", path: "/#signature" },
+  { label: "Reviews", path: "/reviews" },
   { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" }];
 
