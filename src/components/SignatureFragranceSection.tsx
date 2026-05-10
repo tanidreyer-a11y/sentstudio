@@ -249,12 +249,12 @@ const SignatureFragranceSection = () => {
                   </div>
 
                   {/* Filter chips */}
-                  <div className="mb-2 flex flex-wrap gap-1 sm:gap-1.5 md:mb-3 md:gap-2">
+                  <div className="mb-2 flex flex-wrap gap-2 md:mb-3">
                     {genderOptions.map((opt) => (
                       <button
                         key={opt.value}
                         onClick={() => setGenderFilter(opt.value)}
-                        className={`rounded-full border px-1.5 py-0.5 font-sans text-[0.5rem] uppercase tracking-[0.1em] transition-colors sm:px-2 sm:text-[0.55rem] sm:tracking-[0.15em] md:px-3 md:py-1 md:text-[0.6rem] ${
+                        className={`min-h-[36px] rounded-full border px-3.5 py-1.5 font-sans text-[0.65rem] uppercase tracking-[0.15em] transition-colors md:px-4 md:py-2 md:text-xs ${
                           genderFilter === opt.value
                             ? "border-primary bg-primary/15 text-primary"
                             : "border-border text-muted-foreground hover:border-primary/60"
@@ -263,12 +263,12 @@ const SignatureFragranceSection = () => {
                         {opt.label}
                       </button>
                     ))}
-                    <span className="self-center text-[0.5rem] text-border sm:mx-0.5">|</span>
+                    <span className="self-center px-1 text-xs text-border">|</span>
                     {categoryOptions.map((opt) => (
                       <button
                         key={opt.value}
                         onClick={() => setCategoryFilter(opt.value)}
-                        className={`rounded-full border px-1.5 py-0.5 font-sans text-[0.5rem] uppercase tracking-[0.1em] transition-colors sm:px-2 sm:text-[0.55rem] sm:tracking-[0.15em] md:px-3 md:py-1 md:text-[0.6rem] ${
+                        className={`min-h-[36px] rounded-full border px-3.5 py-1.5 font-sans text-[0.65rem] uppercase tracking-[0.15em] transition-colors md:px-4 md:py-2 md:text-xs ${
                           categoryFilter === opt.value
                             ? "border-primary bg-primary/15 text-primary"
                             : "border-border text-muted-foreground hover:border-primary/60"
@@ -279,12 +279,13 @@ const SignatureFragranceSection = () => {
                     ))}
                   </div>
 
-                  {/* Fragrance list */}
-                  <div className="max-h-48 space-y-1.5 overflow-y-auto rounded-lg border border-border bg-background/60 p-2 sm:max-h-56 sm:space-y-2 sm:p-3">
+                  {/* Fragrance grid */}
+                  <div className="max-h-64 overflow-y-auto rounded-lg border border-border bg-background/60 p-2 sm:p-3">
                     {fragranceLibrary.length === 0 ? (
                       <p className="py-3 text-center font-body text-xs text-muted-foreground sm:text-sm">No fragrances match your search.</p>
                     ) : (
-                      fragranceLibrary.map((p) => {
+                      <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 sm:gap-2">
+                      {fragranceLibrary.map((p) => {
                         const selected = selectedFragrances.includes(p.name);
                         const disabled = !selected && selectedFragrances.length >= limits.maxFragrances;
                         return (
@@ -292,7 +293,7 @@ const SignatureFragranceSection = () => {
                             key={p.id}
                             onClick={() => toggleFragrance(p.name)}
                             disabled={disabled}
-                            className={`flex w-full items-center justify-between rounded-md border px-2.5 py-1.5 text-left font-body text-xs transition-colors sm:px-3 sm:py-2 sm:text-sm ${
+                            className={`flex w-full min-h-[40px] items-center justify-between rounded-md border px-3 py-2 text-left font-body text-xs transition-colors sm:text-sm ${
                               selected
                                 ? "border-primary bg-primary/15 text-foreground"
                                 : "border-border bg-card text-muted-foreground hover:border-primary hover:text-foreground"
@@ -302,7 +303,8 @@ const SignatureFragranceSection = () => {
                             {selected && <Check className="h-3 w-3 shrink-0 text-primary sm:h-3.5 sm:w-3.5" />}
                           </button>
                         );
-                      })
+                      })}
+                      </div>
                     )}
                   </div>
                   <p className="mt-1.5 font-body text-xs text-muted-foreground sm:mt-2 sm:text-sm">

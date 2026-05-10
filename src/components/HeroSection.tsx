@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-perfume-bg.jpeg";
 
 const HeroSection = () => {
@@ -23,6 +22,8 @@ const HeroSection = () => {
           src={heroImage}
           alt="Scent Studio luxury perfume collection"
           className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
       </div>
@@ -36,22 +37,15 @@ const HeroSection = () => {
           <span className="italic font-medium text-gold-gradient">Define You</span>
         </h1>
         <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mx-auto animate-fade-up-delay-2 mb-10">
-          Premium oil-based fragrances inspired by the world's most iconic designer scents.
-          Long-lasting, affordable, and crafted for the discerning connoisseur.
+          Designer-quality oil-based perfumes from only R100. Long-lasting luxury that fits your budget.
         </p>
         <div className="flex flex-col items-center justify-center gap-4 animate-fade-up-delay-3">
           <a
             href="#shop-collection"
-            className="font-sans text-sm tracking-[0.2em] uppercase px-10 py-4 border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500"
+            className="font-sans text-sm tracking-[0.2em] uppercase px-12 py-4 bg-primary text-primary-foreground border border-primary hover:bg-primary/90 shadow-lg transition-all duration-500"
           >
-            Explore Collection
+            Shop the Collection
           </a>
-          <Link
-            to="/find-my-scent"
-            className="font-sans text-sm tracking-[0.2em] uppercase px-10 py-4 border border-primary/60 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500"
-          >
-            Find My Scent
-          </Link>
         </div>
       </div>
     </section>

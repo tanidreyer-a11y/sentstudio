@@ -4,8 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import FeaturedCollection from "@/components/FeaturedCollection";
 import SignatureFragranceSection from "@/components/SignatureFragranceSection";
 import AboutSection from "@/components/AboutSection";
-import ValuesSection from "@/components/ValuesSection";
-import ProblemSolutionSection from "@/components/ProblemSolutionSection";
+import WhyScentStudio from "@/components/WhyScentStudio";
 import NewsletterSection from "@/components/NewsletterSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
@@ -96,11 +95,10 @@ const Index = () => {
         </div>
       </section>
 
-      <SignatureFragranceSection />
       <FeaturedCollection />
+      <WhyScentStudio />
       <AboutSection />
-      <ValuesSection />
-      <ProblemSolutionSection />
+      <SignatureFragranceSection />
       <TestimonialsSection />
       <NewsletterSection />
       <JournalPreview />

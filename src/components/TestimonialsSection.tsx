@@ -1,5 +1,4 @@
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const testimonials = [
@@ -12,35 +11,8 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
-  const [current, setCurrent] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  const changeTo = useCallback((index: number) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setTimeout(() => {
-      setCurrent(index);
-      setTimeout(() => setIsAnimating(false), 50);
-    }, 300);
-  }, [isAnimating]);
-
-  const next = useCallback(() => {
-    changeTo((current + 1) % testimonials.length);
-  }, [current, changeTo]);
-
-  const prev = useCallback(() => {
-    changeTo((current - 1 + testimonials.length) % testimonials.length);
-  }, [current, changeTo]);
-
-  useEffect(() => {
-    const timer = setInterval(next, 6000);
-    return () => clearInterval(timer);
-  }, [next]);
-
-  const t = testimonials[current];
-
   return (
-    <section className="py-24 bg-secondary">
+    <section className="py-20 md:py-24 bg-secondary">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <p className="font-sans text-sm tracking-[0.4em] uppercase text-primary mb-4">Testimonials</p>
@@ -48,55 +20,32 @@ const TestimonialsSection = () => {
           <div className="w-16 h-px bg-primary mx-auto mt-8" />
         </div>
 
-        <div className="max-w-3xl mx-auto relative">
-          <div
-            className={`min-h-[220px] flex flex-col items-center justify-center text-center px-8 md:px-16 transition-all duration-300 ease-in-out ${
-              isAnimating ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"
-            }`}
-          >
-            <div className="flex gap-1 mb-6">
-              {Array.from({ length: 5 }).map((_, j) => (
-                <Star key={j} size={16} className="text-primary fill-primary" />
-              ))}
-            </div>
-            <p className="font-body text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 italic">
-              "{t.text}"
-            </p>
-            <div>
-              <p className="font-display text-base text-foreground">{t.name}</p>
-              <p className="font-sans text-xs tracking-[0.2em] uppercase text-primary mt-1">{t.perfume}</p>
-            </div>
-          </div>
-
-          <button
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-muted-foreground hover:text-primary transition-colors"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <button
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-muted-foreground hover:text-primary transition-colors"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight size={24} />
-          </button>
-
-          <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => changeTo(i)}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  i === current ? "bg-primary" : "bg-border"
-                }`}
-                aria-label={`Go to testimonial ${i + 1}`}
-              />
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+            {testimonials.map((t) => (
+              <div
+                key={t.name}
+                className="flex flex-col rounded-lg border border-border bg-card p-6 text-left"
+              >
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <Star key={j} size={14} className="text-primary fill-primary" />
+                  ))}
+                </div>
+                <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed mb-6 italic">
+                  "{t.text}"
+                </p>
+                <div className="mt-auto">
+                  <p className="font-display text-base text-foreground">{t.name}</p>
+                  <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-primary mt-1">
+                    Inspired by {t.perfume}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-12">
             <Link
               to="/reviews"
               className="font-sans text-sm tracking-[0.2em] uppercase text-primary hover:text-gold-light transition-colors border-b border-primary pb-1"
