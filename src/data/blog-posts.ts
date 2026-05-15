@@ -1,5 +1,6 @@
 import blogOilVsAlcohol from "@/assets/blog-oil-vs-alcohol.jpg";
 import blogPerfumeFadesFast from "@/assets/blog-perfume-fades-fast.jpg";
+import blogDupeFragrancesSA from "@/assets/blog-dupe-fragrances-sa.jpg";
 
 export interface BlogPost {
   slug: string;
@@ -15,6 +16,88 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "best-dupe-fragrances-south-africa",
+    title: "The Best Dupe Fragrances in South Africa (And Why Scent Studio Leads the Pack)",
+    excerpt:
+      "Dupe fragrances are exploding in South Africa — but quality varies wildly. Here's an honest look at the market, what to avoid, and why Scent Studio has become the country's most trusted name in inspired perfumes.",
+    metaDescription:
+      "Looking for the best dupe fragrances in South Africa? A 2026 guide to inspired perfumes, oil-based long-lasting scents, fair pricing and why Scent Studio is leading the SA dupe perfume market.",
+    date: "2026-05-15",
+    readingTime: "7 min read",
+    image: blogDupeFragrancesSA,
+    imageAlt: "Amber Scent Studio inspired perfume bottle on warm wood lit by golden South African afternoon light",
+    contentHtml: `
+      <p>Walk into any South African mall in 2026 and you will see it: dupe fragrances are everywhere. Inspired perfumes, oil-based attars, "smells like" sprays — what was once a niche corner of the market has become one of the fastest-growing categories in SA beauty. And honestly, it makes sense. With the rand under pressure and a 100ml designer bottle costing upwards of R3 000, more South Africans than ever are choosing to buy the <em>scent</em> they love without paying for the <em>label</em> they don't need.</p>
+      <p>But not all dupe fragrances are created equal. This guide breaks down the South African dupe perfume market honestly — what's good, what to avoid, and where <strong>Scent Studio</strong> fits in.</p>
+
+      <h2>What is a "dupe fragrance"?</h2>
+      <p>A dupe fragrance — also called an inspired perfume, designer-inspired scent or fragrance dupe — is a perfume crafted to capture the character of an iconic designer scent at a fraction of the price. It is <strong>not</strong> a counterfeit. There is no fake branding, no copied bottle, no attempt to deceive. It is a legal, transparent alternative built around the same fragrance family — woody, oud, gourmand, fresh — without the designer markup.</p>
+      <p>Think of it the way you think about generic medicine, supermarket olive oil, or Woolworths-brand cereal: same quality category, honest labelling, far better value.</p>
+
+      <h2>Why dupe fragrances are exploding in South Africa</h2>
+      <ul>
+        <li><strong>Designer prices keep climbing.</strong> A 100ml of Baccarat Rouge 540 retails near R8 000 in SA. A 100ml of Dior Sauvage sits around R3 200. For most working South Africans, that is simply not realistic for an everyday scent.</li>
+        <li><strong>Oil-based perfumes last longer in our climate.</strong> Alcohol-heavy designer EDTs flash off the skin in our heat. A quality oil-based dupe holds for 8–12 hours.</li>
+        <li><strong>The stigma is gone.</strong> Influencers, TikTok and a generation that values smart spending have made "I bought the dupe" a flex, not an apology.</li>
+        <li><strong>Local craftsmanship is improving fast.</strong> The gap between a well-blended SA inspired perfume and a department store EDP has narrowed dramatically in the last two years.</li>
+      </ul>
+
+      <h2>What to look for in a quality dupe fragrance</h2>
+      <h3>1. Honest, transparent naming</h3>
+      <p>A trustworthy brand says <em>"Inspired by Baccarat Rouge 540"</em> — not pretending to be the original. If a brand is hiding what scent it dupes, they are usually hiding the formulation too.</p>
+      <h3>2. Oil-based formulation</h3>
+      <p>For South African weather, oil wins. It does not flash off in the heat, sits closer to the skin, and lasts a full workday without re-application. Cheap alcohol-based dupes are usually the ones that disappear by lunch.</p>
+      <h3>3. Real fragrance concentration</h3>
+      <p>A good inspired perfume runs 20%+ in fragrance oil. Many supermarket "dupes" sit under 5% — which is why they smell weak and vanish in an hour.</p>
+      <h3>4. Fair, transparent pricing</h3>
+      <p>If a "dupe" of a R3 000 designer scent is being sold for R900, you are still being overcharged. A fair price for a 50ml inspired perfume in SA is in the R150–R250 range.</p>
+      <h3>5. Real customer reviews</h3>
+      <p>Look for South African reviews from real people in your climate. International reviews don't tell you how a scent performs in Joburg summer.</p>
+
+      <h2>Why Scent Studio leads the SA dupe fragrance market</h2>
+      <p>We're not the loudest brand in South Africa. We don't run flashy paid campaigns or pretend to be something we're not. But we have quietly become one of the most trusted names in inspired perfumes in the country — and here's why.</p>
+
+      <h3>Honest "Inspired by" naming, every single bottle</h3>
+      <p>Every Scent Studio fragrance is clearly labelled as <em>Inspired by</em> the designer scent it pays tribute to. No fake branding. No misleading bottle shapes. Just transparent craft.</p>
+
+      <h3>100% oil-based, built for South African weather</h3>
+      <p>Every scent in our catalogue — men's, women's, exclusive — is oil-based and formulated to survive Highveld summers, Cape winters and everything in between. No alcohol burn. No midday fade.</p>
+
+      <h3>Honest pricing across the whole range</h3>
+      <ul>
+        <li><strong>Standard Collection:</strong> 30ml R100 · 50ml R150 · 100ml R280</li>
+        <li><strong>Premium Collection:</strong> 30ml R130 · 50ml R180 · 100ml R320</li>
+        <li><strong>Ultra-Premium (Baccarat Rouge, Initio Oud, Yara Pink):</strong> 30ml R160 · 50ml R250 · 100ml R490</li>
+      </ul>
+      <p>Compare that to the R3 000–R8 000 you would pay for the originals. Same scent profile, same all-day performance, a fraction of the cost.</p>
+
+      <h3>The largest curated dupe catalogue in SA</h3>
+      <p>From Dior Sauvage and Creed Aventus to MFK Baccarat Rouge 540, Tom Ford Oud Wood, Yara Pink and Portrait of a Lady — we cover the scents South Africans actually search for, not just the easy ones.</p>
+
+      <h3>Build Your Own signature blend</h3>
+      <p>No other SA dupe brand lets you design your own perfume. Our <strong>Craft Your Own</strong> studio lets you blend up to 3 fragrances into a single custom 30ml, 50ml or 100ml bottle, with adjustable oil concentration. It is the most personal fragrance experience available in the country.</p>
+
+      <h3>Find My Scent — a real fragrance stylist quiz</h3>
+      <p>Our 6-step quiz uses a 25-point personality and intensity matrix to recommend three scents that genuinely suit you. Not a gimmick — a tool built by people who actually understand fragrance families.</p>
+
+      <h3>Real South African reviews, real local fulfilment</h3>
+      <p>Every order ships from our SA studio. Every review on our site is from a verified South African customer. WhatsApp support is answered by an actual human, usually within minutes.</p>
+
+      <h2>Common dupe fragrance mistakes South Africans make</h2>
+      <ul>
+        <li><strong>Buying the cheapest bottle on Takealot.</strong> Most R49–R99 "perfume oils" are heavily diluted and won't last an hour.</li>
+        <li><strong>Falling for fake designer copies.</strong> If a bottle <em>looks</em> identical to Sauvage, that's a counterfeit, not a dupe. Avoid.</li>
+        <li><strong>Spraying alcohol-based dupes in summer.</strong> They evaporate before they project. Switch to oil.</li>
+        <li><strong>Skipping moisturiser.</strong> Even the best oil perfume needs hydrated skin to anchor properly.</li>
+      </ul>
+
+      <h2>The bottom line</h2>
+      <p>The dupe fragrance market in South Africa is no longer a back-alley alternative to designer perfume — it is the smarter, more honest mainstream choice. But quality varies wildly, and most of what's sold cheaply online is not worth your money.</p>
+      <p>Scent Studio has built its reputation on three simple promises: <strong>honest naming, oil-based craft, fair SA pricing</strong>. That's why our customers stay, refer friends, and come back for the next bottle.</p>
+      <p>If you've never tried a properly made South African inspired perfume, take our short scent quiz — it'll match you to the fragrance you'll actually wear every day.</p>
+    `,
+  },
   {
     slug: "why-does-my-perfume-fade-so-fast",
     title: "Why Does My Perfume Fade So Fast? (And How to Fix It)",
