@@ -960,4 +960,18 @@ export const womensPerfumes: Perfume[] = [
     prices: { "30ml": 100, "50ml": 150 },
     image: "/placeholder.svg",
   },
+  {
+    id: "ysl-black-opium",
+    name: "YSL Black Opium",
+    category: "Sweet",
+    gender: "women",
+    description: "An addictive gourmand built on black coffee, vanilla and white florals — sweet, dark and seductive.",
+    notes: {
+      top: ["Pink Pepper", "Orange Blossom", "Pear"],
+      middle: ["Coffee", "Jasmine", "Bitter Almond", "Licorice"],
+      base: ["Vanilla", "Patchouli", "Cedar", "Cashmere Wood"],
+    },
+    prices: { "30ml": 100, "50ml": 150, "100ml": 280 },
+    image: "/placeholder.svg",
+  },
 ];
