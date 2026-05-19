@@ -26,6 +26,7 @@ import AdminPostEditorPage from "./pages/AdminPostEditorPage";
 import AdminLeadsPage from "./pages/AdminLeadsPage";
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
+import EntryDiscountPopup from "./components/EntryDiscountPopup";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import PaymentCancelPage from "./pages/PaymentCancelPage";
 import NotFound from "./pages/NotFound";
@@ -42,6 +43,7 @@ const App = () => (
           <Sonner />
           <ScrollToTop />
           <FindMyScentFab />
+          <EntryDiscountPopup />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/catalog/:gender" element={<CatalogPage />} />
