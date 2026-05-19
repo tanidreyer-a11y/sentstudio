@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Send, Sparkles, ShoppingCart } from "lucide-react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
+import DiscountModal from "@/components/DiscountModal";
 import { perfumes, Perfume } from "@/data/perfumes";
 import { getPerfumeImage } from "@/lib/perfume-images";
 import { useCart } from "@/contexts/CartContext";
@@ -187,6 +188,8 @@ const FindMyScentPage = () => {
   const [occasion, setOccasion] = useState("");
   const [amplifier, setAmplifier] = useState("");
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const [discountOpen, setDiscountOpen] = useState(false);
+  const [topRecommendation, setTopRecommendation] = useState<string | null>(null);
 
   useEffect(() => {
     const chatContainer = chatContainerRef.current;
@@ -329,6 +332,7 @@ const FindMyScentPage = () => {
       setStep(6);
 
       const results = calculateResults(gender, personality, intensity, occasion, validAmp);
+      setTopRecommendation(results[0]?.perfume.name ?? null);
       addMessages(
         { role: "user", content: text },
         {
