@@ -23,6 +23,7 @@ import LoginPage from "./pages/LoginPage";
 import AdminBlogPage from "./pages/AdminBlogPage";
 import AdminCalendarPage from "./pages/AdminCalendarPage";
 import AdminPostEditorPage from "./pages/AdminPostEditorPage";
+import AdminLeadsPage from "./pages/AdminLeadsPage";
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
@@ -61,6 +62,7 @@ const App = () => (
             <Route path="/admin/blog" element={<ProtectedAdminRoute><AdminBlogPage /></ProtectedAdminRoute>} />
             <Route path="/admin/calendar" element={<ProtectedAdminRoute><AdminCalendarPage /></ProtectedAdminRoute>} />
             <Route path="/admin/post/:id" element={<ProtectedAdminRoute><AdminPostEditorPage /></ProtectedAdminRoute>} />
+            <Route path="/admin/leads" element={<ProtectedAdminRoute><AdminLeadsPage /></ProtectedAdminRoute>} />
             <Route path="*" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
