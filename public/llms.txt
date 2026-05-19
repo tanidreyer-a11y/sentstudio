@@ -1,0 +1,24 @@
+# Scent Studio
+
+> Johannesburg-based luxury perfume boutique specialising in affordable, long-lasting oil-based "Inspired by" designer fragrance dupes. Based at Flora Centre, Roodepoort. Delivery across South Africa.
+
+Scent Studio offers oil-based inspired perfumes (Inspired by Dior Sauvage, Inspired by Baccarat Rouge 540, Inspired by YSL Black Opium and many more) at fair South African prices (R100–R490). Oil-based formulations last 8–12 hours and outperform alcohol-based EDTs in the South African climate.
+
+## Shop
+- [Men's Perfumes](/catalog/men): Inspired-by designer men's fragrance dupes — woody, fresh, musky and oud
+- [Women's Perfumes](/catalog/women): Inspired-by designer women's fragrance dupes — floral, sweet, fruity and oriental
+- [Exclusive Collection](/exclusive): Premium and ultra-premium tier inspired perfumes
+- [Craft Your Own](/#signature): Custom blended signature perfume builder
+
+## Guides
+- [The Journal](/blog): Fragrance guides, scent advice and oil-based perfume tips
+- [Find My Scent](/find-my-scent): Personalised scent recommendations
+- [Fragrance Quiz](/quiz): Short quiz to find your signature scent
+- [Customer Reviews](/reviews): Verified reviews from South African customers
+
+## About
+- [About Scent Studio](/about): Brand story, ethos, and what makes our inspired perfumes different
+- [Contact](/contact): WhatsApp, email and store location at Flora Centre, Roodepoort
+
+## Optional
+- [Cart](/cart): Shopping cart and checkout
