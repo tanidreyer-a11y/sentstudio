@@ -121,6 +121,39 @@ export type Database = {
           },
         ]
       }
+      leads: {
+        Row: {
+          created_at: string
+          discount_code: string
+          email: string
+          id: string
+          phone: string | null
+          redeemed: boolean
+          source: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          discount_code: string
+          email: string
+          id?: string
+          phone?: string | null
+          redeemed?: boolean
+          source?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          discount_code?: string
+          email?: string
+          id?: string
+          phone?: string | null
+          redeemed?: boolean
+          source?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           email: string
