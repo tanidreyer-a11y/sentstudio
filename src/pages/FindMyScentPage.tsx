@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Send, Sparkles, ShoppingCart } from "lucide-react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
+import DiscountModal from "@/components/DiscountModal";
 import { perfumes, Perfume } from "@/data/perfumes";
 import { getPerfumeImage } from "@/lib/perfume-images";
 import { useCart } from "@/contexts/CartContext";
@@ -187,6 +188,8 @@ const FindMyScentPage = () => {
   const [occasion, setOccasion] = useState("");
   const [amplifier, setAmplifier] = useState("");
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const [discountOpen, setDiscountOpen] = useState(false);
+  const [topRecommendation, setTopRecommendation] = useState<string | null>(null);
 
   useEffect(() => {
     const chatContainer = chatContainerRef.current;
@@ -329,6 +332,7 @@ const FindMyScentPage = () => {
       setStep(6);
 
       const results = calculateResults(gender, personality, intensity, occasion, validAmp);
+      setTopRecommendation(results[0]?.perfume.name ?? null);
       addMessages(
         { role: "user", content: text },
         {
@@ -573,7 +577,27 @@ const FindMyScentPage = () => {
           )}
 
           {step >= 6 && (
-            <div className="text-center py-4">
+            <div className="space-y-4 py-4">
+              {/* 10% off CTA */}
+              <div className="rounded-xl border border-primary/40 bg-primary/10 p-5 text-center">
+                <p className="mb-2 font-sans text-[0.65rem] uppercase tracking-[0.4em] text-primary">
+                  Exclusive Offer
+                </p>
+                <h3 className="mb-2 font-display text-xl font-light text-foreground sm:text-2xl">
+                  Get 10% off {topRecommendation ? `Inspired by ${topRecommendation}` : "your recommended fragrance"}
+                </h3>
+                <p className="mb-4 font-body text-sm text-muted-foreground">
+                  Claim your one-time discount code now — we'll send it to your WhatsApp.
+                </p>
+                <button
+                  onClick={() => setDiscountOpen(true)}
+                  className="inline-flex items-center justify-center bg-primary px-6 py-3 font-sans text-xs uppercase tracking-[0.25em] text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  Claim My 10% Off
+                </button>
+              </div>
+
+              <div className="text-center">
               <button
                 onClick={() => {
                   setMessages([{
@@ -593,11 +617,19 @@ const FindMyScentPage = () => {
               >
                 Start Over
               </button>
+              </div>
             </div>
           )}
         </div>
       </div>
       <SiteFooter />
+      <DiscountModal
+        open={discountOpen}
+        onOpenChange={setDiscountOpen}
+        source="scent-stylist"
+        recommendedFragrance={topRecommendation ? `Inspired by ${topRecommendation}` : undefined}
+        cancelLabel="No thanks"
+      />
     </div>
   );
 };
