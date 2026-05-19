@@ -6,6 +6,7 @@ import SignatureFragranceSection from "@/components/SignatureFragranceSection";
 import AboutSection from "@/components/AboutSection";
 import WhyScentStudio from "@/components/WhyScentStudio";
 import NewsletterSection from "@/components/NewsletterSection";
+import DiscountCaptureSection from "@/components/DiscountCaptureSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
 import LiveTrafficSignal from "@/components/LiveTrafficSignal";
@@ -130,6 +131,7 @@ const Index = () => {
       </section>
 
       <FeaturedCollection />
+      <DiscountCaptureSection />
       <WhyScentStudio />
       <AboutSection />
       <SignatureFragranceSection />
