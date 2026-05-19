@@ -33,13 +33,13 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <AuthProvider>
-      <CartProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+  <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <AuthProvider>
+        <CartProvider>
+          <Toaster />
+          <Sonner />
           <ScrollToTop />
           <FindMyScentFab />
           <Routes>
@@ -64,13 +64,12 @@ const App = () => (
             <Route path="/admin/post/:id" element={<ProtectedAdminRoute><AdminPostEditorPage /></ProtectedAdminRoute>} />
             <Route path="/admin/leads" element={<ProtectedAdminRoute><AdminLeadsPage /></ProtectedAdminRoute>} />
             <Route path="*" element={<NotFound />} />
-            <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </CartProvider>
-      </AuthProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
+        </CartProvider>
+        </AuthProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </BrowserRouter>
 );
 
 export default App;
