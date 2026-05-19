@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
+import { AuthProvider } from "@/hooks/useAuth";
+import ProtectedAdminRoute from "@/components/ProtectedAdminRoute";
 import Index from "./pages/Index";
 import CatalogPage from "./pages/CatalogPage";
 import PerfumeDetailPage from "./pages/PerfumeDetailPage";
@@ -17,6 +19,10 @@ import FindMyScentPage from "./pages/FindMyScentPage";
 import ExclusivePage from "./pages/ExclusivePage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
+import LoginPage from "./pages/LoginPage";
+import AdminBlogPage from "./pages/AdminBlogPage";
+import AdminCalendarPage from "./pages/AdminCalendarPage";
+import AdminPostEditorPage from "./pages/AdminPostEditorPage";
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
@@ -28,6 +34,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <AuthProvider>
       <CartProvider>
         <Toaster />
         <Sonner />
@@ -49,11 +56,17 @@ const App = () => (
             <Route path="/exclusive" element={<ExclusivePage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/admin" element={<ProtectedAdminRoute><AdminBlogPage /></ProtectedAdminRoute>} />
+            <Route path="/admin/blog" element={<ProtectedAdminRoute><AdminBlogPage /></ProtectedAdminRoute>} />
+            <Route path="/admin/calendar" element={<ProtectedAdminRoute><AdminCalendarPage /></ProtectedAdminRoute>} />
+            <Route path="/admin/post/:id" element={<ProtectedAdminRoute><AdminPostEditorPage /></ProtectedAdminRoute>} />
             <Route path="*" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </CartProvider>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
