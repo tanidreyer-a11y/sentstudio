@@ -1,8 +1,23 @@
 import { Link } from "react-router-dom";
-import { blogPosts } from "@/data/blog-posts";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+
+interface PreviewPost {
+  slug: string; title: string; excerpt: string;
+  cover_image: string | null; cover_alt: string | null; reading_time: string | null;
+}
 
 const JournalPreview = () => {
-  const posts = blogPosts.slice(0, 3);
+  const [posts, setPosts] = useState<PreviewPost[]>([]);
+  useEffect(() => {
+    supabase.from("blog_posts")
+      .select("slug, title, excerpt, cover_image, cover_alt, reading_time")
+      .eq("status", "published")
+      .lte("published_at", new Date().toISOString())
+      .order("published_at", { ascending: false })
+      .limit(3)
+      .then(({ data }) => setPosts(data ?? []));
+  }, []);
   if (posts.length === 0) return null;
 
   return (
@@ -21,15 +36,19 @@ const JournalPreview = () => {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {posts.map((post) => (
             <Link key={post.slug} to={`/blog/${post.slug}`} className="group block">
-              <div className="mb-4 overflow-hidden border border-border">
-                <img
-                  src={post.image}
-                  alt={post.imageAlt}
-                  loading="lazy"
-                  className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <p className="mb-2 font-sans text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground">{post.readingTime}</p>
+              {post.cover_image && (
+                <div className="mb-4 overflow-hidden border border-border">
+                  <img
+                    src={post.cover_image}
+                    alt={post.cover_alt ?? post.title}
+                    loading="lazy"
+                    className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+              )}
+              {post.reading_time && (
+                <p className="mb-2 font-sans text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground">{post.reading_time}</p>
+              )}
               <h3 className="font-display text-xl font-light text-foreground transition-colors group-hover:text-primary">
                 {post.title}
               </h3>
