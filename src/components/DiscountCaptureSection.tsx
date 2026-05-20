@@ -84,10 +84,10 @@ const DiscountCaptureSection = () => {
           </div>
           <p className="mb-3 font-sans text-xs uppercase tracking-[0.4em] text-primary">Exclusive Offer</p>
           <h2 className="mb-4 font-display text-3xl font-light text-foreground sm:text-4xl md:text-5xl">
-            Get 10% Off Your First Order
+            Buy 3 Get 10% Off
           </h2>
           <p className="mb-8 font-body text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Drop your email and WhatsApp number — we'll generate a one-time discount code instantly. No spam, just one beautiful scent away.
+            Drop your email and WhatsApp number — we'll generate your discount code instantly. No spam, just beautiful scents.
           </p>
 
           {!code ? (
@@ -120,7 +120,7 @@ const DiscountCaptureSection = () => {
                 {submitting ? "Generating…" : "Get My Discount"}
               </button>
               <p className="mt-1 font-sans text-[0.65rem] uppercase tracking-[0.2em] text-muted-foreground">
-                One code per email · Valid on first order
+                One code per email · Buy any 3 fragrances to redeem
               </p>
             </form>
           ) : (
@@ -137,7 +137,7 @@ const DiscountCaptureSection = () => {
                 </button>
               </div>
               <p className="mb-6 font-body text-sm leading-relaxed text-muted-foreground">
-                Send this code on WhatsApp to claim your 10% off — we'll apply it to your first order.
+                Buy any 3 fragrances and send this code on WhatsApp to claim your 10% off.
               </p>
               <a
                 href={whatsappUrl}
