@@ -621,6 +621,8 @@ const ResultCards = ({
     WILDCARD: "bg-accent/20 text-accent border border-accent/30",
   };
 
+  const WHATSAPP_NUMBER = "27761328213";
+
   return (
     <div className="space-y-4 max-w-full">
       {results.map((r) => (
@@ -632,6 +634,25 @@ const ResultCards = ({
           badgeColor={badgeColors[r.matchType]}
         />
       ))}
+
+      {/* Discount CTA after recommendations */}
+      <div className="border border-primary/30 bg-primary/5 rounded-xl p-5 text-center">
+        <p className="font-sans text-xs uppercase tracking-[0.3em] text-primary mb-2">Exclusive Offer</p>
+        <h4 className="font-display text-xl text-foreground mb-2">Get 10% Off on Your Recommended Fragrance</h4>
+        <p className="font-body text-sm text-muted-foreground mb-4">
+          Buy any 3 fragrances and claim 10% off your order. Chat with us on WhatsApp to redeem.
+        </p>
+        <a
+          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+            `Hi Scent Studio! I just used the Find My Scent stylist and loved my recommendations. I'd like to claim my 10% off when I buy 3 fragrances.`
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-primary px-6 py-3 font-sans text-xs uppercase tracking-[0.2em] text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+        >
+          Claim 10% Off on WhatsApp
+        </a>
+      </div>
     </div>
   );
 };
