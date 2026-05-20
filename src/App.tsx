@@ -26,7 +26,6 @@ import AdminPostEditorPage from "./pages/AdminPostEditorPage";
 import AdminLeadsPage from "./pages/AdminLeadsPage";
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
-import EntryDiscountPopup from "./components/EntryDiscountPopup";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import PaymentCancelPage from "./pages/PaymentCancelPage";
 import NotFound from "./pages/NotFound";
@@ -34,16 +33,15 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <BrowserRouter>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <AuthProvider>
-        <CartProvider>
-          <Toaster />
-          <Sonner />
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <AuthProvider>
+      <CartProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
           <ScrollToTop />
           <FindMyScentFab />
-          <EntryDiscountPopup />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/catalog/:gender" element={<CatalogPage />} />
@@ -66,12 +64,13 @@ const App = () => (
             <Route path="/admin/post/:id" element={<ProtectedAdminRoute><AdminPostEditorPage /></ProtectedAdminRoute>} />
             <Route path="/admin/leads" element={<ProtectedAdminRoute><AdminLeadsPage /></ProtectedAdminRoute>} />
             <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
-        </CartProvider>
-        </AuthProvider>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </BrowserRouter>
+        </BrowserRouter>
+      </CartProvider>
+      </AuthProvider>
+    </TooltipProvider>
+  </QueryClientProvider>
 );
 
 export default App;
