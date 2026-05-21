@@ -16,11 +16,13 @@ interface OrderItem {
 }
 
 interface PendingOrder {
+  orderNumber?: string;
   items: OrderItem[];
   delivery: DeliveryDetails;
   totalPrice: number;
   deliveryFee: number;
   grandTotal: number;
+  estimatedDelivery?: string;
 }
 
 const deliveryLabels: Record<string, string> = {
@@ -66,7 +68,9 @@ const PaymentSuccessPage = () => {
         ? `\n🚚 Delivery Fee: R${d.option === "aramex" ? ARAMEX_FEE : POSTNET_FEE}`
         : "";
 
-    const message = `✅ *Payment Confirmed — Scent Studio*\n\n👤 Customer: ${d.fullName}\n📞 Phone: ${d.phone}\n\n📦 Items:\n${itemsList}\n\n🚀 Delivery: ${deliveryLabels[d.option]}${addressBlock}${d.instructions ? `\n📝 Instructions: ${d.instructions}` : ""}${feeInfo}\n\n💰 *Total Paid: R${order.grandTotal}*\n\nPayment received via Yoco. Please prepare the order. Thank you!`;
+    const orderLine = order.orderNumber ? `\n🧾 Order #: ${order.orderNumber}` : "";
+    const etaLine = order.estimatedDelivery ? `\n⏱ ETA: ${order.estimatedDelivery}` : "";
+    const message = `✅ *Payment Confirmed — Scent Studio*${orderLine}\n\n👤 Customer: ${d.fullName}\n📞 Phone: ${d.phone}\n\n📦 Items:\n${itemsList}\n\n🚀 Delivery: ${deliveryLabels[d.option]}${addressBlock}${d.instructions ? `\n📝 Instructions: ${d.instructions}` : ""}${feeInfo}${etaLine}\n\n💰 *Total Paid: R${order.grandTotal}*\n\nPayment received via Yoco. Please prepare the order. Thank you!`;
 
     return `https://wa.me/27761328213?text=${encodeURIComponent(message)}`;
   };
@@ -90,11 +94,70 @@ const PaymentSuccessPage = () => {
             Thank you for your order! We'll prepare your fragrances with care.
           </p>
 
+          {/* Order summary */}
+          {order && (
+            <div className="bg-card border border-border p-6 mb-8 text-left max-w-md mx-auto">
+              {order.orderNumber && (
+                <div className="mb-4 pb-4 border-b border-border">
+                  <p className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground mb-1">
+                    Order Number
+                  </p>
+                  <p className="font-display text-2xl tracking-[0.15em] text-primary">
+                    {order.orderNumber}
+                  </p>
+                </div>
+              )}
+              <p className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground mb-2">Items</p>
+              <ul className="font-body text-sm text-foreground mb-4 space-y-1">
+                {order.items.map((i, idx) => (
+                  <li key={idx} className="flex justify-between gap-3">
+                    <span>• {i.name} ({i.size}) ×{i.quantity}</span>
+                    <span className="text-muted-foreground">R{i.price * i.quantity}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex justify-between font-sans text-sm pt-3 border-t border-border">
+                <span className="text-muted-foreground">Delivery</span>
+                <span className="text-foreground capitalize">{deliveryLabels[order.delivery.option] || order.delivery.option}</span>
+              </div>
+              {order.estimatedDelivery && (
+                <div className="flex justify-between font-sans text-sm mt-2">
+                  <span className="text-muted-foreground">Estimated</span>
+                  <span className="text-foreground">{order.estimatedDelivery}</span>
+                </div>
+              )}
+              <div className="flex justify-between font-sans text-base mt-3 pt-3 border-t border-border">
+                <span className="text-muted-foreground">Total Paid</span>
+                <span className="font-display text-xl text-primary">R{order.grandTotal}</span>
+              </div>
+            </div>
+          )}
+
+          {/* Track via WhatsApp banner */}
+          {order && (
+            <a
+              href={`https://wa.me/27761328213?text=${encodeURIComponent(
+                `Hi Scent Studio, I'd like to track my order ${order.orderNumber ?? ""} (${order.delivery.fullName}).`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-[#25D366]/10 border border-[#25D366]/40 p-4 mb-8 max-w-md mx-auto hover:bg-[#25D366]/20 transition-colors"
+            >
+              <div className="flex items-center justify-center gap-3">
+                <MessageCircle className="w-5 h-5 text-[#25D366]" />
+                <div className="text-left">
+                  <p className="font-sans text-sm text-foreground font-medium">Track your order on WhatsApp</p>
+                  <p className="font-sans text-xs text-muted-foreground">Tap to message us directly</p>
+                </div>
+              </div>
+            </a>
+          )}
+
           {/* WhatsApp confirmation */}
           {order && !whatsAppSent && (
             <div className="bg-card border border-border p-6 mb-8 max-w-md mx-auto">
               <p className="font-sans text-sm text-muted-foreground mb-4">
-                Tap below to send your order confirmation via WhatsApp so we can
+                Please tap below to send your order confirmation via WhatsApp so we can
                 start preparing it right away.
               </p>
               <button

@@ -58,6 +58,7 @@ const AdminLeadsPage = () => {
             <Link to="/admin/blog" className="text-muted-foreground hover:text-primary">Blog</Link>
             <Link to="/admin/calendar" className="text-muted-foreground hover:text-primary">Calendar</Link>
             <Link to="/admin/leads" className="text-primary">Leads</Link>
+            <Link to="/admin/orders" className="text-muted-foreground hover:text-primary">Orders</Link>
           </nav>
         </div>
 
