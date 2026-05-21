@@ -7,6 +7,7 @@ import { perfumes, Perfume } from "@/data/perfumes";
 import { getPerfumeImage } from "@/lib/perfume-images";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 // ─── Name → DB ID mapping ───
 const menNameMap: Record<string, string> = {
@@ -636,24 +637,112 @@ const ResultCards = ({
       ))}
 
       {/* Discount CTA after recommendations */}
-      <div className="border border-primary/30 bg-primary/5 rounded-xl p-5 text-center">
-        <p className="font-sans text-xs uppercase tracking-[0.3em] text-primary mb-2">Exclusive Offer</p>
-        <h4 className="font-display text-xl text-foreground mb-2">Get 10% Off on Your Recommended Fragrance</h4>
+      <ChatbotDiscountCapture userName={userName} />
+    </div>
+  );
+};
+
+const ChatbotDiscountCapture = ({ userName }: { userName: string }) => {
+  const WHATSAPP_NUMBER = "27761328213";
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [code, setCode] = useState<string | null>(null);
+
+  const generateCode = () => {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let s = "";
+    for (let i = 0; i < 5; i++) s += chars[Math.floor(Math.random() * chars.length)];
+    return `SCENT10-${s}`;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || !phone.trim()) {
+      toast.error("Please add your email and phone number.");
+      return;
+    }
+    setSubmitting(true);
+    const discountCode = generateCode();
+    const { error } = await supabase.from("leads").insert({
+      email: email.trim().toLowerCase(),
+      phone: phone.trim(),
+      discount_code: discountCode,
+      source: "chatbot",
+    });
+    setSubmitting(false);
+    if (error) {
+      if (error.code === "23505") {
+        toast.error("This email is already on the list.");
+      } else {
+        toast.error(error.message);
+      }
+      return;
+    }
+    setCode(discountCode);
+  };
+
+  if (code) {
+    return (
+      <div className="border border-primary/40 bg-primary/5 rounded-xl p-5 text-center">
+        <p className="font-sans text-xs uppercase tracking-[0.3em] text-primary mb-2">Your Code</p>
+        <p className="font-display text-2xl tracking-[0.15em] text-primary mb-3">{code}</p>
         <p className="font-body text-sm text-muted-foreground mb-4">
-          Buy any 3 fragrances and claim 10% off your order. Chat with us on WhatsApp to redeem.
+          Send this code on WhatsApp to claim 10% off your recommended fragrance.
         </p>
         <a
           href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-            `Hi Scent Studio! I just used the Find My Scent stylist and loved my recommendations. I'd like to claim my 10% off when I buy 3 fragrances.`
+            `Hi Scent Studio! I'm ${userName || "a new customer"} — I'd like to claim 10% off with code ${code}.`
           )}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 bg-primary px-6 py-3 font-sans text-xs uppercase tracking-[0.2em] text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
         >
-          Claim 10% Off on WhatsApp
+          Claim on WhatsApp
         </a>
       </div>
-    </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="border border-primary/30 bg-primary/5 rounded-xl p-5">
+      <div className="text-center mb-4">
+        <p className="font-sans text-xs uppercase tracking-[0.3em] text-primary mb-2">Exclusive Offer</p>
+        <h4 className="font-display text-xl text-foreground mb-1">
+          Get 10% Off Your Personalised Recommendation
+        </h4>
+        <p className="font-body text-sm text-muted-foreground">
+          Enter your email and phone to claim instantly.
+        </p>
+      </div>
+      <div className="flex flex-col gap-2">
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          maxLength={255}
+          className="w-full border border-border bg-background px-4 py-3 font-body text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none rounded-lg"
+        />
+        <input
+          type="tel"
+          required
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          placeholder="WhatsApp number (e.g. 0761234567)"
+          maxLength={20}
+          className="w-full border border-border bg-background px-4 py-3 font-body text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none rounded-lg"
+        />
+        <button
+          type="submit"
+          disabled={submitting}
+          className="w-full bg-primary px-6 py-3 font-sans text-xs uppercase tracking-[0.25em] text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-60"
+        >
+          {submitting ? "Generating…" : "Claim 10% Off"}
+        </button>
+      </div>
+    </form>
   );
 };
 

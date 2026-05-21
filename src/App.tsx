@@ -26,9 +26,11 @@ import AdminPostEditorPage from "./pages/AdminPostEditorPage";
 import AdminLeadsPage from "./pages/AdminLeadsPage";
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
+import DiscountPopup from "./components/DiscountPopup";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import PaymentCancelPage from "./pages/PaymentCancelPage";
 import NotFound from "./pages/NotFound";
+import AdminOrdersPage from "./pages/AdminOrdersPage";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +44,7 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <FindMyScentFab />
+          <DiscountPopup />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/catalog/:gender" element={<CatalogPage />} />
@@ -63,6 +66,7 @@ const App = () => (
             <Route path="/admin/calendar" element={<ProtectedAdminRoute><AdminCalendarPage /></ProtectedAdminRoute>} />
             <Route path="/admin/post/:id" element={<ProtectedAdminRoute><AdminPostEditorPage /></ProtectedAdminRoute>} />
             <Route path="/admin/leads" element={<ProtectedAdminRoute><AdminLeadsPage /></ProtectedAdminRoute>} />
+            <Route path="/admin/orders" element={<ProtectedAdminRoute><AdminOrdersPage /></ProtectedAdminRoute>} />
             <Route path="*" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

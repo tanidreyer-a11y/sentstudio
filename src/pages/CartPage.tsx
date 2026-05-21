@@ -32,6 +32,20 @@ const CartPage = () => {
   const deliveryFee = delivery.option === "aramex" ? ARAMEX_FEE : delivery.option === "postnet" ? POSTNET_FEE : 0;
   const grandTotal = finalPrice + deliveryFee;
 
+  const deliveryEtaMap: Record<string, string> = {
+    pickup: "Ready in 2–4 hours (Mon–Sat)",
+    uber: "Same day — you arrange pickup",
+    aramex: "2–4 business days nationwide",
+    postnet: "2–3 business days nationwide",
+  };
+
+  const generateOrderNumber = () => {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let s = "";
+    for (let i = 0; i < 6; i++) s += chars[Math.floor(Math.random() * chars.length)];
+    return `SS-${s}`;
+  };
+
   const isFormValid =
     delivery.fullName.trim() &&
     delivery.phone.trim() &&
@@ -45,19 +59,55 @@ const CartPage = () => {
     setIsProcessing(true);
 
     try {
-      // Store order details in localStorage for success page
+      const orderNumber = generateOrderNumber();
+      const estimatedDelivery = deliveryEtaMap[delivery.option];
+      const orderItems = items.map((i) => ({
+        name: i.name,
+        size: i.size,
+        quantity: i.quantity,
+        price: i.price,
+        gender: i.gender,
+      }));
+
+      // Persist order to DB before redirecting to Yoco
+      const { error: insertError } = await supabase.from("orders").insert({
+        order_number: orderNumber,
+        customer_name: delivery.fullName,
+        customer_phone: delivery.phone,
+        items: orderItems,
+        total_amount: grandTotal,
+        delivery_fee: deliveryFee,
+        delivery_method: delivery.option,
+        delivery_address: needsAddress
+          ? {
+              streetAddress: delivery.streetAddress,
+              cityArea: delivery.cityArea,
+              postalCode: delivery.postalCode,
+              instructions: delivery.instructions,
+            }
+          : { instructions: delivery.instructions },
+        estimated_delivery: estimatedDelivery,
+        status: "pending",
+      });
+      if (insertError) {
+        console.error("Order save failed:", insertError);
+        toast({
+          title: "Could not save order",
+          description: "Please try WhatsApp ordering instead.",
+          variant: "destructive",
+        });
+        setIsProcessing(false);
+        return;
+      }
+
       const orderData = {
-        items: items.map((i) => ({
-          name: i.name,
-          size: i.size,
-          quantity: i.quantity,
-          price: i.price,
-          gender: i.gender,
-        })),
+        orderNumber,
+        items: orderItems,
         delivery,
         totalPrice,
         deliveryFee,
         grandTotal,
+        estimatedDelivery,
       };
       localStorage.setItem("pending_order", JSON.stringify(orderData));
 

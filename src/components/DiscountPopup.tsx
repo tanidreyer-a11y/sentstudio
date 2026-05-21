@@ -106,7 +106,7 @@ const DiscountPopup = () => {
           </div>
           <p className="mb-2 font-sans text-[0.65rem] uppercase tracking-[0.4em] text-primary">Exclusive Offer</p>
           <h2 className="mb-3 font-display text-2xl font-light text-foreground sm:text-3xl">
-            Buy 3 Get 10% Off
+            Get 10% Off Your First Order
           </h2>
           <p className="mb-6 font-body text-sm leading-relaxed text-muted-foreground">
             Drop your email & WhatsApp number — we'll generate your discount code instantly.
@@ -146,7 +146,7 @@ const DiscountPopup = () => {
                 onClick={dismiss}
                 className="font-sans text-[0.65rem] uppercase tracking-[0.25em] text-muted-foreground hover:text-primary"
               >
-                No thanks
+                Maybe later
               </button>
             </form>
           ) : (
@@ -159,7 +159,7 @@ const DiscountPopup = () => {
                 </button>
               </div>
               <p className="mb-5 font-body text-xs leading-relaxed text-muted-foreground">
-                Buy any 3 fragrances and send this code on WhatsApp to claim 10% off.
+                Send this code on WhatsApp to claim 10% off your first order.
               </p>
               <a
                 href={whatsappUrl}
