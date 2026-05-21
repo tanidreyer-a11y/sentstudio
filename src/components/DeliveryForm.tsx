@@ -25,35 +25,40 @@ const deliveryOptions: {
   icon: typeof Store;
   title: string;
   description: string;
-  extra: string;
+  fee: string;
+  eta: string;
 }[] = [
   {
     value: "pickup",
     icon: Store,
     title: "Store Pickup",
     description: "Collect at Flora Shopping Centre, Roodepoort",
-    extra: "Free",
+    fee: "Free",
+    eta: "Ready in 2–4 hours (Mon–Sat)",
   },
   {
     value: "uber",
     icon: Car,
     title: "Uber / Bolt",
     description: "Order your own ride from Flora Centre",
-    extra: "You arrange",
+    fee: "You arrange",
+    eta: "Same day · You set the time",
   },
   {
     value: "aramex",
     icon: Truck,
     title: "Aramex Courier",
     description: "Nationwide via Pick n Pay drop-off",
-    extra: `+ R${ARAMEX_FEE}`,
+    fee: `+ R${ARAMEX_FEE}`,
+    eta: "2–4 business days nationwide",
   },
   {
     value: "postnet",
     icon: Package,
     title: "PostNet Courier",
     description: "Nationwide via PostNet drop-off",
-    extra: `+ R${POSTNET_FEE}`,
+    fee: `+ R${POSTNET_FEE}`,
+    eta: "2–3 business days nationwide",
   },
 ];
 
@@ -92,9 +97,14 @@ const DeliveryForm = ({ details, onChange }: DeliveryFormProps) => {
                 <p className="font-sans text-xs text-muted-foreground mt-1">
                   {opt.description}
                 </p>
-                <p className="font-sans text-xs text-primary mt-1 font-medium">
-                  {opt.extra}
-                </p>
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <span className="font-sans text-xs text-primary font-medium">
+                    {opt.fee}
+                  </span>
+                  <span className="font-sans text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground">
+                    {opt.eta}
+                  </span>
+                </div>
               </button>
             );
           })}

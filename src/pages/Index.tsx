@@ -7,7 +7,6 @@ import AboutSection from "@/components/AboutSection";
 import WhyScentStudio from "@/components/WhyScentStudio";
 import NewsletterSection from "@/components/NewsletterSection";
 import DiscountCaptureSection from "@/components/DiscountCaptureSection";
-import DiscountPopup from "@/components/DiscountPopup";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import SiteFooter from "@/components/SiteFooter";
 import LiveTrafficSignal from "@/components/LiveTrafficSignal";
@@ -52,7 +51,6 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <HeroSection />
-      <DiscountPopup />
 
       {/* Legal Disclaimer Banner */}
       <div className="bg-secondary border-y border-border">
