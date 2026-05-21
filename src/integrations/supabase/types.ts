@@ -174,33 +174,57 @@ export type Database = {
       }
       orders: {
         Row: {
+          admin_notes: string | null
           created_at: string
           currency: string
           customer_name: string
+          customer_phone: string | null
+          delivery_address: Json | null
+          delivery_fee: number
+          delivery_method: string | null
+          estimated_delivery: string | null
           id: string
           items: Json
+          order_number: string
           status: string
           total_amount: number
+          updated_at: string
           yoco_checkout_id: string | null
         }
         Insert: {
+          admin_notes?: string | null
           created_at?: string
           currency?: string
           customer_name: string
+          customer_phone?: string | null
+          delivery_address?: Json | null
+          delivery_fee?: number
+          delivery_method?: string | null
+          estimated_delivery?: string | null
           id?: string
           items: Json
+          order_number: string
           status?: string
           total_amount: number
+          updated_at?: string
           yoco_checkout_id?: string | null
         }
         Update: {
+          admin_notes?: string | null
           created_at?: string
           currency?: string
           customer_name?: string
+          customer_phone?: string | null
+          delivery_address?: Json | null
+          delivery_fee?: number
+          delivery_method?: string | null
+          estimated_delivery?: string | null
           id?: string
           items?: Json
+          order_number?: string
           status?: string
           total_amount?: number
+          updated_at?: string
           yoco_checkout_id?: string | null
         }
         Relationships: []
