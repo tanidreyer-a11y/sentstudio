@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Sparkles, MessageCircle, Copy, Check, X } from "lucide-react";
+import { Sparkles, Copy, Check, X, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
@@ -35,7 +36,7 @@ const DiscountPopup = () => {
 
   useEffect(() => {
     if (localStorage.getItem(STORAGE_KEY)) return;
-    const t = setTimeout(() => setOpen(true), 5000);
+    const t = setTimeout(() => setOpen(true), 1200);
     return () => clearTimeout(t);
   }, []);
 
@@ -83,12 +84,6 @@ const DiscountPopup = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
-  const whatsappUrl = code
-    ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-        `Hi Scent Studio, I'd like to claim my 10% off using code: ${code} (email: ${email})`
-      )}`
-    : "#";
 
   return (
     <Dialog open={open} onOpenChange={(v) => (v ? setOpen(true) : dismiss())}>
@@ -158,18 +153,20 @@ const DiscountPopup = () => {
                   {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                 </button>
               </div>
-              <p className="mb-5 font-body text-xs leading-relaxed text-muted-foreground">
-                Send this code on WhatsApp to claim 10% off your first order.
+              <p className="mb-2 font-body text-xs leading-relaxed text-foreground">
+                Apply this code at checkout to get <span className="text-primary font-medium">10% off any fragrance</span> sitewide.
               </p>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <p className="mb-5 font-sans text-[0.65rem] uppercase tracking-[0.2em] text-destructive">
+                ⏳ Expires in 30 days — one-time use
+              </p>
+              <Link
+                to="/cart"
+                onClick={dismiss}
                 className="inline-flex w-full items-center justify-center gap-2 bg-primary px-6 py-3 font-sans text-xs uppercase tracking-[0.25em] text-primary-foreground hover:bg-primary/90"
               >
-                <MessageCircle className="h-4 w-4" />
-                Send on WhatsApp
-              </a>
+                Continue to Checkout
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           )}
         </div>
