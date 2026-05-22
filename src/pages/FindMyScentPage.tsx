@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Send, Sparkles, ShoppingCart } from "lucide-react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
