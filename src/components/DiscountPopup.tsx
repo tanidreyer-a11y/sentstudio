@@ -6,7 +6,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
-const WHATSAPP_NUMBER = "27761328213";
 const STORAGE_KEY = "scentDiscountPopupSeen";
 
 const schema = z.object({
