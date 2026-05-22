@@ -27,6 +27,7 @@ import AdminLeadsPage from "./pages/AdminLeadsPage";
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
 import DiscountPopup from "./components/DiscountPopup";
+import UrgencyBar from "./components/UrgencyBar";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import PaymentCancelPage from "./pages/PaymentCancelPage";
 import NotFound from "./pages/NotFound";
@@ -43,6 +44,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <UrgencyBar />
           <FindMyScentFab />
           <DiscountPopup />
           <Routes>
