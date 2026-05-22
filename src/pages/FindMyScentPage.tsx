@@ -643,7 +643,6 @@ const ResultCards = ({
 };
 
 const ChatbotDiscountCapture = ({ userName }: { userName: string }) => {
-  const WHATSAPP_NUMBER = "27761328213";
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -687,19 +686,25 @@ const ChatbotDiscountCapture = ({ userName }: { userName: string }) => {
       <div className="border border-primary/40 bg-primary/5 rounded-xl p-5 text-center">
         <p className="font-sans text-xs uppercase tracking-[0.3em] text-primary mb-2">Your Code</p>
         <p className="font-display text-2xl tracking-[0.15em] text-primary mb-3">{code}</p>
-        <p className="font-body text-sm text-muted-foreground mb-4">
-          Send this code on WhatsApp to claim 10% off your recommended fragrance.
+        <button
+          type="button"
+          onClick={() => { navigator.clipboard.writeText(code); toast.success("Code copied!"); }}
+          className="mb-3 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-primary"
+        >
+          Copy code
+        </button>
+        <p className="font-body text-sm text-foreground mb-2">
+          Apply this code at checkout for <span className="text-primary font-medium">10% off any fragrance</span> sitewide.
         </p>
-        <a
-          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-            `Hi Scent Studio! I'm ${userName || "a new customer"} — I'd like to claim 10% off with code ${code}.`
-          )}`}
-          target="_blank"
-          rel="noopener noreferrer"
+        <p className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-destructive mb-4">
+          ⏳ Expires in 30 days — one-time use
+        </p>
+        <Link
+          to="/cart"
           className="inline-flex items-center gap-2 bg-primary px-6 py-3 font-sans text-xs uppercase tracking-[0.2em] text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
         >
-          Claim on WhatsApp
-        </a>
+          Continue to Checkout
+        </Link>
       </div>
     );
   }
