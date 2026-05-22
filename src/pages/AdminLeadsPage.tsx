@@ -45,6 +45,7 @@ const AdminLeadsPage = () => {
 
   const total = leads.length;
   const redeemed = leads.filter((l) => l.redeemed).length;
+  const qualified = leads.filter((l) => l.source.startsWith("quiz:")).length;
 
   return (
     <div className="min-h-screen bg-background py-12">
@@ -62,10 +63,14 @@ const AdminLeadsPage = () => {
           </nav>
         </div>
 
-        <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
+        <div className="mb-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
           <div className="border border-border bg-secondary p-5">
             <p className="font-sans text-xs uppercase tracking-[0.2em] text-muted-foreground">Total leads</p>
             <p className="mt-2 font-display text-3xl text-foreground">{total}</p>
+          </div>
+          <div className="border border-primary/40 bg-secondary p-5">
+            <p className="font-sans text-xs uppercase tracking-[0.2em] text-muted-foreground">Quiz qualified</p>
+            <p className="mt-2 font-display text-3xl text-primary">{qualified}</p>
           </div>
           <div className="border border-border bg-secondary p-5">
             <p className="font-sans text-xs uppercase tracking-[0.2em] text-muted-foreground">Redeemed</p>
@@ -100,7 +105,15 @@ const AdminLeadsPage = () => {
                     <td className="px-4 py-3">{l.email}</td>
                     <td className="px-4 py-3">{l.phone ?? "—"}</td>
                     <td className="px-4 py-3 font-mono text-primary">{l.discount_code}</td>
-                    <td className="px-4 py-3 text-muted-foreground">{l.source}</td>
+                    <td className="px-4 py-3 text-muted-foreground">
+                      {l.source.startsWith("quiz:") ? (
+                        <span className="inline-flex items-center gap-1 rounded bg-primary/15 px-2 py-0.5 text-[0.7rem] uppercase tracking-wider text-primary">
+                          {l.source.replace("quiz:", "")}
+                        </span>
+                      ) : (
+                        l.source
+                      )}
+                    </td>
                     <td className="px-4 py-3 text-muted-foreground">{new Date(l.created_at).toLocaleString()}</td>
                     <td className="px-4 py-3 text-right">
                       <Switch checked={l.redeemed} onCheckedChange={() => toggleRedeemed(l)} />
