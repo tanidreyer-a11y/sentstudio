@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,31 +8,30 @@ import { CartProvider } from "@/contexts/CartContext";
 import { AuthProvider } from "@/hooks/useAuth";
 import ProtectedAdminRoute from "@/components/ProtectedAdminRoute";
 import Index from "./pages/Index";
-import CatalogPage from "./pages/CatalogPage";
-import PerfumeDetailPage from "./pages/PerfumeDetailPage";
-import CartPage from "./pages/CartPage";
-import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContactPage";
-import ReviewsPage from "./pages/ReviewsPage";
-
-import QuizPage from "./pages/QuizPage";
-import FindMyScentPage from "./pages/FindMyScentPage";
-import ExclusivePage from "./pages/ExclusivePage";
-import BlogPage from "./pages/BlogPage";
-import BlogPostPage from "./pages/BlogPostPage";
-import LoginPage from "./pages/LoginPage";
-import AdminBlogPage from "./pages/AdminBlogPage";
-import AdminCalendarPage from "./pages/AdminCalendarPage";
-import AdminPostEditorPage from "./pages/AdminPostEditorPage";
-import AdminLeadsPage from "./pages/AdminLeadsPage";
+const CatalogPage = lazy(() => import("./pages/CatalogPage"));
+const PerfumeDetailPage = lazy(() => import("./pages/PerfumeDetailPage"));
+const CartPage = lazy(() => import("./pages/CartPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
+const ReviewsPage = lazy(() => import("./pages/ReviewsPage"));
+const QuizPage = lazy(() => import("./pages/QuizPage"));
+const FindMyScentPage = lazy(() => import("./pages/FindMyScentPage"));
+const ExclusivePage = lazy(() => import("./pages/ExclusivePage"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
+const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const AdminBlogPage = lazy(() => import("./pages/AdminBlogPage"));
+const AdminCalendarPage = lazy(() => import("./pages/AdminCalendarPage"));
+const AdminPostEditorPage = lazy(() => import("./pages/AdminPostEditorPage"));
+const AdminLeadsPage = lazy(() => import("./pages/AdminLeadsPage"));
+const AdminOrdersPage = lazy(() => import("./pages/AdminOrdersPage"));
+const PaymentSuccessPage = lazy(() => import("./pages/PaymentSuccessPage"));
+const PaymentCancelPage = lazy(() => import("./pages/PaymentCancelPage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
 import DiscountPopup from "./components/DiscountPopup";
 import UrgencyBar from "./components/UrgencyBar";
-import PaymentSuccessPage from "./pages/PaymentSuccessPage";
-import PaymentCancelPage from "./pages/PaymentCancelPage";
-import NotFound from "./pages/NotFound";
-import AdminOrdersPage from "./pages/AdminOrdersPage";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +47,7 @@ const App = () => (
           <UrgencyBar />
           <FindMyScentFab />
           <DiscountPopup />
+          <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/catalog/:gender" element={<CatalogPage />} />
@@ -70,8 +71,8 @@ const App = () => (
             <Route path="/admin/leads" element={<ProtectedAdminRoute><AdminLeadsPage /></ProtectedAdminRoute>} />
             <Route path="/admin/orders" element={<ProtectedAdminRoute><AdminOrdersPage /></ProtectedAdminRoute>} />
             <Route path="*" element={<NotFound />} />
-            <Route path="*" element={<NotFound />} />
           </Routes>
+          </Suspense>
         </BrowserRouter>
       </CartProvider>
       </AuthProvider>
