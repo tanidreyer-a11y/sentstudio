@@ -492,8 +492,8 @@ export const womensPerfumes: Perfume[] = [
     image: "/placeholder.svg",
   },
   {
-    id: "michael-kors",
-    name: "Michael Kors",
+    id: "michael-kors-white",
+    name: "Michael Kors White",
     category: "Luxury",
     gender: "women",
     description: "An opulent composition layering rare woods, amber and refined florals for a regal trail.",
