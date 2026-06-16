@@ -47,14 +47,15 @@ const ContactPage = () => {
             </a>
 
             <a
-              href="https://maps.google.com/?q=Flora+Shopping+Centre,+Conrad+St+%26+Ontdekkers+Rd,+Florida+North,+Roodepoort"
+              href="https://maps.app.goo.gl/PQxRkSyJEw81wPbZ6"
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-col items-center p-8 bg-card border border-border hover:border-primary transition-colors text-center group"
             >
               <MapPin className="text-primary mb-4" size={28} />
               <h3 className="font-display text-lg text-foreground mb-2">In-Store</h3>
-              <p className="font-body text-sm text-muted-foreground">Flora Shopping Centre, Conrad Street &amp; Ontdekkers Rd, Florida North, Roodepoort</p>
+              <p className="font-body text-sm text-muted-foreground">Flora Shopping Centre, Corner Ontdekkers &amp; Conrad St, Florida North, Roodepoort, 1709</p>
+              <p className="font-body text-xs text-muted-foreground mt-1">Open Tue 9 AM – 6 PM</p>
             </a>
           </div>
 
