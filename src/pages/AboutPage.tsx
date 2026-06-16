@@ -43,6 +43,28 @@ const AboutPage = () => {
                 </div>
               ))}
             </div>
+
+            <div className="pt-12 border-t border-border mt-12">
+              <h2 className="font-display text-2xl text-foreground text-center mb-8">Visit Our Store</h2>
+              <div className="max-w-2xl mx-auto text-center space-y-4">
+                <p className="font-body text-muted-foreground">
+                  Flora Shopping Centre, Corner Ontdekkers &amp; Conrad St<br />
+                  Florida North, Roodepoort, 1709
+                </p>
+                <p className="font-body text-sm text-muted-foreground">
+                  Open Tuesday 9 AM – 6 PM<br />
+                  <span className="text-xs">(Hours may vary on public holidays)</span>
+                </p>
+                <a
+                  href="https://maps.app.goo.gl/PQxRkSyJEw81wPbZ6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-8 py-3 bg-primary text-primary-foreground font-sans text-sm tracking-[0.2em] uppercase hover:bg-gold-light transition-colors duration-300 mt-4"
+                >
+                  Get Directions
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

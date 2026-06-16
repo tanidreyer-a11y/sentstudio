@@ -67,8 +67,8 @@ const SiteFooter = () => {
             <h4 className="font-sans text-xs tracking-[0.3em] uppercase text-foreground mb-6">Contact</h4>
             <div className="font-body text-base text-muted-foreground space-y-2">
               <p>Flora Shopping Centre</p>
-              <p>Conrad St &amp; Ontdekkers Rd</p>
-              <p>Florida North, Roodepoort</p>
+              <p>Corner Ontdekkers &amp; Conrad St</p>
+              <p>Florida North, Roodepoort, 1709</p>
               <a href="mailto:scentstudio.fragrance@gmail.com" className="block mt-4 text-sm hover:text-primary transition-colors">scentstudio.fragrance@gmail.com</a>
               <a
                 href="https://wa.me/27761328213"
