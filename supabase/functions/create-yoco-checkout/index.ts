@@ -1,8 +1,4 @@
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
-};
+import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -10,7 +6,8 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { amount, successUrl, cancelUrl } = await req.json();
+    const body = await req.json();
+    const { amount, successUrl, cancelUrl, metadata, externalId } = body;
 
     if (!amount || !successUrl || !cancelUrl) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), {
@@ -27,6 +24,21 @@ Deno.serve(async (req) => {
       });
     }
 
+    const requestPayload: Record<string, unknown> = {
+      amount: Math.round(amount * 100), // Yoco expects cents
+      currency: "ZAR",
+      successUrl,
+      cancelUrl,
+      failureUrl: cancelUrl,
+    };
+
+    if (metadata && typeof metadata === "object") {
+      requestPayload.metadata = metadata;
+    }
+    if (externalId && typeof externalId === "string") {
+      requestPayload.externalId = externalId;
+    }
+
     // Create Yoco checkout — no database storage
     const yocoRes = await fetch("https://payments.yoco.com/api/checkouts", {
       method: "POST",
@@ -34,13 +46,7 @@ Deno.serve(async (req) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${YOCO_SECRET_KEY}`,
       },
-      body: JSON.stringify({
-        amount: Math.round(amount * 100), // Yoco expects cents
-        currency: "ZAR",
-        successUrl,
-        cancelUrl,
-        failureUrl: cancelUrl,
-      }),
+      body: JSON.stringify(requestPayload),
     });
 
     const yocoData = await yocoRes.json();
@@ -54,7 +60,10 @@ Deno.serve(async (req) => {
     }
 
     return new Response(
-      JSON.stringify({ checkoutUrl: yocoData.redirectUrl }),
+      JSON.stringify({
+        checkoutUrl: yocoData.redirectUrl,
+        id: yocoData.id,
+      }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err) {
