@@ -70,25 +70,30 @@ const CartPage = () => {
       }));
 
       // Persist order to DB before redirecting to Yoco
-      const { error: insertError } = await supabase.from("orders").insert({
-        order_number: orderNumber,
-        customer_name: delivery.fullName,
-        customer_phone: delivery.phone,
-        items: orderItems,
-        total_amount: grandTotal,
-        delivery_fee: deliveryFee,
-        delivery_method: delivery.option,
-        delivery_address: needsAddress
-          ? {
-              streetAddress: delivery.streetAddress,
-              cityArea: delivery.cityArea,
-              postalCode: delivery.postalCode,
-              instructions: delivery.instructions,
-            }
-          : { instructions: delivery.instructions },
-        estimated_delivery: estimatedDelivery,
-        status: "pending",
-      });
+      const { data: insertedOrder, error: insertError } = await supabase
+        .from("orders")
+        .insert({
+          order_number: orderNumber,
+          customer_name: delivery.fullName,
+          customer_phone: delivery.phone,
+          items: orderItems,
+          total_amount: grandTotal,
+          delivery_fee: deliveryFee,
+          delivery_method: delivery.option,
+          delivery_address: needsAddress
+            ? {
+                streetAddress: delivery.streetAddress,
+                cityArea: delivery.cityArea,
+                postalCode: delivery.postalCode,
+                instructions: delivery.instructions,
+              }
+            : { instructions: delivery.instructions },
+          estimated_delivery: estimatedDelivery,
+          status: "pending",
+        })
+        .select("id")
+        .single();
+
       if (insertError) {
         console.error("Order save failed:", insertError);
         toast({
@@ -98,6 +103,43 @@ const CartPage = () => {
         });
         setIsProcessing(false);
         return;
+      }
+
+      const orderId = insertedOrder?.id;
+      const origin = window.location.origin;
+
+      const { data, error } = await supabase.functions.invoke(
+        "create-yoco-checkout",
+        {
+          body: {
+            amount: grandTotal,
+            successUrl: `${origin}/payment/success`,
+            cancelUrl: `${origin}/payment/cancel`,
+            externalId: orderNumber,
+            metadata: {
+              orderNumber,
+              orderId,
+              checkoutId: null,
+            },
+          },
+        }
+      );
+
+      if (error) throw error;
+      if (!data?.checkoutUrl || !data?.id) {
+        throw new Error("No checkout URL returned");
+      }
+
+      const yocoCheckoutId = data.id as string;
+
+      // Update the order with the Yoco checkout ID so webhooks can match it
+      const { error: updateError } = await supabase
+        .from("orders")
+        .update({ yoco_checkout_id: yocoCheckoutId })
+        .eq("id", orderId);
+
+      if (updateError) {
+        console.error("Failed to update order with checkout ID:", updateError);
       }
 
       const orderData = {
@@ -111,24 +153,7 @@ const CartPage = () => {
       };
       localStorage.setItem("pending_order", JSON.stringify(orderData));
 
-      const origin = window.location.origin;
-      const { data, error } = await supabase.functions.invoke(
-        "create-yoco-checkout",
-        {
-          body: {
-            amount: grandTotal,
-            successUrl: `${origin}/payment/success`,
-            cancelUrl: `${origin}/payment/cancel`,
-          },
-        }
-      );
-
-      if (error) throw error;
-      if (data?.checkoutUrl) {
-        window.location.href = data.checkoutUrl;
-      } else {
-        throw new Error("No checkout URL returned");
-      }
+      window.location.href = data.checkoutUrl;
     } catch (err: any) {
       console.error("Payment error:", err);
       toast({
@@ -141,6 +166,7 @@ const CartPage = () => {
       setIsProcessing(false);
     }
   };
+
 
   const getWhatsAppUrl = () => {
     const itemsList = items
