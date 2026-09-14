@@ -395,7 +395,7 @@ export const womensPerfumes: Perfume[] = [
   },
   {
     id: "jimmy-choo-woman",
-    name: "Jimmy Choo Woman",
+    name: "Jimmy Choo Women",
     category: "Luxury",
     gender: "women",
     description: "An opulent composition layering rare woods, amber and refined florals for a regal trail.",

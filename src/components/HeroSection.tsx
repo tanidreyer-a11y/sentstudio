@@ -38,7 +38,7 @@ const HeroSection = () => {
           <span className="italic font-medium text-gold-gradient">Define You</span>
         </h1>
         <p className="font-body text-lg md:text-xl text-muted-foreground max-w-xl mx-auto animate-fade-up-delay-2 mb-10">
-          Designer-quality oil-based perfumes from only R100. Long-lasting luxury that fits your budget.
+          Designer-quality oil-based perfumes from only R120. Long-lasting luxury that fits your budget.
         </p>
         <div className="flex flex-col items-center justify-center gap-4 animate-fade-up-delay-3">
           <a
