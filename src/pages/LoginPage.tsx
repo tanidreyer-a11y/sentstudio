@@ -69,7 +69,7 @@ const LoginPage = () => {
             {mode === "signin" ? "Need an admin account? Sign up" : "Already have an account? Sign in"}
           </button>
           <p className="mt-6 text-center font-sans text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground">
-            First signup becomes admin automatically
+            New accounts need to be approved as admin by Scent Studio
           </p>
         </div>
       </main>

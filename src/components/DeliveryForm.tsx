@@ -6,6 +6,7 @@ export interface DeliveryDetails {
   option: DeliveryOption;
   fullName: string;
   phone: string;
+  email: string;
   streetAddress: string;
   cityArea: string;
   postalCode: string;
@@ -130,6 +131,16 @@ const DeliveryForm = ({ details, onChange }: DeliveryFormProps) => {
         />
       </div>
 
+      <Field
+        label="Email"
+        value={details.email}
+        onChange={(v) => update({ email: v })}
+        placeholder="you@example.com"
+        type="email"
+        optional
+        hint="For your receipt and order updates"
+      />
+
       {needsAddress(details.option) && (
         <div className="space-y-4">
           <Field
@@ -177,6 +188,7 @@ const Field = ({
   type = "text",
   required,
   optional,
+  hint,
 }: {
   label: string;
   value: string;
@@ -185,13 +197,14 @@ const Field = ({
   type?: string;
   required?: boolean;
   optional?: boolean;
+  hint?: string;
 }) => (
   <div>
     <label className="font-sans text-xs tracking-[0.3em] uppercase text-muted-foreground block mb-2">
       {label}
       {optional && (
         <span className="normal-case tracking-normal text-muted-foreground/50 ml-2">
-          (optional)
+          (optional{hint ? ` · ${hint}` : ""})
         </span>
       )}
     </label>
@@ -206,5 +219,12 @@ const Field = ({
   </div>
 );
 
-export { ARAMEX_FEE, POSTNET_FEE };
+const DELIVERY_LABELS: Record<DeliveryOption, string> = {
+  pickup: "Store Pickup",
+  uber: "Uber / Bolt (customer arranges)",
+  aramex: "Aramex Courier",
+  postnet: "PostNet Courier",
+};
+
+export { ARAMEX_FEE, POSTNET_FEE, DELIVERY_LABELS };
 export default DeliveryForm;

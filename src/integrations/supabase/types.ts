@@ -190,6 +190,14 @@ export type Database = {
           total_amount: number
           updated_at: string
           yoco_checkout_id: string | null
+          amount_paid: number | null
+          courier_tracking: string | null
+          customer_email: string | null
+          paid_at: string | null
+          payment_mode: string | null
+          source: string
+          tracking_token: string
+          yoco_payment_id: string | null
         }
         Insert: {
           admin_notes?: string | null
@@ -208,6 +216,14 @@ export type Database = {
           total_amount: number
           updated_at?: string
           yoco_checkout_id?: string | null
+          amount_paid?: number | null
+          courier_tracking?: string | null
+          customer_email?: string | null
+          paid_at?: string | null
+          payment_mode?: string | null
+          source?: string
+          tracking_token?: string
+          yoco_payment_id?: string | null
         }
         Update: {
           admin_notes?: string | null
@@ -226,6 +242,14 @@ export type Database = {
           total_amount?: number
           updated_at?: string
           yoco_checkout_id?: string | null
+          amount_paid?: number | null
+          courier_tracking?: string | null
+          customer_email?: string | null
+          paid_at?: string | null
+          payment_mode?: string | null
+          source?: string
+          tracking_token?: string
+          yoco_payment_id?: string | null
         }
         Relationships: []
       }

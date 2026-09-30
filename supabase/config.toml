@@ -1,1 +1,5 @@
 project_id = "dvuhgkntowowcddswdyj"
+
+# Yoco calls this without a Supabase login; the function verifies Yoco's signature itself.
+[functions.yoco-webhook]
+verify_jwt = false

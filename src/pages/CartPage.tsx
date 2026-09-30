@@ -10,7 +10,9 @@ import DeliveryForm, {
   type DeliveryDetails,
   ARAMEX_FEE,
   POSTNET_FEE,
+  DELIVERY_LABELS,
 } from "@/components/DeliveryForm";
+import { rememberOrder } from "@/lib/recent-orders";
 
 const CartPage = () => {
   const { items, removeFromCart, updateQuantity, clearCart, totalPrice, discounts, totalDiscount, finalPrice, promoCode, setPromoCode } =
@@ -22,6 +24,7 @@ const CartPage = () => {
     option: "pickup",
     fullName: "",
     phone: "",
+    email: "",
     streetAddress: "",
     cityArea: "",
     postalCode: "",
@@ -32,20 +35,6 @@ const CartPage = () => {
   const deliveryFee = delivery.option === "aramex" ? ARAMEX_FEE : delivery.option === "postnet" ? POSTNET_FEE : 0;
   const grandTotal = finalPrice + deliveryFee;
 
-  const deliveryEtaMap: Record<string, string> = {
-    pickup: "Ready in 2–4 hours (Mon–Sat)",
-    uber: "Same day — you arrange pickup",
-    aramex: "2–4 business days nationwide",
-    postnet: "2–3 business days nationwide",
-  };
-
-  const generateOrderNumber = () => {
-    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-    let s = "";
-    for (let i = 0; i < 6; i++) s += chars[Math.floor(Math.random() * chars.length)];
-    return `SS-${s}`;
-  };
-
   const isFormValid =
     delivery.fullName.trim() &&
     delivery.phone.trim() &&
@@ -54,119 +43,46 @@ const CartPage = () => {
         delivery.cityArea.trim() &&
         delivery.postalCode.trim()));
 
+  // The order is saved and priced on the server (create-order), which returns the Yoco
+  // payment page. The browser never writes to the orders table.
   const handlePayOnline = async () => {
     if (!isFormValid) return;
     setIsProcessing(true);
 
     try {
-      const orderNumber = generateOrderNumber();
-      const estimatedDelivery = deliveryEtaMap[delivery.option];
-      const orderItems = items.map((i) => ({
-        name: i.name,
-        size: i.size,
-        quantity: i.quantity,
-        price: i.price,
-        gender: i.gender,
-      }));
+      const { email, ...deliveryDetails } = delivery;
+      const { data, error } = await supabase.functions.invoke("create-order", {
+        body: {
+          items,
+          delivery: deliveryDetails,
+          email,
+          discount: totalDiscount,
+          origin: window.location.origin,
+        },
+      });
 
-      // Persist order to DB before redirecting to Yoco
-      const { data: insertedOrder, error: insertError } = await supabase
-        .from("orders")
-        .insert({
-          order_number: orderNumber,
-          customer_name: delivery.fullName,
-          customer_phone: delivery.phone,
-          items: orderItems,
-          total_amount: grandTotal,
-          delivery_fee: deliveryFee,
-          delivery_method: delivery.option,
-          delivery_address: needsAddress
-            ? {
-                streetAddress: delivery.streetAddress,
-                cityArea: delivery.cityArea,
-                postalCode: delivery.postalCode,
-                instructions: delivery.instructions,
-              }
-            : { instructions: delivery.instructions },
-          estimated_delivery: estimatedDelivery,
-          status: "pending",
-        })
-        .select("id")
-        .single();
-
-      if (insertError) {
-        console.error("Order save failed:", insertError);
-        toast({
-          title: "Could not save order",
-          description: "Please try WhatsApp ordering instead.",
-          variant: "destructive",
-        });
-        setIsProcessing(false);
-        return;
-      }
-
-      const orderId = insertedOrder?.id;
-      const origin = window.location.origin;
-
-      const { data, error } = await supabase.functions.invoke(
-        "create-yoco-checkout",
-        {
-          body: {
-            amount: grandTotal,
-            successUrl: `${origin}/payment/success`,
-            cancelUrl: `${origin}/payment/cancel`,
-            externalId: orderNumber,
-            metadata: {
-              orderNumber,
-              orderId,
-              checkoutId: null,
-            },
-          },
+      if (error || !data?.redirectUrl) {
+        let message = "Could not open the payment page. Please try again or order via WhatsApp.";
+        const ctx = (error as { context?: Response } | null)?.context;
+        if (ctx && typeof ctx.json === "function") {
+          const body = await ctx.json().catch(() => null);
+          if (body?.error) message = body.error;
         }
-      );
-
-      if (error) throw error;
-      if (!data?.checkoutUrl || !data?.id) {
-        throw new Error("No checkout URL returned");
+        throw new Error(message);
       }
 
-      const yocoCheckoutId = data.id as string;
-
-      // Update the order with the Yoco checkout ID so webhooks can match it
-      const { error: updateError } = await supabase
-        .from("orders")
-        .update({ yoco_checkout_id: yocoCheckoutId })
-        .eq("id", orderId);
-
-      if (updateError) {
-        console.error("Failed to update order with checkout ID:", updateError);
-      }
-
-      const orderData = {
-        orderNumber,
-        items: orderItems,
-        delivery,
-        totalPrice,
-        deliveryFee,
-        grandTotal,
-        estimatedDelivery,
-      };
-      localStorage.setItem("pending_order", JSON.stringify(orderData));
-
-      window.location.href = data.checkoutUrl;
-    } catch (err: any) {
+      rememberOrder(data.orderNumber, data.trackingToken);
+      window.location.href = data.redirectUrl;
+    } catch (err) {
       console.error("Payment error:", err);
       toast({
         title: "Payment Error",
-        description:
-          "Could not initiate payment. Please try WhatsApp ordering instead.",
+        description: (err as Error).message,
         variant: "destructive",
       });
-    } finally {
       setIsProcessing(false);
     }
   };
-
 
   const getWhatsAppUrl = () => {
     const itemsList = items
@@ -178,13 +94,6 @@ const CartPage = () => {
         return base;
       })
       .join("\n");
-
-    const deliveryLabels: Record<string, string> = {
-      pickup: "Store Pickup",
-      uber: "Uber Pickup Selected",
-      local: "Local Delivery",
-      aramex: "Aramex Courier",
-    };
 
     let addressBlock = "";
     if (needsAddress) {
@@ -200,7 +109,7 @@ const CartPage = () => {
       ? `\n\n🎉 Discounts:\n${discounts.map((d) => `  − ${d.label}: -R${d.amount}`).join("\n")}`
       : "";
 
-    const message = `🛍️ *New Order — Scent Studio*\n\n👤 Customer: ${delivery.fullName}\n📞 Phone: ${delivery.phone}\n\n📦 Items:\n${itemsList}${discountInfo}\n\n🚀 Delivery: ${deliveryLabels[delivery.option]}${addressBlock}${delivery.instructions ? `\n📝 Instructions: ${delivery.instructions}` : ""}${feeInfo}\n\n💰 *Total: R${grandTotal}*\n\nPlease confirm availability. Thank you!`;
+    const message = `🛍️ *New Order — Scent Studio*\n\n👤 Customer: ${delivery.fullName}\n📞 Phone: ${delivery.phone}\n\n📦 Items:\n${itemsList}${discountInfo}\n\n🚀 Delivery: ${DELIVERY_LABELS[delivery.option]}${addressBlock}${delivery.instructions ? `\n📝 Instructions: ${delivery.instructions}` : ""}${feeInfo}\n\n💰 *Total: R${grandTotal}*\n\nPlease confirm availability. Thank you!`;
 
     return `https://wa.me/27761328213?text=${encodeURIComponent(message)}`;
   };
@@ -365,7 +274,7 @@ const CartPage = () => {
                   {deliveryFee > 0 && (
                     <div className="flex justify-between items-center">
                       <span className="font-sans text-sm text-muted-foreground">
-                        Aramex Delivery
+                        {DELIVERY_LABELS[delivery.option]}
                       </span>
                       <span className="font-sans text-sm text-foreground">
                         R{deliveryFee}

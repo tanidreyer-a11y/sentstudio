@@ -66,9 +66,9 @@ export const blogPosts: BlogPost[] = [
 
       <h3>Honest pricing across the whole range</h3>
       <ul>
-        <li><strong>Standard Collection:</strong> 30ml R100 · 50ml R150 · 100ml R280</li>
-        <li><strong>Premium Collection:</strong> 30ml R130 · 50ml R180 · 100ml R320</li>
-        <li><strong>Ultra-Premium (Baccarat Rouge, Initio Oud, Yara Pink):</strong> 30ml R160 · 50ml R250 · 100ml R490</li>
+        <li><strong>Standard Collection:</strong> 30ml R120 · 50ml R170 · 100ml R290</li>
+        <li><strong>Premium Collection:</strong> 30ml R150 · 50ml R200 · 100ml R330</li>
+        <li><strong>Ultra-Premium (Alchemy 540, Oud for Greatness, Yara Pink):</strong> 30ml R200 · 50ml R270 · 100ml R490</li>
       </ul>
       <p>Compare that to the R3 000–R8 000 you would pay for the originals. Same scent profile, same all-day performance, a fraction of the cost.</p>
 

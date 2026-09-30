@@ -47,7 +47,7 @@ const FeaturedCard = ({ perfume }: { perfume: { id: string; name: string; catego
         {perfume.name}
       </h3>
       <p className="font-sans text-sm tracking-wider text-primary font-medium">
-        From R100
+        From R120
       </p>
     </Link>
   );

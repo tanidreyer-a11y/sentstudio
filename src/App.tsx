@@ -27,6 +27,7 @@ const AdminLeadsPage = lazy(() => import("./pages/AdminLeadsPage"));
 const AdminOrdersPage = lazy(() => import("./pages/AdminOrdersPage"));
 const PaymentSuccessPage = lazy(() => import("./pages/PaymentSuccessPage"));
 const PaymentCancelPage = lazy(() => import("./pages/PaymentCancelPage"));
+const OrderStatusPage = lazy(() => import("./pages/OrderStatusPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 import FindMyScentFab from "./components/FindMyScentFab";
 import ScrollToTop from "./components/ScrollToTop";
@@ -58,6 +59,7 @@ const App = () => (
             <Route path="/reviews" element={<ReviewsPage />} />
             <Route path="/payment/success" element={<PaymentSuccessPage />} />
             <Route path="/payment/cancel" element={<PaymentCancelPage />} />
+            <Route path="/order/:orderNumber" element={<OrderStatusPage />} />
             <Route path="/quiz" element={<QuizPage />} />
             <Route path="/find-my-scent" element={<FindMyScentPage />} />
             <Route path="/exclusive" element={<ExclusivePage />} />

@@ -1,199 +1,39 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { CheckCircle, MessageCircle } from "lucide-react";
+import { Navigate, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
-import { useCart } from "@/contexts/CartContext";
-import { ARAMEX_FEE, POSTNET_FEE } from "@/components/DeliveryForm";
-import type { DeliveryDetails } from "@/components/DeliveryForm";
+import { getRecentOrders, orderPath } from "@/lib/recent-orders";
 
-interface OrderItem {
-  name: string;
-  size: string;
-  quantity: number;
-  price: number;
-  gender: string;
-}
-
-interface PendingOrder {
-  orderNumber?: string;
-  items: OrderItem[];
-  delivery: DeliveryDetails;
-  totalPrice: number;
-  deliveryFee: number;
-  grandTotal: number;
-  estimatedDelivery?: string;
-}
-
-const deliveryLabels: Record<string, string> = {
-  pickup: "Customer Pickup",
-  uber: "Uber Pickup Selected",
-  local: "Local Delivery",
-  aramex: "Aramex Courier",
-  postnet: "PostNet Courier",
-};
-
+// Yoco now returns customers to /order/:number. This route stays for checkouts
+// started before that change: it forwards to the latest order's tracking page.
 const PaymentSuccessPage = () => {
-  const { clearCart } = useCart();
-  const [order, setOrder] = useState<PendingOrder | null>(null);
-  const [whatsAppSent, setWhatsAppSent] = useState(false);
-
-  useEffect(() => {
-    clearCart();
-    const raw = localStorage.getItem("pending_order");
-    if (raw) {
-      try {
-        setOrder(JSON.parse(raw));
-      } catch {}
-      localStorage.removeItem("pending_order");
-    }
-  }, []);
-
-  const getWhatsAppUrl = () => {
-    if (!order) return "#";
-    const itemsList = order.items
-      .map(
-        (i) => `• ${i.name} (${i.size}) x${i.quantity} — R${i.price * i.quantity}`
-      )
-      .join("\n");
-
-    const d = order.delivery;
-    const needsAddress = d.option === "aramex" || d.option === "postnet";
-    const addressBlock = needsAddress
-      ? `\n\n📍 Address:\n${d.streetAddress}\n${d.cityArea}\n${d.postalCode}`
-      : "";
-
-    const feeInfo =
-      (d.option === "aramex" || d.option === "postnet")
-        ? `\n🚚 Delivery Fee: R${d.option === "aramex" ? ARAMEX_FEE : POSTNET_FEE}`
-        : "";
-
-    const orderLine = order.orderNumber ? `\n🧾 Order #: ${order.orderNumber}` : "";
-    const etaLine = order.estimatedDelivery ? `\n⏱ ETA: ${order.estimatedDelivery}` : "";
-    const message = `✅ *Payment Confirmed — Scent Studio*${orderLine}\n\n👤 Customer: ${d.fullName}\n📞 Phone: ${d.phone}\n\n📦 Items:\n${itemsList}\n\n🚀 Delivery: ${deliveryLabels[d.option]}${addressBlock}${d.instructions ? `\n📝 Instructions: ${d.instructions}` : ""}${feeInfo}${etaLine}\n\n💰 *Total Paid: R${order.grandTotal}*\n\nPayment received via Yoco. Please prepare the order. Thank you!`;
-
-    return `https://wa.me/27761328213?text=${encodeURIComponent(message)}`;
-  };
-
-  const handleWhatsAppConfirm = () => {
-    window.open(getWhatsAppUrl(), "_blank");
-    setWhatsAppSent(true);
-  };
+  const latest = getRecentOrders()[0];
+  if (latest) return <Navigate to={`${orderPath(latest)}&paid=1`} replace />;
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="pt-24 pb-20">
+      <main className="pt-24 pb-20">
         <div className="container mx-auto px-6 max-w-2xl text-center">
-          <CheckCircle className="w-20 h-20 text-primary mx-auto mb-8" />
-          <h1 className="font-display text-4xl md:text-5xl font-light text-foreground mb-4">
-            Payment Successful
-          </h1>
-          <div className="w-16 h-px bg-primary mx-auto my-8" />
-          <p className="font-body text-lg text-muted-foreground mb-8">
-            Thank you for your order! We'll prepare your fragrances with care.
+          <h1 className="font-display text-4xl md:text-5xl font-light text-foreground mb-6">Thank you</h1>
+          <p className="font-body text-lg text-muted-foreground mb-10">
+            If your payment went through, Scent Studio has been notified. Message us on WhatsApp with your name if you'd like
+            to confirm your order.
           </p>
-
-          {/* Order summary */}
-          {order && (
-            <div className="bg-card border border-border p-6 mb-8 text-left max-w-md mx-auto">
-              {order.orderNumber && (
-                <div className="mb-4 pb-4 border-b border-border">
-                  <p className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground mb-1">
-                    Order Number
-                  </p>
-                  <p className="font-display text-2xl tracking-[0.15em] text-primary">
-                    {order.orderNumber}
-                  </p>
-                </div>
-              )}
-              <p className="font-sans text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground mb-2">Items</p>
-              <ul className="font-body text-sm text-foreground mb-4 space-y-1">
-                {order.items.map((i, idx) => (
-                  <li key={idx} className="flex justify-between gap-3">
-                    <span>• {i.name} ({i.size}) ×{i.quantity}</span>
-                    <span className="text-muted-foreground">R{i.price * i.quantity}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex justify-between font-sans text-sm pt-3 border-t border-border">
-                <span className="text-muted-foreground">Delivery</span>
-                <span className="text-foreground capitalize">{deliveryLabels[order.delivery.option] || order.delivery.option}</span>
-              </div>
-              {order.estimatedDelivery && (
-                <div className="flex justify-between font-sans text-sm mt-2">
-                  <span className="text-muted-foreground">Estimated</span>
-                  <span className="text-foreground">{order.estimatedDelivery}</span>
-                </div>
-              )}
-              <div className="flex justify-between font-sans text-base mt-3 pt-3 border-t border-border">
-                <span className="text-muted-foreground">Total Paid</span>
-                <span className="font-display text-xl text-primary">R{order.grandTotal}</span>
-              </div>
-            </div>
-          )}
-
-          {/* Track via WhatsApp banner */}
-          {order && (
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href={`https://wa.me/27761328213?text=${encodeURIComponent(
-                `Hi Scent Studio, I'd like to track my order ${order.orderNumber ?? ""} (${order.delivery.fullName}).`
-              )}`}
+              href="https://wa.me/27761328213"
               target="_blank"
               rel="noopener noreferrer"
-              className="block bg-[#25D366]/10 border border-[#25D366]/40 p-4 mb-8 max-w-md mx-auto hover:bg-[#25D366]/20 transition-colors"
+              className="px-10 py-4 bg-[#25D366] text-white font-sans text-sm tracking-[0.2em] uppercase"
             >
-              <div className="flex items-center justify-center gap-3">
-                <MessageCircle className="w-5 h-5 text-[#25D366]" />
-                <div className="text-left">
-                  <p className="font-sans text-sm text-foreground font-medium">Track your order on WhatsApp</p>
-                  <p className="font-sans text-xs text-muted-foreground">Tap to message us directly</p>
-                </div>
-              </div>
+              WhatsApp us
             </a>
-          )}
-
-          {/* WhatsApp confirmation */}
-          {order && !whatsAppSent && (
-            <div className="bg-card border border-border p-6 mb-8 max-w-md mx-auto">
-              <p className="font-sans text-sm text-muted-foreground mb-4">
-                Please tap below to send your order confirmation via WhatsApp so we can
-                start preparing it right away.
-              </p>
-              <button
-                onClick={handleWhatsAppConfirm}
-                className="w-full py-4 bg-[#25D366] text-white font-sans text-sm tracking-[0.2em] uppercase hover:bg-[#20bd5a] transition-colors duration-300 flex items-center justify-center gap-3"
-              >
-                <MessageCircle size={18} />
-                Confirm via WhatsApp
-              </button>
-            </div>
-          )}
-
-          {whatsAppSent && (
-            <div className="bg-card border border-primary/30 p-4 mb-8 max-w-md mx-auto">
-              <p className="font-sans text-sm text-primary">
-                ✓ WhatsApp confirmation sent! We'll get back to you shortly.
-              </p>
-            </div>
-          )}
-
-          {!order && (
-            <div className="bg-card border border-border p-4 mb-8 max-w-md mx-auto">
-              <p className="font-sans text-sm text-muted-foreground">
-                Order details unavailable. Please contact us on WhatsApp to confirm.
-              </p>
-            </div>
-          )}
-
-          <Link
-            to="/catalog/women"
-            className="inline-block px-10 py-4 bg-primary text-primary-foreground font-sans text-sm tracking-[0.2em] uppercase hover:bg-gold-light transition-colors duration-300"
-          >
-            Continue Shopping
-          </Link>
+            <Link to="/" className="px-10 py-4 border border-primary text-primary font-sans text-sm tracking-[0.2em] uppercase">
+              Home
+            </Link>
+          </div>
         </div>
-      </div>
+      </main>
       <SiteFooter />
     </div>
   );

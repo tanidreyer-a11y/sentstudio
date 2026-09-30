@@ -21,7 +21,7 @@ const pillars = [
   {
     icon: Gem,
     title: "Everyday Luxury",
-    text: "Designer-inspired scents from R100 — no need to save for special occasions.",
+    text: "Designer-inspired scents from R120 — no need to save for special occasions.",
   },
   {
     icon: Shield,
