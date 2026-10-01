@@ -13,6 +13,7 @@ import DeliveryForm, {
   DELIVERY_LABELS,
 } from "@/components/DeliveryForm";
 import { rememberOrder } from "@/lib/recent-orders";
+import { ONLINE_PAYMENTS_ENABLED, PAYMENTS_PAUSED_NOTE, orderReference, whatsAppLink } from "@/lib/ordering";
 
 const CartPage = () => {
   const { items, removeFromCart, updateQuantity, clearCart, totalPrice, discounts, totalDiscount, finalPrice, promoCode, setPromoCode } =
@@ -84,7 +85,7 @@ const CartPage = () => {
     }
   };
 
-  const getWhatsAppUrl = () => {
+  const getWhatsAppUrl = (ref: string) => {
     const itemsList = items
       .map((i) => {
         const base = `• ${i.name} (${i.size}) x${i.quantity} — R${i.price * i.quantity}`;
@@ -109,9 +110,10 @@ const CartPage = () => {
       ? `\n\n🎉 Discounts:\n${discounts.map((d) => `  − ${d.label}: -R${d.amount}`).join("\n")}`
       : "";
 
-    const message = `🛍️ *New Order — Scent Studio*\n\n👤 Customer: ${delivery.fullName}\n📞 Phone: ${delivery.phone}\n\n📦 Items:\n${itemsList}${discountInfo}\n\n🚀 Delivery: ${DELIVERY_LABELS[delivery.option]}${addressBlock}${delivery.instructions ? `\n📝 Instructions: ${delivery.instructions}` : ""}${feeInfo}\n\n💰 *Total: R${grandTotal}*\n\nPlease confirm availability. Thank you!`;
+    const emailLine = delivery.email.trim() ? `\n✉️ Email: ${delivery.email.trim()}` : "";
+    const message = `🛍️ *New Order — Scent Studio*\n🧾 Ref: ${ref}\n\n👤 Customer: ${delivery.fullName}\n📞 Phone: ${delivery.phone}${emailLine}\n\n📦 Items:\n${itemsList}${discountInfo}\n\n🚀 Delivery: ${DELIVERY_LABELS[delivery.option]}${addressBlock}${delivery.instructions ? `\n📝 Instructions: ${delivery.instructions}` : ""}${feeInfo}\n\n💰 *Total: R${grandTotal}*\n\nPlease confirm availability and how I can pay. Thank you!`;
 
-    return `https://wa.me/27761328213?text=${encodeURIComponent(message)}`;
+    return whatsAppLink(message);
   };
 
   return (
@@ -291,39 +293,56 @@ const CartPage = () => {
                   </div>
                 </div>
 
-                <button
-                  onClick={handlePayOnline}
-                  disabled={!isFormValid || isProcessing}
-                  className="w-full py-4 bg-primary text-primary-foreground font-sans text-sm tracking-[0.2em] uppercase hover:bg-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
-                >
-                  {isProcessing ? (
-                    <>
-                      <Loader2 size={18} className="animate-spin" />
-                      Processing…
-                    </>
-                  ) : (
-                    `Pay Online — R${grandTotal}`
-                  )}
-                </button>
+                {ONLINE_PAYMENTS_ENABLED ? (
+                  <>
+                    <button
+                      onClick={handlePayOnline}
+                      disabled={!isFormValid || isProcessing}
+                      className="w-full py-4 bg-primary text-primary-foreground font-sans text-sm tracking-[0.2em] uppercase hover:bg-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                    >
+                      {isProcessing ? (
+                        <>
+                          <Loader2 size={18} className="animate-spin" />
+                          Processing…
+                        </>
+                      ) : (
+                        `Pay Online — R${grandTotal}`
+                      )}
+                    </button>
 
-                <div className="relative flex items-center gap-4">
-                  <div className="flex-1 h-px bg-border" />
-                  <span className="font-sans text-xs tracking-wider text-muted-foreground uppercase">
-                    or
-                  </span>
-                  <div className="flex-1 h-px bg-border" />
-                </div>
+                    <div className="relative flex items-center gap-4">
+                      <div className="flex-1 h-px bg-border" />
+                      <span className="font-sans text-xs tracking-wider text-muted-foreground uppercase">
+                        or
+                      </span>
+                      <div className="flex-1 h-px bg-border" />
+                    </div>
+                  </>
+                ) : (
+                  <div role="note" className="border border-primary/40 bg-primary/5 p-4">
+                    <p className="font-sans text-sm text-foreground leading-relaxed">{PAYMENTS_PAUSED_NOTE}</p>
+                  </div>
+                )}
 
                 <button
                   onClick={() => {
                     if (!isFormValid) return;
-                    window.open(getWhatsAppUrl(), "_blank");
+                    window.open(getWhatsAppUrl(orderReference()), "_blank");
                   }}
                   disabled={!isFormValid}
-                  className="w-full py-4 border border-primary text-primary font-sans text-sm tracking-[0.2em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={`w-full py-4 font-sans text-sm tracking-[0.2em] uppercase transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
+                    ONLINE_PAYMENTS_ENABLED
+                      ? "border border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                      : "bg-primary text-primary-foreground hover:bg-gold-light"
+                  }`}
                 >
-                  Order via WhatsApp
+                  {ONLINE_PAYMENTS_ENABLED ? "Order via WhatsApp" : `Send Order on WhatsApp — R${grandTotal}`}
                 </button>
+                {!isFormValid && (
+                  <p className="font-sans text-xs text-muted-foreground text-center -mt-3">
+                    Enter your name and phone number{needsAddress ? " and delivery address" : ""} above to continue.
+                  </p>
+                )}
 
                 <button
                   onClick={clearCart}

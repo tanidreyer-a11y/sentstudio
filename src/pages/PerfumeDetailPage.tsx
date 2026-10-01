@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, MessageCircle } from "lucide-react";
+import { ONLINE_PAYMENTS_ENABLED, orderReference, whatsAppLink } from "@/lib/ordering";
 import { useState } from "react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
@@ -161,6 +162,25 @@ const PerfumeDetailPage = () => {
               >
                 Add to Cart — R{perfume.prices[selectedSize]}
               </button>
+
+              {!ONLINE_PAYMENTS_ENABLED && (
+                <>
+                  <a
+                    href={whatsAppLink(
+                      `Hi Scent Studio! 🌟\n🧾 Ref: ${orderReference()}\n\nI'd like to order:\n• ${perfume.name} (${selectedSize}) — R${perfume.prices[selectedSize]}\n\nPlease confirm availability, payment and delivery. Thank you!`,
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 w-full inline-flex items-center justify-center gap-3 py-4 border border-[#25D366] text-foreground font-sans text-sm tracking-[0.2em] uppercase hover:bg-[#25D366]/10 transition-colors duration-300"
+                  >
+                    <MessageCircle size={18} className="text-[#25D366]" />
+                    Order on WhatsApp
+                  </a>
+                  <p className="mt-3 font-sans text-xs text-muted-foreground leading-relaxed">
+                    Online card payments are temporarily unavailable. All orders are placed on WhatsApp for now.
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>
