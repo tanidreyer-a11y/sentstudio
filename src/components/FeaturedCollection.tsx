@@ -5,16 +5,16 @@ import { Grid3X3, Rows3 } from "lucide-react";
 
 const featuredMen = [
   { id: "michael-kors", name: "Michael Kors", category: "Luxury" as const, gender: "men" as const },
-  { id: "creed-aventus", name: "Creed Aventus", category: "Musky" as const, gender: "men" as const },
-  { id: "calvin-klein-ck1", name: "Calvin Klein CK1", category: "Fresh" as const, gender: "men" as const },
-  { id: "paco-rabanne-one-million", name: "Paco Rabanne One Million", category: "Sweet" as const, gender: "men" as const },
+  { id: "aventus", name: "Aventus", category: "Musky" as const, gender: "men" as const },
+  { id: "ck-one", name: "CK One", category: "Fresh" as const, gender: "men" as const },
+  { id: "one-million", name: "One Million", category: "Sweet" as const, gender: "men" as const },
 ];
 
 const featuredWomen = [
-  { id: "chanel-no5", name: "Chanel No.5", category: "Luxury" as const, gender: "women" as const },
-  { id: "narciso-rodriguez-for-her", name: "Narciso Rodriguez For Her", category: "Musky" as const, gender: "women" as const },
-  { id: "elizabeth-arden-green-tea", name: "Elizabeth Arden Green Tea", category: "Fresh" as const, gender: "women" as const },
-  { id: "paco-rabanne-lady-million", name: "Paco Rabanne Lady Million", category: "Sweet" as const, gender: "women" as const },
+  { id: "chanel-no-5", name: "Chanel No.5", category: "Luxury" as const, gender: "women" as const },
+  { id: "narciso-for-her", name: "Narciso For Her", category: "Musky" as const, gender: "women" as const },
+  { id: "light-blue-femme", name: "Light Blue Femme", category: "Fresh" as const, gender: "women" as const },
+  { id: "lady-million", name: "Lady Million", category: "Sweet" as const, gender: "women" as const },
 ];
 
 const FeaturedCard = ({ perfume }: { perfume: { id: string; name: string; category: string; gender: "men" | "women" } }) => {

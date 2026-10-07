@@ -1,3 +1,5 @@
+import Seo from "@/components/Seo";
+import { staticMeta } from "@/lib/seo";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Send, Sparkles, ShoppingCart } from "lucide-react";
@@ -496,6 +498,7 @@ const FindMyScentPage = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
+      <Seo meta={staticMeta("/find-my-scent")} />
       <div className="flex-1 pt-24 pb-6 flex flex-col">
         <div className="container mx-auto px-4 flex-1 flex flex-col max-w-3xl">
           {/* Title */}

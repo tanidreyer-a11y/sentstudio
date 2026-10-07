@@ -1,3 +1,5 @@
+import Seo from "@/components/Seo";
+import { staticMeta } from "@/lib/seo";
 import Header from "@/components/Header";
 import exclusiveBg from "@/assets/exclusive-bg.png";
 import HeroSection from "@/components/HeroSection";
@@ -50,6 +52,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <Seo meta={staticMeta("/")} />
       <HeroSection />
 
       {/* Legal Disclaimer Banner */}

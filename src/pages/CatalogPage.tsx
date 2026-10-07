@@ -6,6 +6,8 @@ import PerfumeCard from "@/components/PerfumeCard";
 import { getPerfumesByGender } from "@/data/perfumes";
 import type { Perfume } from "@/data/perfumes";
 import { Grid3X3, Rows3 } from "lucide-react";
+import Seo from "@/components/Seo";
+import { staticMeta } from "@/lib/seo";
 
 const categories = ["All", "Luxury", "Fresh", "Musky", "Sweet"] as const;
 
@@ -25,6 +27,7 @@ const CatalogPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <Seo meta={staticMeta(`/catalog/${validGender}`)} />
       <div className="pt-24 pb-20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Instagram } from "lucide-react";
+import { DISCLAIMER } from "@/lib/seo";
 
 const SiteFooter = () => {
   return (
@@ -83,6 +84,9 @@ const SiteFooter = () => {
         </div>
 
         <div className="border-t border-border pt-8 text-center">
+          <p className="font-sans text-[0.7rem] leading-relaxed text-muted-foreground/80 max-w-3xl mx-auto mb-4">
+            {DISCLAIMER}
+          </p>
           <p className="font-sans text-xs tracking-wider text-muted-foreground">
             © 2026 Scent Studio. All rights reserved.
           </p>

@@ -15,7 +15,7 @@ interface Post {
   published_at: string | null; updated_at: string; reading_time: string | null;
 }
 
-const BASE = "https://scentstudiosa.co.za";
+const BASE = "https://www.scentstudiosa.co.za";
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();

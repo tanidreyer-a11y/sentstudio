@@ -1,3 +1,5 @@
+import Seo from "@/components/Seo";
+import { staticMeta } from "@/lib/seo";
 import { MessageCircle, Mail, MapPin, Instagram } from "lucide-react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
@@ -6,6 +8,7 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <Seo meta={staticMeta("/contact")} />
       <div className="pt-24 pb-20">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-16">

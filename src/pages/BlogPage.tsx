@@ -30,10 +30,10 @@ const BlogPage = () => {
       <Helmet>
         <title>The Journal | Scent Studio Fragrance Blog</title>
         <meta name="description" content="Fragrance guides, scent advice and perfume tips from Scent Studio — Johannesburg's home of affordable, long-lasting oil-based inspired perfumes." />
-        <link rel="canonical" href="https://scentstudiosa.co.za/blog" />
+        <link rel="canonical" href="https://www.scentstudiosa.co.za/blog" />
         <meta property="og:title" content="The Journal | Scent Studio" />
         <meta property="og:description" content="Fragrance guides from South Africa's leading inspired-perfume boutique." />
-        <meta property="og:url" content="https://scentstudiosa.co.za/blog" />
+        <meta property="og:url" content="https://www.scentstudiosa.co.za/blog" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>

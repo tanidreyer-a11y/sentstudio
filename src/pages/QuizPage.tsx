@@ -1,3 +1,5 @@
+import Seo from "@/components/Seo";
+import { staticMeta } from "@/lib/seo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
@@ -69,6 +71,7 @@ const QuizPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <Seo meta={staticMeta("/quiz")} />
       <div className="pt-24 pb-20">
         <div className="container mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center mb-16">

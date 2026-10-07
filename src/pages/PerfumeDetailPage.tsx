@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 import { ONLINE_PAYMENTS_ENABLED, orderReference, whatsAppLink } from "@/lib/ordering";
+import Seo from "@/components/Seo";
+import { DISCLAIMER, perfumeJsonLd, perfumeMeta } from "@/lib/seo";
 import { useState } from "react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
@@ -43,6 +45,7 @@ const PerfumeDetailPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <Seo meta={perfumeMeta(perfume)} jsonLd={perfumeJsonLd(perfume)} />
       <div className="pt-24 pb-20">
         <div className="container mx-auto px-6">
           <button
@@ -181,6 +184,10 @@ const PerfumeDetailPage = () => {
                   </p>
                 </>
               )}
+
+              <p className="mt-6 pt-6 border-t border-border font-sans text-[0.7rem] text-muted-foreground/80 leading-relaxed">
+                {DISCLAIMER}
+              </p>
             </div>
           </div>
         </div>
