@@ -4,6 +4,8 @@
 //   of every page so Google sees the right title without running any JavaScript.
 // Keep this file free of React and asset imports so the build script can load it.
 import type { Perfume } from "@/data/perfumes";
+import { PERFUME_HOUSES, designerName } from "@/data/perfume-houses";
+import type { BlogPost } from "@/lib/blog-format";
 
 export const SITE_URL = "https://www.scentstudiosa.co.za";
 export const SITE_NAME = "Scent Studio";
@@ -97,33 +99,77 @@ const startingPrice = (p: Perfume) =>
 
 const truncate = (s: string, max: number) => (s.length <= max ? s : `${s.slice(0, max - 1).replace(/\s+\S*$/, "")}…`);
 
+export const WHATSAPP_DISPLAY = "076 132 8213";
+export const DELIVERY_FEES = { aramex: 99, postnet: 109 };
+
 export function perfumeMeta(p: Perfume): PageMeta {
   const forWho = p.gender === "men" ? "Men's" : "Women's";
   const from = startingPrice(p);
+  const designer = designerName(p);
   const notes = [...p.notes.top, ...p.notes.middle].slice(0, 2).join(", ").toLowerCase();
+  const long = `Inspired by ${designer}: ${forWho} Oil Perfume from R${from} | Scent Studio`;
   return {
     path: `/perfume/${p.id}`,
-    // Google shows ~60 characters; long perfume names get the short form.
-    title:
-      p.name.length <= 22
-        ? `Inspired by ${p.name}: ${forWho} Oil Perfume from R${from} | Scent Studio`
-        : `Inspired by ${p.name} | Scent Studio`,
+    // Google shows ~60-70 characters; long names drop the middle part.
+    title: long.length <= 72 ? long : `Inspired by ${designer} | Scent Studio`,
     description: truncate(
-      `Long-lasting oil-based ${forWho.toLowerCase()} perfume inspired by ${p.name}${notes ? `, with ${notes}` : ""}. From R${from} (30ml). Order on WhatsApp or collect in Roodepoort.`,
+      `Long-lasting oil-based ${forWho.toLowerCase()} perfume inspired by ${designer}${notes ? `, with ${notes}` : ""}. From R${from} (30ml). Order on WhatsApp or collect in Roodepoort.`,
       160,
     ),
-    heading: `Inspired by ${p.name}`,
+    heading: `Inspired by ${designer}`,
   };
 }
+
+const priceLine = (p: Perfume) =>
+  (["30ml", "50ml", "100ml"] as const)
+    .filter((s) => typeof p.prices[s] === "number")
+    .map((s) => `R${p.prices[s]} for ${s}`)
+    .join(", ");
+
+/** Questions shown on every product page and marked up as FAQPage. Facts only, from the catalogue. */
+export function perfumeFaq(p: Perfume) {
+  const designer = designerName(p);
+  const house = PERFUME_HOUSES[p.id];
+  const notes = (list: string[]) => list.join(", ").toLowerCase();
+  return [
+    {
+      q: `Is this the original ${designer}?`,
+      a: `No. It is Scent Studio's own oil-based fragrance inspired by the scent profile of ${designer}. We are not affiliated with or endorsed by ${house ?? "the original brand"}.`,
+    },
+    {
+      q: `How much does the ${designer} inspired perfume cost?`,
+      a: `${priceLine(p)}.`,
+    },
+    {
+      q: `What does it smell like?`,
+      a: `Top notes: ${notes(p.notes.top)}. Heart: ${notes(p.notes.middle)}. Base: ${notes(p.notes.base)}.`,
+    },
+    {
+      q: `Why choose an oil-based perfume?`,
+      a: `Oil-based perfumes contain no alcohol, so they sit close to the skin, don't dry it out and usually last longer than alcohol-based sprays, especially in hot weather.`,
+    },
+    {
+      q: `How do I order?`,
+      a: `Message Scent Studio on WhatsApp (${WHATSAPP_DISPLAY}) or visit us at Flora Shopping Centre, Roodepoort. We deliver nationwide by Aramex (R${DELIVERY_FEES.aramex}) or PostNet (R${DELIVERY_FEES.postnet}).`,
+    },
+  ];
+}
+
+const faqPage = (faq: { q: string; a: string }[]) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+});
 
 export function perfumeJsonLd(p: Perfume, imageUrl?: string) {
   const prices = Object.values(p.prices).filter((v): v is number => typeof v === "number");
   const url = `${SITE_URL}/perfume/${p.id}`;
+  const designer = designerName(p);
   return [
     {
       "@context": "https://schema.org",
       "@type": "Product",
-      name: `Scent Studio: inspired by ${p.name}`,
+      name: `Scent Studio: inspired by ${designer}`,
       description: p.description,
       category: p.gender === "men" ? "Men's fragrance" : "Women's fragrance",
       brand: { "@type": "Brand", name: SITE_NAME },
@@ -144,14 +190,51 @@ export function perfumeJsonLd(p: Perfume, imageUrl?: string) {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: p.gender === "men" ? "Men" : "Women",
-          item: `${SITE_URL}/catalog/${p.gender}`,
-        },
-        { "@type": "ListItem", position: 3, name: `Inspired by ${p.name}`, item: url },
+        { "@type": "ListItem", position: 2, name: p.gender === "men" ? "Men" : "Women", item: `${SITE_URL}/catalog/${p.gender}` },
+        { "@type": "ListItem", position: 3, name: `Inspired by ${designer}`, item: url },
+      ],
+    },
+    faqPage(perfumeFaq(p)),
+  ];
+}
+
+export function blogMeta(post: BlogPost): PageMeta {
+  return {
+    path: `/blog/${post.slug}`,
+    title: post.metaTitle ?? `${post.title} | Scent Studio`,
+    description: post.metaDescription ?? post.excerpt,
+    heading: post.title,
+  };
+}
+
+export function blogJsonLd(post: BlogPost, imageUrl?: string) {
+  const url = `${SITE_URL}/blog/${post.slug}`;
+  const docs: object[] = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.metaDescription ?? post.excerpt,
+      datePublished: post.publishedAt,
+      dateModified: post.updatedAt ?? post.publishedAt,
+      author: { "@type": "Organization", name: post.author, url: SITE_URL },
+      publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: `${SITE_URL}/favicon.png` } },
+      mainEntityOfPage: url,
+      ...(imageUrl ? { image: imageUrl } : {}),
+      ...(post.keywords.length ? { keywords: post.keywords.join(", ") } : {}),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+        { "@type": "ListItem", position: 2, name: "Journal", item: `${SITE_URL}/blog` },
+        { "@type": "ListItem", position: 3, name: post.title, item: url },
       ],
     },
   ];
+  if (post.faq.length) docs.push(faqPage(post.faq));
+  return docs;
 }
+
+export { designerName };

@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 import { ONLINE_PAYMENTS_ENABLED, orderReference, whatsAppLink } from "@/lib/ordering";
 import Seo from "@/components/Seo";
-import { DISCLAIMER, perfumeJsonLd, perfumeMeta } from "@/lib/seo";
+import { DISCLAIMER, designerName, perfumeFaq, perfumeJsonLd, perfumeMeta } from "@/lib/seo";
 import { useState } from "react";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
@@ -90,7 +90,7 @@ const PerfumeDetailPage = () => {
               </div>
               <p className="font-sans text-xs tracking-wider text-muted-foreground/70 uppercase mb-1">Inspired by</p>
               <h1 className="font-display text-4xl md:text-5xl font-light text-foreground mb-4">
-                {perfume.name}
+                {designerName(perfume)}
               </h1>
               <p className="font-body text-lg text-muted-foreground leading-relaxed mb-8">
                 {perfume.description}
@@ -184,6 +184,21 @@ const PerfumeDetailPage = () => {
                   </p>
                 </>
               )}
+
+              <section className="mt-10" aria-labelledby="perfume-faq">
+                <h2 id="perfume-faq" className="font-display text-2xl font-light text-foreground mb-4">
+                  Questions
+                </h2>
+                {perfumeFaq(perfume).map((f) => (
+                  <details key={f.q} className="group border-b border-border py-4">
+                    <summary className="cursor-pointer list-none font-sans text-sm text-foreground flex justify-between gap-4">
+                      {f.q}
+                      <span aria-hidden className="text-primary transition-transform duration-200 group-open:rotate-45">+</span>
+                    </summary>
+                    <p className="mt-3 font-body text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+                  </details>
+                ))}
+              </section>
 
               <p className="mt-6 pt-6 border-t border-border font-sans text-[0.7rem] text-muted-foreground/80 leading-relaxed">
                 {DISCLAIMER}

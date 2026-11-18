@@ -1,29 +1,11 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import SiteFooter from "@/components/SiteFooter";
-import { supabase } from "@/integrations/supabase/client";
-
-interface PostRow {
-  slug: string; title: string; excerpt: string;
-  cover_image: string | null; cover_alt: string | null;
-  published_at: string | null; reading_time: string | null;
-}
+import { getPublishedPosts } from "@/lib/blog";
 
 const BlogPage = () => {
-  const [posts, setPosts] = useState<PostRow[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    supabase
-      .from("blog_posts")
-      .select("slug, title, excerpt, cover_image, cover_alt, published_at, reading_time")
-      .eq("status", "published")
-      .lte("published_at", new Date().toISOString())
-      .order("published_at", { ascending: false })
-      .then(({ data }) => { setPosts(data ?? []); setLoading(false); });
-  }, []);
+  const posts = getPublishedPosts();
 
   return (
     <div className="min-h-screen bg-background">
@@ -47,28 +29,26 @@ const BlogPage = () => {
           </p>
         </header>
 
-        {loading ? (
-          <p className="text-center text-muted-foreground">Loading…</p>
-        ) : posts.length === 0 ? (
+        {posts.length === 0 ? (
           <p className="text-center text-muted-foreground">No posts yet. Check back soon.</p>
         ) : (
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-2">
           {posts.map((post) => (
             <article key={post.slug} className="group">
               <Link to={`/blog/${post.slug}`} className="block">
-                {post.cover_image && (
+                {post.cover && (
                   <div className="mb-5 overflow-hidden border border-border">
                     <img
-                      src={post.cover_image}
-                      alt={post.cover_alt ?? post.title}
+                      src={post.cover}
+                      alt={post.coverAlt ?? post.title}
                       loading="lazy"
                       className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
                 )}
                 <p className="mb-2 font-sans text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground">
-                  {post.published_at && new Date(post.published_at).toLocaleDateString("en-ZA", { year: "numeric", month: "long", day: "numeric" })}
-                  {post.reading_time ? ` · ${post.reading_time}` : ""}
+                  {new Date(`${post.publishedAt}T12:00:00`).toLocaleDateString("en-ZA", { year: "numeric", month: "long", day: "numeric" })}
+                  {post.readingTime ? ` · ${post.readingTime}` : ""}
                 </p>
                 <h2 className="font-display text-2xl font-light text-foreground transition-colors group-hover:text-primary">
                   {post.title}

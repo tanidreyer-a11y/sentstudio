@@ -15,7 +15,7 @@ const tmp = join(root, "node_modules", ".seo-prerender");
 // 1. Load the catalogue + SEO rules straight from the app's TypeScript sources.
 await build({
   stdin: {
-    contents: `export { perfumes } from "@/data/perfumes"; export * from "@/lib/seo";`,
+    contents: `export { perfumes } from "@/data/perfumes"; export * from "@/lib/seo"; export { parsePost, isPublished, sortNewestFirst } from "@/lib/blog-format";`,
     resolveDir: root,
     loader: "ts",
   },
@@ -27,22 +27,15 @@ await build({
   logLevel: "warning",
 });
 const seo = await import(pathToFileURL(join(tmp, "seo.mjs")).href);
-const { perfumes, SITE_URL, STATIC_PAGES, perfumeMeta, perfumeJsonLd } = seo;
+const { perfumes, SITE_URL, STATIC_PAGES, perfumeMeta, perfumeJsonLd, blogMeta, blogJsonLd, designerName, DISCLAIMER } = seo;
 
-// 2. Published blog posts (public read). The build still succeeds if this fails.
-const env = await readFile(join(root, ".env"), "utf8").catch(() => "");
-const envVar = (k) => process.env[k] ?? env.match(new RegExp(`^${k}="?([^"\\r\\n]+)`, "m"))?.[1];
-let posts = [];
-try {
-  const res = await fetch(
-    `${envVar("VITE_SUPABASE_URL")}/rest/v1/blog_posts?select=slug,title,excerpt,meta_title,meta_description,cover_image,published_at,updated_at&status=eq.published&published_at=lte.${new Date().toISOString()}&order=published_at.desc`,
-    { headers: { apikey: envVar("VITE_SUPABASE_PUBLISHABLE_KEY") } },
-  );
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  posts = await res.json();
-} catch (e) {
-  console.warn(`[seo] blog posts not loaded, blog pages keep the default tags: ${e.message}`);
-}
+// 2. Published blog posts from content/blog/*.md (a bad post fails the build loudly).
+const blogDir = join(root, "content", "blog");
+const blogFiles = (await readdir(blogDir).catch(() => [])).filter((f) => f.endsWith(".md"));
+const allPosts = seo.sortNewestFirst(
+  await Promise.all(blogFiles.map(async (f) => seo.parsePost(f.replace(/\.md$/, ""), await readFile(join(blogDir, f), "utf8")))),
+);
+const published = allPosts.filter((p) => seo.isPublished(p));
 
 // 3. Absolute URLs for the per-category product images Vite fingerprinted.
 const assets = await readdir(join(dist, "assets"));
@@ -120,37 +113,58 @@ for (const p of perfumes) {
   sitemap.push({ loc: meta.path, lastmod: today, priority: "0.8" });
 }
 
-for (const post of posts) {
-  const path = `/blog/${post.slug}`;
-  const image = post.cover_image ? (post.cover_image.startsWith("http") ? post.cover_image : `${SITE_URL}${post.cover_image}`) : undefined;
-  const description = post.meta_description ?? post.excerpt ?? "";
-  await writePage(
-    path,
-    renderPage({
-      title: post.meta_title ?? `${post.title} | Scent Studio`,
-      description,
-      path,
-      heading: post.title,
-      image,
-      type: "article",
-      jsonLd: [
-        {
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          headline: post.title,
-          description,
-          datePublished: post.published_at,
-          dateModified: post.updated_at,
-          author: { "@type": "Organization", name: "Scent Studio" },
-          publisher: { "@type": "Organization", name: "Scent Studio", logo: { "@type": "ImageObject", url: `${SITE_URL}/favicon.png` } },
-          mainEntityOfPage: `${SITE_URL}${path}`,
-          ...(image ? { image } : {}),
-        },
-      ],
-    }),
-  );
-  sitemap.push({ loc: path, lastmod: (post.updated_at ?? post.published_at ?? today).slice(0, 10), priority: "0.7" });
+for (const post of published) {
+  const meta = blogMeta(post);
+  const image = post.cover ? (post.cover.startsWith("http") ? post.cover : `${SITE_URL}${post.cover}`) : undefined;
+  await writePage(meta.path, renderPage({ ...meta, image, type: "article", jsonLd: blogJsonLd(post, image) }));
+  sitemap.push({ loc: meta.path, lastmod: post.updatedAt ?? post.publishedAt, priority: "0.7" });
 }
+
+// 4b. Files for AI assistants (ChatGPT, Perplexity, Claude): a site summary and plain-text prices.
+const tiers = [
+  ["Standard", 120, 170, 290],
+  ["Premium", 150, 200, 330],
+  ["Ultra Premium", 200, 270, 490],
+];
+const tierOf = (p) => tiers.find((t) => t[1] === p.prices["30ml"])?.[0] ?? "Other";
+const productLine = (p) =>
+  `- [Inspired by ${designerName(p)}](${SITE_URL}/perfume/${p.id}): ${["30ml", "50ml", "100ml"].filter((k) => p.prices[k]).map((k) => `${k} R${p.prices[k]}`).join(", ")}`;
+const llms = `# Scent Studio
+
+> Oil-based, alcohol-free perfumes inspired by well-known designer fragrances, made affordable for South Africa. Store at Flora Shopping Centre, Roodepoort (Johannesburg). Orders on WhatsApp 076 132 8213; nationwide delivery by Aramex (R99) or PostNet (R109). Prices from R120 for 30ml.
+
+${DISCLAIMER}
+
+## Shop
+- [Men's perfumes](${SITE_URL}/catalog/men): ${perfumes.filter((p) => p.gender === "men").length} men's fragrances
+- [Women's perfumes](${SITE_URL}/catalog/women): ${perfumes.filter((p) => p.gender === "women").length} women's fragrances
+- [Prices](${SITE_URL}/pricing.md): every product and size in plain text
+- [Find My Scent](${SITE_URL}/find-my-scent): fragrance matcher
+
+## Guides
+${published.map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug}): ${p.excerpt}`).join("\n")}
+
+## About
+- [About](${SITE_URL}/about)
+- [Contact and store location](${SITE_URL}/contact)
+`;
+await writeFile(join(dist, "llms.txt"), llms);
+
+const pricing = `# Scent Studio prices (South African rand, ${today})
+
+All fragrances are oil-based and inspired by designer scents. Order on WhatsApp 076 132 8213.
+
+| Tier | 30ml | 50ml | 100ml |
+|---|---|---|---|
+${tiers.map((t) => `| ${t[0]} | R${t[1]} | R${t[2]} | R${t[3]} |`).join("\n")}
+
+Delivery: store pickup free (Flora Shopping Centre, Roodepoort); Aramex R99; PostNet R109.
+
+${tiers
+  .map((t) => `## ${t[0]}\n${perfumes.filter((p) => tierOf(p) === t[0]).map(productLine).join("\n")}`)
+  .join("\n\n")}
+${perfumes.some((p) => tierOf(p) === "Other") ? `\n## Other\n${perfumes.filter((p) => tierOf(p) === "Other").map(productLine).join("\n")}\n` : ""}`;
+await writeFile(join(dist, "pricing.md"), pricing);
 
 // 5. sitemap.xml
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -163,4 +177,4 @@ ${sitemap
 await writeFile(join(dist, "sitemap.xml"), xml);
 await rm(tmp, { recursive: true, force: true });
 
-console.log(`[seo] pre-rendered ${STATIC_PAGES.length} pages, ${perfumes.length} perfumes, ${posts.length} blog posts; sitemap has ${sitemap.length} URLs`);
+console.log(`[seo] pre-rendered ${STATIC_PAGES.length} pages, ${perfumes.length} perfumes, ${published.length} blog posts (${allPosts.length - published.length} scheduled/draft); sitemap has ${sitemap.length} URLs; wrote llms.txt + pricing.md`);
