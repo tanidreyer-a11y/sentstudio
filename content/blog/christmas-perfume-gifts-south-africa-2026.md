@@ -31,8 +31,8 @@ For comparison, a 100ml bottle of a designer scent such as Dior Sauvage is liste
 
 Choose a fresh, easy scent if you are not sure what he wears. Fresh fragrances suit most people, work in the South African summer heat, and rarely offend.
 
-- **[Inspired by Dior Sauvage](/perfume/sauvage)**: a crisp blend of lemon, bergamot and mint, with lavender and green tea in the middle and cedar and white musk underneath. It is the safest gift on the list. Read our full [Sauvage review](/blog/inspired-by-dior-sauvage-south-africa-review).
-- **[Inspired by Versace Dylan Blue](/perfume/dylan-blue)**: the same fresh family, a good pick for a man who likes clean, bright scents.
+- **[Inspired by Dior Sauvage](/perfume/sauvage)**: the fresh, peppery crowd-pleaser most men already know. It is the safest gift on the list. Read our full [Sauvage review](/blog/inspired-by-dior-sauvage-south-africa-review).
+- **[Inspired by Versace Dylan Blue](/perfume/dylan-blue)**: a fresh, bright choice for a man who likes clean scents.
 - **Inspired by Paco Rabanne One Million**: for the man who likes something warmer and bolder. Find it on our [One Million page](/perfume/one-million).
 
 All three are R120 for 30ml, R170 for 50ml and R290 for 100ml.
@@ -43,7 +43,7 @@ Sweet and warm scents are the classic gift for women, but a fresh option is just
 
 - **[Inspired by YSL Black Opium](/perfume/black-opium)**: a popular evening scent. We wrote about [why it keeps trending in Johannesburg](/blog/inspired-by-ysl-black-opium-johannesburg-dupe-trending-2026).
 - **[Inspired by Carolina Herrera Good Girl](/perfume/good-girl)**: confident and a little dramatic, for a woman who likes to be noticed.
-- **[Inspired by Aquolina Pink Sugar](/perfume/pink-sugar)**: pear and bergamot on top, jasmine and praline in the heart, and vanilla, caramel and musk to finish. It sits in the R150 tier, so choose the 30ml (R150) or 50ml (R200) to stay under R300.
+- **[Inspired by Aquolina Pink Sugar](/perfume/pink-sugar)**: sweet and playful, with the candy-like warmth the original is known for. It sits in the R150 tier, so choose the 30ml (R150) or 50ml (R200) to stay under R300.
 
 Black Opium and Good Girl are R120 for 30ml, R170 for 50ml and R290 for 100ml.
 
