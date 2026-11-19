@@ -106,14 +106,15 @@ export function perfumeMeta(p: Perfume): PageMeta {
   const forWho = p.gender === "men" ? "Men's" : "Women's";
   const from = startingPrice(p);
   const designer = designerName(p);
-  const notes = [...p.notes.top, ...p.notes.middle].slice(0, 2).join(", ").toLowerCase();
+  // Scent notes in src/data are placeholders shared by many products (3 sets for 147), so they
+  // are kept out of anything search engines or AI assistants read until real notes are added.
   const long = `Inspired by ${designer}: ${forWho} Oil Perfume from R${from} | Scent Studio`;
   return {
     path: `/perfume/${p.id}`,
     // Google shows ~60-70 characters; long names drop the middle part.
     title: long.length <= 72 ? long : `Inspired by ${designer} | Scent Studio`,
     description: truncate(
-      `Long-lasting oil-based ${forWho.toLowerCase()} perfume inspired by ${designer}${notes ? `, with ${notes}` : ""}. From R${from} (30ml). Order on WhatsApp or collect in Roodepoort.`,
+      `Long-lasting oil-based ${forWho.toLowerCase()} perfume inspired by ${designer}. Alcohol-free. From R${from} (30ml). Order on WhatsApp or collect in Roodepoort.`,
       160,
     ),
     heading: `Inspired by ${designer}`,
@@ -130,7 +131,6 @@ const priceLine = (p: Perfume) =>
 export function perfumeFaq(p: Perfume) {
   const designer = designerName(p);
   const house = PERFUME_HOUSES[p.id];
-  const notes = (list: string[]) => list.join(", ").toLowerCase();
   return [
     {
       q: `Is this the original ${designer}?`,
@@ -139,10 +139,6 @@ export function perfumeFaq(p: Perfume) {
     {
       q: `How much does the ${designer} inspired perfume cost?`,
       a: `${priceLine(p)}.`,
-    },
-    {
-      q: `What does it smell like?`,
-      a: `Top notes: ${notes(p.notes.top)}. Heart: ${notes(p.notes.middle)}. Base: ${notes(p.notes.base)}.`,
     },
     {
       q: `Why choose an oil-based perfume?`,

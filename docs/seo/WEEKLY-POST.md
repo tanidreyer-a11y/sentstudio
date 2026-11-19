@@ -10,6 +10,8 @@ live until Tanid approves it by merging your pull request.
 2. Research it on the web (what South Africans search, what competitors say, real designer prices). Note your sources.
 3. Get every Scent Studio fact from the repo, never from memory:
    - products and prices: `src/data/mens-perfumes.ts`, `src/data/womens-perfumes.ts`
+     (the `notes` in these files are placeholders, not real: never quote them. For what a scent smells like, use the
+     designer fragrance's published notes and link the source)
    - designer houses: `src/data/perfume-houses.ts`
    - delivery fees and contact: `src/lib/seo.ts` (`DELIVERY_FEES`, `WHATSAPP_DISPLAY`)
    - existing posts: `content/blog/` (do not repeat a topic; link to related posts)
