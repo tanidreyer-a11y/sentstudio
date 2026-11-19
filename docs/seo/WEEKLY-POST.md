@@ -14,7 +14,7 @@ live until Tanid approves it by merging your pull request.
    - delivery fees and contact: `src/lib/seo.ts` (`DELIVERY_FEES`, `WHATSAPP_DISPLAY`)
    - existing posts: `content/blog/` (do not repeat a topic; link to related posts)
 4. Write `content/blog/<slug>.md` in the exact format described at the top of `src/lib/blog-format.ts`:
-   - `publishedAt` and `updatedAt` = next Monday's date (YYYY-MM-DD), `author` = "Scent Studio"
+   - `publishedAt` and `updatedAt` = today's date in South Africa (YYYY-MM-DD), `author` = "Scent Studio"
    - `metaTitle` 50-60 characters with the main search phrase first; `metaDescription` 140-160 characters
    - `faq`: 3-5 real questions people ask about the topic, each answered in 1-3 sentences
 5. Run `npm install` and `npm run build`. The build must pass and print the post in its count. Fix and rebuild if not.
