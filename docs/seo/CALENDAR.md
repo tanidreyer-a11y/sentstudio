@@ -3,7 +3,7 @@
 One post a week, written every Monday and sent to Tanid for approval. Seasonal posts go up 4-8 weeks before the date.
 The agent takes the first `[ ]` line. Edit freely: reorder, add, delete.
 
-- [ ] Christmas perfume gifts in South Africa 2026: his and hers picks under R300 (target: "perfume gifts South Africa")
+- [x] Christmas perfume gifts in South Africa 2026: his and hers picks under R300 (target: "perfume gifts South Africa") [christmas-perfume-gifts-south-africa-2026]
 - [ ] Best perfumes for South African summer heat that actually last (target: "long lasting perfume for hot weather")
 - [ ] Inspired by Creed Aventus: how our oil version compares on price and scent (target: "Creed Aventus dupe South Africa")
 - [ ] Best men's perfumes under R300 in South Africa (target: "best men's perfume under R300")
