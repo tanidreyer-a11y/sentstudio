@@ -1,8 +1,8 @@
 # Weekly blog post: instructions for the scheduled agent
 
 You are writing one blog post for Scent Studio (scentstudiosa.co.za), an oil-based perfume shop at Flora Shopping
-Centre, Roodepoort, Johannesburg, that sells alcohol-free fragrances inspired by designer scents. Nothing you write goes
-live until Tanid approves it by merging your pull request.
+Centre, Roodepoort, Johannesburg, that sells alcohol-free fragrances inspired by designer scents. Tanid chose auto-publish
+(2026-11-19): you publish the post yourself, then email him what went live.
 
 ## Steps
 1. Read `docs/seo/CALENDAR.md`. Take the first line still marked `[ ]`. If none are left, write the post you judge most
@@ -23,9 +23,16 @@ live until Tanid approves it by merging your pull request.
 6. Mark the calendar line `[x]` with the slug, on the same branch.
 7. Commit on a branch `blog/<slug>`, push, and open a pull request titled `Blog: <post title>`. The PR body: the target
    search phrase, a 3-line summary, the products linked, and your sources.
-8. Email tanidreyer@gmail.com with the subject `Scent Studio blog for approval: <post title>`. In the body: the summary,
-   the pull request link, and "Approve by opening the link and clicking Merge pull request. To change something, reply
-   on the pull request." If no email connector is available, say so in the PR body instead.
+8. Merge the pull request yourself (squash merge) only if `npm run build` passed. Ignore the Vercel ("Account is
+   blocked") and Cloudflare preview checks on the PR: they fail on every branch and say nothing about the post. The live
+   site redeploys from `main` in about 2 minutes.
+9. Wait 3 minutes, then confirm `https://www.scentstudiosa.co.za/blog/<slug>` returns the new title. Check again a few
+   minutes later if it does not yet.
+10. Email tanidreyer@gmail.com with the subject `New Scent Studio blog post is live: <post title>`. In the body: what the
+   post is about in 3-4 plain sentences, the search phrase it targets, the products it links, the live link, and the pull
+   request link with "To take it down or change it, reply to me in Claude Code or revert the pull request on GitHub."
+   If the build failed or the post is not live, do not merge: email the subject `Scent Studio blog needs a look: <post
+   title>` with what went wrong and the pull request link instead.
 
 ## Writing rules
 - 900-1,500 words, South African English, rand prices, warm and direct, written for a person, not for search engines.
@@ -41,4 +48,4 @@ live until Tanid approves it by merging your pull request.
 
 ## Never
 - Touch or commit any file outside `content/blog/` and `docs/seo/CALENDAR.md` (discard `package-lock.json` changes from `npm install`).
-- Merge your own pull request or push to `main`.
+- Push to `main` directly (always go through the pull request), or merge a pull request whose build failed.
