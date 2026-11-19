@@ -25,10 +25,10 @@ export interface PageMeta {
 export const STATIC_PAGES: PageMeta[] = [
   {
     path: "/",
-    title: "Oil-Based Perfume Dupes in South Africa from R120 | Scent Studio",
+    title: "Scent Studio | Luxury Oil Perfumes Inspired by the Icons",
     description:
-      "Long-lasting, alcohol-free perfumes inspired by designer favourites like Sauvage, Aventus, Baccarat Rouge 540 and Black Opium. From R120. Flora Centre, Roodepoort, or order on WhatsApp.",
-    heading: "Oil-based perfumes inspired by designer favourites, from R120",
+      "Find the scent that feels like you. Long-lasting, alcohol-free oil perfumes inspired by Dior, Creed, YSL and Tom Ford, from R120. Flora Centre, Roodepoort.",
+    heading: "Scents that define you",
   },
   {
     path: "/catalog/men",
